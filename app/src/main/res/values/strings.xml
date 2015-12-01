@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ToDo</string>
+    <string name="action_add">action add</string>
+    <string name="dialog_task_title">Add a task</string>
+    <string name="dialog_task_message">What do you want to add?</string>
+    <string name="share_task">Share</string>
+    <string name="change_date_btn">Change Due Date</string>
+    <string name="spinner_title">Select a task...</string>
+    <string name="add_btn">Add</string>
+
+
+    <string-array name="task_types">
+        <item>Running</item>
+        <item>Shopping</item>
+        <item>Working</item>
+        <item>Studying</item>
+    </string-array>
+
+</resources>

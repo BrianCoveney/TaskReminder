@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical" >
+
+    <Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/addButton"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Dialog"
+        android:id="@+id/addButton"
+        android:layout_below="@+id/spinner"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/closeAddBtn"
+        android:text="@string/add_btn"
+        android:layout_below="@+id/spinner"
+        android:layout_alignParentEnd="true" />
+
+    <Spinner
+        android:entries="@array/task_types"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_alignBaseline="@+id/spinnerTitle"
+        android:layout_alignBottom="@+id/spinnerTitle"
+        android:layout_toEndOf="@+id/addButton"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerTitle"
+        android:text="@string/spinner_title"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/spinner"
+        android:layout_marginTop="60dp" />
+
+
+</RelativeLayout>
