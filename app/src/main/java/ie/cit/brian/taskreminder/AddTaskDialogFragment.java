@@ -24,48 +24,48 @@ import java.util.ArrayList;
 /**
  * Created by briancoveney on 11/26/15.
  */
-public class AddTaskDialogFragment extends DialogFragment {
-
-
-    private ArrayAdapter adapter;
-    private ArrayList<Task> taskList;
-
-
-
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState)
-    {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.dialog_task_title);
-        builder.setMessage(R.string.dialog_task_message);
-        // Set an EditText view to get user input
-        final EditText inputField = new EditText(getActivity());
-        builder.setView(inputField);
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        Button myButton = (Button) getActivity().findViewById(R.id.addButton);
-                        myButton.setText(inputField.getText().toString());
-
-
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
-
-        //Create the AlertDialog and return it
-        return builder.create();
-
-
-    }
-
-}
+//public class AddTaskDialogFragment extends DialogFragment {
+//
+//
+//    private ArrayAdapter adapter;
+//    private ArrayList<Task> taskList;
+//
+//
+//
+//    @Override
+//    public Dialog onCreateDialog(Bundle savedInstanceState)
+//    {
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setTitle(R.string.dialog_task_title);
+//        builder.setMessage(R.string.dialog_task_message);
+//        // Set an EditText view to get user input
+//        final EditText inputField = new EditText(getActivity());
+//        builder.setView(inputField);
+//        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//
+//
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int id) {
+//
+//                        Button myButton = (Button) getActivity().findViewById(R.id.addButton);
+//                        myButton.setText(inputField.getText().toString());
+//
+//
+//                    }
+//                })
+//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//        //Create the AlertDialog and return it
+//        return builder.create();
+//
+//
+//    }
+//
+//}

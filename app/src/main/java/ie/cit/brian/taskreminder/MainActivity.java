@@ -49,30 +49,10 @@ public class MainActivity extends AppCompatActivity implements TopFragment.TaskS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        Toolbar myToolBar = (Toolbar) findViewById(R.id.my_toolbar);
-        setActionBar(myToolBar);
-        getActionBar().setDisplayShowTitleEnabled(false);
-
-
-        Task t1 = new Task("Shopping");
-        Task t2 = new Task("Running");
-
-        taskList = new ArrayList<Task>();
-        taskList.add(t1);
-        taskList.add(t2);
-
-
-        //Old Spinner
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, taskList);
-
-
-        //New Custom Spinner
         Spinner mySpinner = (Spinner) findViewById(R.id.spinner);
         mySpinner.setAdapter(new MyAdapter(this, R.layout.custom_spinner, spinnerValues));
 
-
-    }//end onCreate
+    }
 
 
 
@@ -90,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements TopFragment.TaskS
     //ActionBar Write to File
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.mainmenu, menu);
 
         //Info Icon
@@ -164,39 +145,6 @@ public class MainActivity extends AppCompatActivity implements TopFragment.TaskS
         }
 
         return ret;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        Spinner taskSpinner = (Spinner)findViewById(R.id.spinner);
-        TextView spinnerTitle = (TextView) findViewById(R.id.spinnerTitle);
-
-        switch (item.getItemId()) {
-            case R.id.action_add_dialog:
-
-
-
-                AddTaskDialogFragment dialogFragment = new AddTaskDialogFragment();
-                dialogFragment.show(getFragmentManager(), "yesNoDialog");
-
-
-                break;
-
-            case R.id.action_add_spinner:
-                spinnerTitle.setVisibility(View.VISIBLE);
-                taskSpinner.setVisibility(View.VISIBLE);
-                break;
-
-            case R.id.action_remove_spinner:
-                spinnerTitle.setVisibility(View.GONE);
-                taskSpinner.setVisibility(View.GONE);
-
-            default:
-                break;
-        }
-        return true;
     }
 
 
