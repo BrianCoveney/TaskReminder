@@ -1,6 +1,7 @@
 package ie.cit.brian.taskreminder;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by briancoveney on 11/26/15.
@@ -25,8 +26,8 @@ public class TaskController
         return instance;
     }
 
-    public void addTask(String taskName){
-        Task task = new Task(taskName);
+    public void addTask(String taskName, String taskDesc, String taskDate){
+        Task task = new Task(taskName, taskDesc, taskDate);
         this.taskList.add(task);
     }
 

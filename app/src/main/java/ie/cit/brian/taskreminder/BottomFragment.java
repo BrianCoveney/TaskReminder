@@ -42,6 +42,7 @@ public class BottomFragment extends ListFragment {
 
         //Create a new instance of Intent - our context is our Activity - then our new FlightViewActivity class
         Intent i = new Intent(getActivity(), TaskActivity.class);
+
         //Call the controller, we get the flight list and within that list we get the item at that position
         //dictated what was selected in the list fragment
         Task selectedTask = TaskController.getInstance().getTask().get(position);

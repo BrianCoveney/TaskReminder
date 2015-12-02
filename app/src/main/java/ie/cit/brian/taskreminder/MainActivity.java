@@ -73,35 +73,35 @@ public class MainActivity extends AppCompatActivity implements TopFragment.TaskS
 
         getMenuInflater().inflate(R.menu.mainmenu, menu);
 
-        //Info Icon
-        ImageButton imgButton = (ImageButton) menu.findItem(R.id.action_info).getActionView();
-        imgButton.setImageResource(R.drawable.ic_text);
-        imgButton.setBackgroundResource(0); //hides background
-        imgButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-
-                TextView tv = (TextView) findViewById(R.id.textView);
-
-
-                Spinner taskSpinner = (Spinner) findViewById(R.id.spinner);
-                String selected = taskSpinner.getSelectedItem().toString();
-
-                //Calls out to the controller to put the data into the model,
-                //then tells the bottom fragment to refresh itself from the updated model
-                TaskController.getInstance().addTask(selected);
-
-
-                //Write and Read from file
-                writeToFile(selected.toString());
-                tv.setText(readFromFile());
-
-
-                tv.setVisibility(View.VISIBLE);
-            }
-        });
+//        //Info Icon
+//        ImageButton imgButton = (ImageButton) menu.findItem(R.id.action_info).getActionView();
+//        imgButton.setImageResource(R.drawable.ic_text);
+//        imgButton.setBackgroundResource(0); //hides background
+//        imgButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                TextView tv = (TextView) findViewById(R.id.textView);
+//
+//
+//                Spinner taskSpinner = (Spinner) findViewById(R.id.spinner);
+////                String selected = taskSpinner.getSelectedItem().toString();
+//
+//                //Calls out to the controller to put the data into the model,
+//                //then tells the bottom fragment to refresh itself from the updated model
+//                TaskController.getInstance().addTask(selected);
+//
+//
+//                //Write and Read from file
+//                writeToFile(selected.toString());
+//                tv.setText(readFromFile());
+//
+//
+//                tv.setVisibility(View.VISIBLE);
+//            }
+//        });
 
         return super.onCreateOptionsMenu(menu);
     }

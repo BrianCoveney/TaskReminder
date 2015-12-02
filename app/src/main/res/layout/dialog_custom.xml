@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/task_name_dialog"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentStart="true" />-->
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/task_desc_dialog"-->
+        <!--android:layout_below="@+id/task_name_dialog"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentEnd="true" />-->
+
+    <!--&lt;!&ndash;<EditText&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/task_date_dialog"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_below="@+id/task_desc_dialog"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_alignParentStart="true"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_alignParentEnd="true" />&ndash;&gt;-->
+
+</RelativeLayout>

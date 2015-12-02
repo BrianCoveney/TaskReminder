@@ -1,6 +1,7 @@
 package ie.cit.brian.taskreminder;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by briancoveney on 11/25/15.
@@ -8,31 +9,31 @@ import java.io.Serializable;
 public class Task implements Serializable{
 
     private String taskName;
-//    private String taskDescription;
-//    private int taskDueDate;
+    private String taskDescription;
+    private String taskDueDate;
 
-    public Task(String taskName)  //String taskDescription, int taskDueDate
+    public Task(String taskName, String taskDescription, String taskDueDate)  //String taskDescription, int taskDueDate
     {
         this.taskName = taskName;
-//        this.taskDescription = taskDescription;
-//        this.taskDueDate = taskDueDate;
+        this.taskDescription = taskDescription;
+        this.taskDueDate = taskDueDate;
     }
 
-//    public int getTaskDueDate() {
-//        return taskDueDate;
-//    }
-//
-//    public void setTaskDueDate(int taskDueDate) {
-//        this.taskDueDate = taskDueDate;
-//    }
-//
-//    public String getTaskDescription() {
-//        return taskDescription;
-//    }
-//
-//    public void setTaskDescription(String taskDescription) {
-//        this.taskDescription = taskDescription;
-//    }
+    public String getTaskDueDate() {
+        return taskDueDate;
+    }
+
+    public void setTaskDueDate(String taskDueDate) {
+        this.taskDueDate = taskDueDate;
+    }
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
+    }
 
     public String getTaskName() {
         return taskName;
@@ -44,6 +45,9 @@ public class Task implements Serializable{
 
     public String toString()
     {
-        return this.taskName;
+        return this.taskName + " - " + this.taskDescription + " - " + this.taskDueDate;
     }
+
+
 }
+

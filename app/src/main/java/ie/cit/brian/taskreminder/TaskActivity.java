@@ -32,7 +32,11 @@ import java.util.ArrayList;
 public class TaskActivity extends FragmentActivity{
 
     private Task theTask;
+    private Task theTask2;
+
     private TextView taskName;
+    private TextView taskDesc;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +46,16 @@ public class TaskActivity extends FragmentActivity{
         //get the Task from the bottom fragment and display it in a new activity's textview
         theTask = (Task) getIntent().getSerializableExtra("selectedTask");
         taskName = (TextView) findViewById(R.id.task_name);
-        taskName.setText(theTask.toString());
+        taskName.setText("Task Name: " + theTask.getTaskName() +"\n\n"+
+                "Task Description: " + theTask.getTaskDescription() +"\n\n"+
+                "Task Date: " + theTask.getTaskDueDate());
+
+
+        //does not work
+//        theTask2 = (Task) getIntent().getSerializableExtra("selectedTask");
+//        taskDesc = (TextView) findViewById(R.id.task_desc);
+//        taskDesc.setText(theTask2.toString());
+
 
     }
 

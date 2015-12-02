@@ -16,10 +16,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.Toolbar;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -44,7 +52,7 @@ public class TopFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
 
 
-        setUpListeners();
+//        setUpListeners();
 
 
         Toolbar myToolBar = (Toolbar)getActivity().findViewById(R.id.my_toolbar);
@@ -87,28 +95,28 @@ public class TopFragment extends Fragment {
 
 
 
-    private void setUpListeners()
-    {
-
-        spinnerTitle = (TextView) getActivity().findViewById(R.id.spinnerTitle);
-        addBtn = (Button) getActivity().findViewById(R.id.closeAddBtn);
-
-
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Spinner taskSpinner = (Spinner) getActivity().findViewById(R.id.spinner);
-                String selected = taskSpinner.getSelectedItem().toString();
-
-                //Calls out to the controller to put the data into the model,
-                //then tells the bottom fragment to refresh itself from the updated model
-                TaskController.getInstance().addTask(selected);
-                searcher.refreshTaskList();
-
-            }
-        });
-    }
+//    private void setUpListeners()
+//    {
+//
+//        spinnerTitle = (TextView) getActivity().findViewById(R.id.spinnerTitle);
+//        addBtn = (Button) getActivity().findViewById(R.id.closeAddBtn);
+//
+//
+//        addBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Spinner taskSpinner = (Spinner) getActivity().findViewById(R.id.spinner);
+//                String selected = taskSpinner.getSelectedItem().toString();
+//
+//                //Calls out to the controller to put the data into the model,
+//                //then tells the bottom fragment to refresh itself from the updated model
+//                TaskController.getInstance().addTask(selected);
+//                searcher.refreshTaskList();
+//
+//            }
+//        });
+//    }
 
 
 
@@ -118,42 +126,91 @@ public class TopFragment extends Fragment {
         Spinner taskSpinner = (Spinner)getActivity().findViewById(R.id.spinner);
         TextView spinnerTitle = (TextView)getActivity().findViewById(R.id.spinnerTitle);
 
+
+        //Dialog user entries
         switch (item.getItemId()) {
             case R.id.action_add_dialog:
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(R.string.dialog_task_title);
-                builder.setMessage(R.string.dialog_task_message);
-                // Set an EditText view to get user input
-                final EditText inputField = new EditText(getActivity());
-                builder.setView(inputField);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                alertDialog.setTitle(R.string.dialog_task_title);
+                alertDialog.setMessage(R.string.dialog_task_message);
+
+                //EditText to get user input
+                final EditText taskName = new EditText(getActivity());
+                final EditText taskDesc = new EditText(getActivity());
+//                final EditText taskDate = new EditText(getActivity());
+
+                //Custom Dialog
+                LinearLayout dialogLayout = new LinearLayout(getActivity().getApplicationContext());
+                dialogLayout.setOrientation(LinearLayout.VERTICAL);
+                dialogLayout.addView(taskName);
+                dialogLayout.addView(taskDesc);
+//                dialogLayout.addView(taskDate);
 
 
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
+                alertDialog.setView(dialogLayout);
 
+                alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
 
-                        String tasks = inputField.getText().toString();
+                        String name = taskName.getText().toString();
+                        String description = taskDesc.getText().toString();
 
-                        TaskController.getInstance().addTask(tasks);
+                        DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+                        String date = dateFormat.format(Calendar.getInstance().getTime());
+
+                        TaskController.getInstance().addTask(name, description, date);
                         searcher.refreshTaskList();
-
-
                     }
-                })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
-                        });
+                });
 
-                //Create the AlertDialog and return it
-                AlertDialog alertDialog = builder.create();
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Canceled.
+                    }
+                });
 
                 alertDialog.show();
+
+
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                builder.setTitle(R.string.dialog_task_title);
+//                builder.setMessage(R.string.dialog_task_message);
+//                // Set an EditText view to get user input
+//                final EditText inputField = new EditText(getActivity());
+//                builder.setView(inputField);
+//                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//
+//
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int id) {
+//
+//
+//                        String tasks = inputField.getText().toString();
+//
+//                        TaskController.getInstance().addTask(tasks);
+//                        searcher.refreshTaskList();
+//
+//
+//                    }
+//                })
+//
+//
+//
+//
+//                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                dialog.dismiss();
+//                            }
+//                        });
+//
+//                //Create the AlertDialog and return it
+//                AlertDialog alertDialog = builder.create();
+//
+//                alertDialog.show();
 
 
 
