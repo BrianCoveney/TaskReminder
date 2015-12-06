@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 /**
  * Created by briancoveney on 11/25/15.
  */
-public class MainActivity extends AppCompatActivity implements TopFragment.TaskSearcher {
+public class MainActivity extends FragmentActivity implements TopFragment.TaskSearcher {
 
     String[] spinnerValues = { "Running", "Working", "Cycling","Shopping", "Swimming", };
     String[] spinnerSubs = { "On the track", "In the office", "On the road", "In the shop", "At the pool" };

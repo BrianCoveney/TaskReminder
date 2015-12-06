@@ -1,6 +1,7 @@
 package ie.cit.brian.taskreminder;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 /**

@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -120,11 +121,14 @@ public class TopFragment extends Fragment {
 
 
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         Spinner taskSpinner = (Spinner)getActivity().findViewById(R.id.spinner);
         TextView spinnerTitle = (TextView)getActivity().findViewById(R.id.spinnerTitle);
+
+
 
 
         //Dialog user entries
@@ -139,6 +143,7 @@ public class TopFragment extends Fragment {
                 final EditText taskName = new EditText(getActivity());
                 final EditText taskDesc = new EditText(getActivity());
 //                final EditText taskDate = new EditText(getActivity());
+
 
                 //Custom Dialog
                 LinearLayout dialogLayout = new LinearLayout(getActivity().getApplicationContext());
@@ -157,8 +162,10 @@ public class TopFragment extends Fragment {
                         String name = taskName.getText().toString();
                         String description = taskDesc.getText().toString();
 
+
                         DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
                         String date = dateFormat.format(Calendar.getInstance().getTime());
+
 
                         TaskController.getInstance().addTask(name, description, date);
                         searcher.refreshTaskList();
@@ -172,47 +179,6 @@ public class TopFragment extends Fragment {
                 });
 
                 alertDialog.show();
-
-
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//                builder.setTitle(R.string.dialog_task_title);
-//                builder.setMessage(R.string.dialog_task_message);
-//                // Set an EditText view to get user input
-//                final EditText inputField = new EditText(getActivity());
-//                builder.setView(inputField);
-//                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//
-//
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int id) {
-//
-//
-//                        String tasks = inputField.getText().toString();
-//
-//                        TaskController.getInstance().addTask(tasks);
-//                        searcher.refreshTaskList();
-//
-//
-//                    }
-//                })
-//
-//
-//
-//
-//                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                dialog.dismiss();
-//                            }
-//                        });
-//
-//                //Create the AlertDialog and return it
-//                AlertDialog alertDialog = builder.create();
-//
-//                alertDialog.show();
-
-
 
                 break;
 
@@ -229,6 +195,19 @@ public class TopFragment extends Fragment {
                 break;
         }
         return true;
+    }
+
+    public void myCalendar()
+    {
+        Calendar cal = Calendar.getInstance();
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra("beginTime", cal.getTimeInMillis());
+        intent.putExtra("allDay", true);
+        intent.putExtra("rrule", "FREQ=YEARLY");
+        intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
+        intent.putExtra("title", "A Test Event from android app");
+        startActivity(intent);
     }
 
 
