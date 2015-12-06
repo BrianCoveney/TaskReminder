@@ -11,30 +11,35 @@ public class Task implements Serializable{
 
     private String taskName;
     private String taskDescription;
-    private String taskDueDate;
+    private String taskTime;
+    private String taskDate;
 
-    public Task(String taskName, String taskDescription, String taskDueDate)  //String taskDescription, int taskDueDate
+    public Task(String taskName, String taskDescription , String taskTime , String taskDate)  //String taskDescription, int taskDueDate
     {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
-        this.taskDueDate = taskDueDate;
+        this.taskTime = taskTime;
+        this.taskDate = taskDate;
+
     }
 
-    public String getTaskDueDate() {
-        return taskDueDate;
+    public String getTaskDate() {
+        return taskDate;
     }
 
-    public void setTaskDueDate(String taskDueDate) {
-        this.taskDueDate = taskDueDate;
+    public void setTaskDate(String taskDate) {
+        this.taskDate = taskDate;
     }
 
     public String getTaskDescription() {
         return taskDescription;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
-    }
+    public void setTaskDescription(String taskDescription) {this.taskDescription = taskDescription;}
+
+    public String getTaskTime() {return taskTime;}
+
+    public void setTaskTime(String taskTime) {this.taskTime = taskTime;}
 
     public String getTaskName() {
         return taskName;
@@ -46,7 +51,7 @@ public class Task implements Serializable{
 
     public String toString()
     {
-        return this.taskName + " - " + this.taskDescription + " - " + this.taskDueDate;
+        return this.taskName;
     }
 
 

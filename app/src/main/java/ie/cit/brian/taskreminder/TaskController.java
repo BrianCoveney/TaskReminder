@@ -27,8 +27,8 @@ public class TaskController
         return instance;
     }
 
-    public void addTask(String taskName, String taskDesc, String taskDate){
-        Task task = new Task(taskName, taskDesc, taskDate);
+    public void addTask(String taskName, String taskDesc, String taskTime, String taskDate){
+        Task task = new Task(taskName, taskDesc, taskTime, taskDate);
         this.taskList.add(task);
     }
 

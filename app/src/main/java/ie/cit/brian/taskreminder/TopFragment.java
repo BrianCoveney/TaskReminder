@@ -142,7 +142,8 @@ public class TopFragment extends Fragment {
                 //EditText to get user input
                 final EditText taskName = new EditText(getActivity());
                 final EditText taskDesc = new EditText(getActivity());
-//                final EditText taskDate = new EditText(getActivity());
+                final EditText taskTime = new EditText(getActivity());
+                final EditText taskDate = new EditText(getActivity());
 
 
                 //Custom Dialog
@@ -150,7 +151,8 @@ public class TopFragment extends Fragment {
                 dialogLayout.setOrientation(LinearLayout.VERTICAL);
                 dialogLayout.addView(taskName);
                 dialogLayout.addView(taskDesc);
-//                dialogLayout.addView(taskDate);
+                dialogLayout.addView(taskTime);
+                dialogLayout.addView(taskDate);
 
 
 
@@ -162,12 +164,13 @@ public class TopFragment extends Fragment {
                         String name = taskName.getText().toString();
                         String description = taskDesc.getText().toString();
 
+                        DateFormat dateTimeFormat = new SimpleDateFormat("HH:mm");
+                        String time = dateTimeFormat.format(Calendar.getInstance().getTime());
 
-                        DateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         String date = dateFormat.format(Calendar.getInstance().getTime());
 
-
-                        TaskController.getInstance().addTask(name, description, date);
+                        TaskController.getInstance().addTask(name, description, time, date);
                         searcher.refreshTaskList();
                     }
                 });

@@ -9,25 +9,39 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="40dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@color/lightBlue"/>
 
-    <!--<EditText-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/task_desc"-->
-        <!--android:layout_marginTop="40dp"-->
-        <!--android:layout_below="@+id/task_name"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentStart="true" />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/task_desc"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/task_name"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/lightBlue"/>
 
-    <!--<EditText-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/task_date"-->
-        <!--android:layout_marginTop="40dp"-->
-        <!--android:layout_below="@+id/task_desc"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentStart="true" />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/task_date"
+        android:background="@color/lightBlue"
+        android:layout_below="@+id/task_time"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/task_time"
+        android:background="@color/lightBlue"
+        android:layout_below="@+id/task_desc"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentEnd="true" />
+
 
     <Button
         android:layout_width="wrap_content"
@@ -38,7 +52,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="44dp"
         android:layout_marginBottom="38dp"
-        android:onClick="setDate"/>
+        android:onClick="setDate"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -49,13 +64,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="46dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/date_display"
-        android:onClick="setDate"
-        android:layout_below="@+id/task_name"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="67dp" />
+
+
+
 </RelativeLayout>

@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class DateSettings extends FragmentActivity implements DatePickerDialog.OnDateSetListener {
 
     Context context;
+    TextView tv;
 
     //Constructor
     public DateSettings(Context context) {
@@ -22,8 +23,10 @@ public class DateSettings extends FragmentActivity implements DatePickerDialog.O
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
         //find the TextView in TaskActivity and change it to the selected date, from the dialog
-        TaskActivity.myDateTextView.setText("Task Date Changed: " + monthOfYear + " / " + dayOfMonth + " / " + year);
+        TaskActivity.taskDate.setText("Task Date Changed: " + dayOfMonth + "/" + monthOfYear + "/" + year);
+
     }
 }
 
