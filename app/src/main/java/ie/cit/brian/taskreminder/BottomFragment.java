@@ -40,16 +40,20 @@ public class BottomFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        //Create a new instance of Intent - our context is our Activity - then our new FlightViewActivity class
-        Intent i = new Intent(getActivity(), TaskActivity.class);
+        //Create a new instance of Intent - our context is our Activity - then our new TaskActivity class
+        Intent intent = new Intent(getActivity(), TaskActivity.class);
 
         //Call the controller, we get the flight list and within that list we get the item at that position
         //dictated what was selected in the list fragment
         Task selectedTask = TaskController.getInstance().getTask().get(position);
 
         //put our flight object into the bundle
-        i.putExtra("selectedTask", selectedTask);
-        startActivity(i);
+        intent.putExtra("selectedTask", selectedTask);
+
+        //extra check to sure there is something out there that is capable of dealing with the implicit intent
+        if(intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
 

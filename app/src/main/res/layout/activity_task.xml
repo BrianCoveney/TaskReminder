@@ -40,7 +40,8 @@
         android:layout_below="@+id/task_desc"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="timeOnClick" />
 
 
     <Button
@@ -48,12 +49,11 @@
         android:layout_height="wrap_content"
         android:text="@string/change_date_btn"
         android:id="@+id/change_date_btn"
+        android:layout_marginStart="47dp"
+        android:layout_marginBottom="93dp"
+        android:onClick="dateOnClick"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="38dp"
-        android:onClick="setDate"
-        />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -64,7 +64,26 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="46dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_file"
+        android:background="@color/lightBlue"
+        android:layout_below="@+id/task_date"
+        android:layout_marginTop="27dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_time"
+        android:id="@+id/button_time"
+        android:layout_below="@+id/share_btn"
+        android:layout_alignStart="@+id/change_date_btn"
+        android:layout_marginTop="10dp"
+        android:onClick="timeOnClick" />
 
 
 </RelativeLayout>

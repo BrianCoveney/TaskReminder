@@ -14,7 +14,7 @@ public class Task implements Serializable{
     private String taskTime;
     private String taskDate;
 
-    public Task(String taskName, String taskDescription , String taskTime , String taskDate)  //String taskDescription, int taskDueDate
+    public Task(String taskName, String taskDescription , String taskTime , String taskDate)
     {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
@@ -51,8 +51,8 @@ public class Task implements Serializable{
 
     public String toString()
     {
-        return this.taskName;
-    }
+        return this.taskName ;
+    } //+ " - " + this.taskTime
 
 
 }

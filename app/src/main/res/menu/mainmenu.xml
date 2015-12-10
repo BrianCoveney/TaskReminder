@@ -16,18 +16,6 @@
         android:layout_width="fill_parent"
         android:src="@android:drawable/divider_horizontal_bright" />
 
-    <item android:id="@+id/action_add_spinner"
-        android:icon="@drawable/ic_add_spin"
-        android:title="@string/action_add"
-        android:showAsAction="always"
-        />
-
-    <item android:id="@+id/action_remove_spinner"
-        android:icon="@drawable/ic_remove_circle"
-        android:title="@string/action_add"
-        android:showAsAction="always"
-        />
-
     <ImageView
         android:layout_gravity="center_horizontal"
         android:paddingTop="10px"
@@ -35,14 +23,5 @@
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:src="@android:drawable/divider_horizontal_bright" />
-
-
-    <item android:id="@+id/action_info"
-        android:title="@string/action_add"
-        android:actionViewClass="android.widget.ImageButton"
-        android:showAsAction="always"
-        />
-
-
 
 </menu>

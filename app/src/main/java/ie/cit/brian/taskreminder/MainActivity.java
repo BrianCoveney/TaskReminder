@@ -35,26 +35,16 @@ import java.util.ArrayList;
  */
 public class MainActivity extends FragmentActivity implements TopFragment.TaskSearcher {
 
-    String[] spinnerValues = { "Running", "Working", "Cycling","Shopping", "Swimming", };
-    String[] spinnerSubs = { "On the track", "In the office", "On the road", "In the shop", "At the pool" };
-    int total_images[] = { R.drawable.running, R.drawable.office, R.drawable.biking, R.drawable.shopping_cart, R.drawable.swimming};
 
-
-
-    private ArrayAdapter adapter;
-    private ArrayList<Task> taskList;
+//    private ArrayAdapter adapter;
+//    private ArrayList<Task> taskList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Spinner mySpinner = (Spinner) findViewById(R.id.spinner);
-        mySpinner.setAdapter(new MyAdapter(this, R.layout.custom_spinner, spinnerValues));
-
     }
-
 
 
     @Override
@@ -68,127 +58,14 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
     }
 
 
-    //ActionBar Write to File
+    //Inflate the ActionBar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.mainmenu, menu);
-
-//        //Info Icon
-//        ImageButton imgButton = (ImageButton) menu.findItem(R.id.action_info).getActionView();
-//        imgButton.setImageResource(R.drawable.ic_text);
-//        imgButton.setBackgroundResource(0); //hides background
-//        imgButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                TextView tv = (TextView) findViewById(R.id.textView);
-//
-//
-//                Spinner taskSpinner = (Spinner) findViewById(R.id.spinner);
-////                String selected = taskSpinner.getSelectedItem().toString();
-//
-//                //Calls out to the controller to put the data into the model,
-//                //then tells the bottom fragment to refresh itself from the updated model
-//                TaskController.getInstance().addTask(selected);
-//
-//
-//                //Write and Read from file
-//                writeToFile(selected.toString());
-//                tv.setText(readFromFile());
-//
-//
-//                tv.setVisibility(View.VISIBLE);
-//            }
-//        });
-
         return super.onCreateOptionsMenu(menu);
     }
 
-
-    private void writeToFile(String data) {
-        try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("config.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.write(data);
-            outputStreamWriter.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
-
-
-    private String readFromFile() {
-
-        String ret = "";
-
-        try {
-            InputStream inputStream = openFileInput("config.txt");
-
-            if (inputStream != null) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ((receiveString = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(receiveString);
-                }
-
-                inputStream.close();
-                ret = stringBuilder.toString();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        }
-
-        return ret;
-    }
-
-
-
-    //Spinner Custom ************
-
-    public class MyAdapter extends ArrayAdapter<String>
-    {
-        public MyAdapter(Context ctx, int txtViewResourceId, String[] objects) {
-            super(ctx, txtViewResourceId, objects);
-        }
-
-        @Override public View getDropDownView(int position, View cnvtView, ViewGroup prnt) {
-            return getCustomView(position, cnvtView, prnt);
-        }
-
-        @Override public View getView(int pos, View cnvtView, ViewGroup prnt) {
-            return getCustomView(pos, cnvtView, prnt);
-        }
-
-        public View getCustomView(int position, View convertView, ViewGroup parent)
-        {
-            LayoutInflater inflater = getLayoutInflater();
-
-            View mySpinner = inflater.inflate(R.layout.custom_spinner, parent, false);
-
-            TextView main_text = (TextView) mySpinner .findViewById(R.id.text_main_seen);
-
-            main_text.setText(spinnerValues[position]);
-
-            TextView subSpinner = (TextView) mySpinner .findViewById(R.id.sub_text_seen);
-
-            subSpinner.setText(spinnerSubs[position]);
-
-            ImageView left_icon = (ImageView) mySpinner .findViewById(R.id.left_pic);
-
-            left_icon.setImageResource(total_images[position]);
-            left_icon.setBackgroundResource(0);
-
-
-            return mySpinner;
-        }
-    }
 
 }
 
