@@ -6,22 +6,8 @@
     <item android:id="@+id/action_add_dialog"
         android:icon="@drawable/ic_add_dia"
         android:title="@string/action_add"
-        android:showAsAction="always"/>
+        android:showAsAction="ifRoom"/>
 
-    <ImageView
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="10px"
-        android:paddingBottom="5px"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:src="@android:drawable/divider_horizontal_bright" />
 
-    <ImageView
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="10px"
-        android:paddingBottom="5px"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        android:src="@android:drawable/divider_horizontal_bright" />
 
 </menu>

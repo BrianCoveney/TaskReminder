@@ -32,8 +32,7 @@ import java.util.TimeZone;
 public class TaskActivity extends FragmentActivity {
 
     private Task theTask;
-    private TextView taskName, taskDesc, taskTime,
-                                taskDate, fileTextView;
+    private TextView taskName, taskDesc, taskTime, taskDate, fileTextView;
     private Button shareBtn;
 
 
@@ -44,13 +43,13 @@ public class TaskActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
-        writeTasks();
+        populateTasks();
         shareTaskDialog();
     }
 
 
 
-    public void writeTasks()
+    public void populateTasks()
     {
         //get the Task from the bottom fragment and display it in a new activity's textview
         theTask = (Task) getIntent().getSerializableExtra("selectedTask");
@@ -153,13 +152,12 @@ public class TaskActivity extends FragmentActivity {
 
 
 
-    // Test - When user minimises the app
-    // the Date data preserved and still displays in its TextView
+    // Writing Task to file - used in the MainActivity
     @Override
     public void onPause()
     {
         super.onPause();
-        String savedTask = taskDate.getText().toString();
+        String savedTask = taskName.getText().toString() +" - "+ taskDesc.getText().toString();
         writeToFile(savedTask);
     }
 

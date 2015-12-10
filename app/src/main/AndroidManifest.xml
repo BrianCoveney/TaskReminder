@@ -32,6 +32,15 @@
                 android:value=".MainActivity"/>
         </activity>
 
+        <activity
+            android:name=".NotificationActivity"
+            android:label="Notifications Activity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
     </application>
 
 </manifest>

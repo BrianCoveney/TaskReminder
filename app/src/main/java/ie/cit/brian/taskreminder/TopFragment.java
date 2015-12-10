@@ -39,7 +39,7 @@ public class TopFragment extends Fragment {
 
         Toolbar myToolBar = (Toolbar)getActivity().findViewById(R.id.my_toolbar);
         getActivity().setActionBar(myToolBar);
-        getActivity().getActionBar().setDisplayShowTitleEnabled(false);
+        getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
@@ -60,7 +60,7 @@ public class TopFragment extends Fragment {
     }
 
 
-    //ActionBar Write to File
+    //Inflate ActionBar
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
@@ -69,11 +69,9 @@ public class TopFragment extends Fragment {
 
 
 
-
+    //Action bar options
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
         //Dialog user entries
         switch (item.getItemId()) {
             case R.id.action_add_dialog:
@@ -115,16 +113,9 @@ public class TopFragment extends Fragment {
                         String time = myTimeFormat.format(Calendar.getInstance(timeZone).getTime());
 
 
-
                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         String date = dateFormat.format(Calendar.getInstance().getTime());
 
-
-
-
-
-
-//                        String date = "";
 
                         TaskController.getInstance().addTask(name, description, time, date);
                         searcher.refreshTaskList();
@@ -156,20 +147,6 @@ public class TopFragment extends Fragment {
         }
         return true;
     }
-
-//    public void myCalendar()
-//    {
-//        Calendar cal = Calendar.getInstance();
-//        Intent intent = new Intent(Intent.ACTION_EDIT);
-//        intent.setType("vnd.android.cursor.item/event");
-//        intent.putExtra("beginTime", cal.getTimeInMillis());
-//        intent.putExtra("allDay", true);
-//        intent.putExtra("rrule", "FREQ=YEARLY");
-//        intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
-//        intent.putExtra("title", "A Test Event from android app");
-//        startActivity(intent);
-//    }
-
 
 }
 

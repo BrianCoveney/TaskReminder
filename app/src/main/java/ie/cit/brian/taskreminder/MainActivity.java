@@ -2,10 +2,13 @@ package ie.cit.brian.taskreminder;
 
 import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,14 +39,13 @@ import java.util.ArrayList;
  */
 public class MainActivity extends FragmentActivity implements TopFragment.TaskSearcher {
 
-
-//    private ArrayAdapter adapter;
-//    private ArrayList<Task> taskList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        createNotifications();
+        testFile();
 
     }
 
@@ -53,7 +56,6 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
         FragmentManager mgr = getFragmentManager();
         BottomFragment secondFragmentRef =
                 (BottomFragment)mgr.findFragmentById(R.id.second_fragment);
-
         secondFragmentRef.refreshList();
     }
 
@@ -65,6 +67,67 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
         getMenuInflater().inflate(R.menu.mainmenu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+
+    public void testFile()
+    {
+        Button testButton = (Button) findViewById(R.id.button_test_file);
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView tv = (TextView) findViewById(R.id.text_test_file);
+                tv.setText(readFromFile());
+            }
+        });
+
+
+    }
+
+    private String readFromFile() {
+
+        String result = "";
+
+        try {
+            InputStream inputStream = openFileInput("myFile");
+
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((receiveString = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                result = stringBuilder.toString();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return result;
+    }
+
+
+    public void createNotifications()
+    {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setSmallIcon(R.drawable.ic_remove_circle);
+        builder.setContentTitle("You have a message");
+        builder.setContentText("Hello, how are you doing?");
+
+        Notification myNotification = builder.build();
+
+        NotificationManager nManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        nManager.notify(0, myNotification);
+    }
+
 
 
 }
