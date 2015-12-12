@@ -3,10 +3,13 @@ package ie.cit.brian.taskreminder;
 
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +48,7 @@ public class TaskActivity extends FragmentActivity {
         setContentView(R.layout.activity_task);
         populateTasks();
         shareTaskDialog();
+
     }
 
 
@@ -58,16 +62,12 @@ public class TaskActivity extends FragmentActivity {
         taskTime = (TextView) findViewById(R.id.task_time);
         taskDate = (TextView) findViewById(R.id.task_date);
 
-        taskName.setText("Task Name: " + theTask.getTaskName());
-        taskDesc.setText("Task Description: " + theTask.getTaskDescription());
-        taskTime.setText("Task Time: " + theTask.getTaskTime());
-        taskDate.setText("Task Date: " + theTask.getTaskDate());
+        taskName.setText("Name: " + theTask.getTaskName());
+        taskDesc.setText("Description: " + theTask.getTaskDescription());
+        taskTime.setText("Time: " + theTask.getTaskTime());
+        taskDate.setText("Date: " + theTask.getTaskDate());
 
-        fileTextView = (TextView) findViewById(R.id.text_file);
-        fileTextView.setText("Task Name: " + theTask.getTaskName() + "\n\n" +
-                "Task Description: " + theTask.getTaskDescription() + "\n\n"
-                + "Task Time: " + theTask.getTaskTime() + "\n\n"
-                + "Task Date: " + theTask.getTaskDate());
+
 
     }
 
@@ -103,16 +103,27 @@ public class TaskActivity extends FragmentActivity {
         }
     });
 
+
+
+
+    //Date and Notifications changed on clicking Change Date button
     public void setCurrentDate()
     {
         DateFormat myDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         taskDate.setText("Task Date: " +myDateFormat.format(cal.getTime()));
+
+        //Write selected task name and date to file
+        String selectedDate = myDateFormat.format(cal.getTime());
+        writeToFile(theTask.toString() +" - "+ selectedDate);
+
+        //Notification to display result
+        createNotifications();
     }
 
 
     public void dateOnClick(View view)
     {
-        new DatePickerDialog( TaskActivity.this, date,
+        new DatePickerDialog(this, date,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH))
@@ -138,7 +149,7 @@ public class TaskActivity extends FragmentActivity {
     }
 
     public void timeOnClick( View view ) {
-        new TimePickerDialog(TaskActivity.this, time,
+        new TimePickerDialog(this, time,
                 cal.get(Calendar.HOUR),
                 cal.get(Calendar.MINUTE),
                 false)
@@ -149,24 +160,6 @@ public class TaskActivity extends FragmentActivity {
 
 
 
-
-
-
-    // Writing Task to file - used in the MainActivity
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-        String savedTask = taskName.getText().toString() +" - "+ taskDesc.getText().toString();
-        writeToFile(savedTask);
-    }
-
-    @Override
-    protected void onRestart()
-    {
-        super.onRestart();
-        taskDate.setText(readFromFile());
-    }
 
 
 
@@ -192,13 +185,6 @@ public class TaskActivity extends FragmentActivity {
 
 
 
-
-
-//    public void setDate(View view)
-//    {
-//        PickDialogs pickDialogs = new PickDialogs();
-//        pickDialogs.show(getFragmentManager(), "date_picker");
-//    }
 
 
     private void writeToFile(String data) {
@@ -246,7 +232,38 @@ public class TaskActivity extends FragmentActivity {
     }
 
 
+    public void createNotifications()
+    {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setSmallIcon(R.drawable.ic_add_dia);
+        builder.setContentTitle("You have a message");
+        builder.setContentText(readFromFile()); // adds Task from the File to the notification
+        Notification myNotification = builder.build();
 
+        NotificationManager nManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        nManager.notify(0, myNotification);
+    }
+
+
+
+// Writing Task to file - used in the MainActivity
+//    @Override
+//    public void onPause()
+//    {
+//        super.onPause();
+//        String savedTask = taskName.getText().toString() +" - "
+//                + taskTime.getText().toString() +" - "+ taskDate.getText().toString();
+//        writeToFile(savedTask);
+//    }
+//
+//    @Override
+//    protected void onRestart()
+//    {
+//        super.onRestart();
+//        taskDate.setText(readFromFile());
+//    }
 
 
 

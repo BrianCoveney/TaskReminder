@@ -45,17 +45,17 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
         setContentView(R.layout.activity_main);
 
         createNotifications();
-        testFile();
+
+
 
     }
 
 
     @Override
-    public void refreshTaskList()
-    {
+    public void refreshTaskList() {
         FragmentManager mgr = getFragmentManager();
         BottomFragment secondFragmentRef =
-                (BottomFragment)mgr.findFragmentById(R.id.second_fragment);
+                (BottomFragment) mgr.findFragmentById(R.id.second_fragment);
         secondFragmentRef.refreshList();
     }
 
@@ -66,22 +66,9 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
 
         getMenuInflater().inflate(R.menu.mainmenu, menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-
-    public void testFile()
-    {
-        Button testButton = (Button) findViewById(R.id.button_test_file);
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView tv = (TextView) findViewById(R.id.text_test_file);
-                tv.setText(readFromFile());
-            }
-        });
-
 
     }
+
 
     private String readFromFile() {
 
@@ -113,13 +100,13 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
     }
 
 
+
     public void createNotifications()
     {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setSmallIcon(R.drawable.ic_remove_circle);
+        android.support.v7.app.NotificationCompat.Builder builder = new android.support.v7.app.NotificationCompat.Builder(this);
+        builder.setSmallIcon(R.drawable.ic_add_dia);
         builder.setContentTitle("You have a message");
-        builder.setContentText("Hello, how are you doing?");
-
+        builder.setContentText(readFromFile()); // adds Task from the File to the notification
         Notification myNotification = builder.build();
 
         NotificationManager nManager =
@@ -127,8 +114,6 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
 
         nManager.notify(0, myNotification);
     }
-
-
 
 }
 
