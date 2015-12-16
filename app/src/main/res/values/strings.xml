@@ -10,6 +10,7 @@
     <string name="change_time">Change Time</string>
     <string name="share_message1">The task you are sharing is:</string>
     <string name="share_message2">Thanks for sharing!</string>
+    <string name="save_task">Save</string>
 
 
     <string-array name="task_types">

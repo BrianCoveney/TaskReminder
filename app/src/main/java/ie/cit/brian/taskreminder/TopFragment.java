@@ -62,8 +62,7 @@ public class TopFragment extends Fragment {
 
     //Inflate ActionBar
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -83,8 +82,6 @@ public class TopFragment extends Fragment {
                 //EditText to get user input
                 final EditText taskName = new EditText(getActivity());
                 final EditText taskDesc = new EditText(getActivity());
-//                final EditText taskTime = new EditText(getActivity());
-//                final EditText taskDate = new EditText(getActivity());
 
 
                 //Custom Dialog
@@ -92,9 +89,6 @@ public class TopFragment extends Fragment {
                 dialogLayout.setOrientation(LinearLayout.VERTICAL);
                 dialogLayout.addView(taskName);
                 dialogLayout.addView(taskDesc);
-//                dialogLayout.addView(taskTime);
-//                dialogLayout.addView(taskDate);
-
 
 
                 alertDialog.setView(dialogLayout);
@@ -126,7 +120,7 @@ public class TopFragment extends Fragment {
 
                 alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        // Canceled.
+                        // Canceled by default.
                     }
                 });
 
