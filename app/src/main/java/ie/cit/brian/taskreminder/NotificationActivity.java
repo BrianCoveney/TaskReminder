@@ -29,7 +29,7 @@ public class NotificationActivity extends Activity {
 
     public void populateNotificationTasks()
     {
-        notificationResult = (TextView) findViewById(R.id.text_notifications);
+        notificationResult = (TextView) findViewById(R.id.text_notification1);
         notificationResult.setText(UtilityClass.readFromFile(this));
     }
 }

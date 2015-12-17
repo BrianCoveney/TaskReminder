@@ -115,7 +115,10 @@ public class TaskActivity extends FragmentActivity {
     //Save task by clicking button - write it to file and set it in the notification
     public void saveOnClick()
     {
+
+        //get the result of variable selectDate from setCurrentDate()
         setCurrentDate();
+
         saveBtn = (Button) findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override

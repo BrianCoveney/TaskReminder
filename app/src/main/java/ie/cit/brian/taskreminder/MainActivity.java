@@ -35,10 +35,11 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
     }
 
 
-    //Inflate the ActionBar
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
+        //Inflate the ActionBar 
         getMenuInflater().inflate(R.menu.mainmenu, menu);
         return super.onCreateOptionsMenu(menu);
     }

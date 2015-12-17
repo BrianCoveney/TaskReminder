@@ -4,10 +4,10 @@
     <string name="dialog_task_title">Add a task</string>
     <string name="dialog_task_message">What do you want to add?</string>
     <string name="share_task">Share</string>
-    <string name="change_date_btn">Change Date</string>
+    <string name="change_date_btn">Edit Date</string>
     <string name="spinner_title">Select a task...</string>
     <string name="add_btn">Add</string>
-    <string name="change_time">Change Time</string>
+    <string name="change_time">Edit Time</string>
     <string name="share_message1">The task you are sharing is:</string>
     <string name="share_message2">Thanks for sharing!</string>
     <string name="save_task">Save</string>

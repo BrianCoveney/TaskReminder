@@ -4,10 +4,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/text_notifications"
+        android:id="@+id/text_notification1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is the result activity opened from the notification" >
+        android:text="result "
+        style="@style/notificationCustom">
     </TextView>
 
 </LinearLayout>
