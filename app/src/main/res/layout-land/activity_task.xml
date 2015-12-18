@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/task_name"
         android:layout_alignParentTop="true"
         android:layout_marginTop="40dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         style="@style/textViewCustom"
-        />
+        android:layout_toStartOf="@+id/button_time" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,8 +21,9 @@
         android:layout_marginTop="20dp"
         android:layout_below="@+id/task_name"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        style="@style/textViewCustom"/>
+        style="@style/textViewCustom"
+        android:layout_toStartOf="@+id/save_btn"
+        android:layout_alignEnd="@+id/task_name" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,8 +32,9 @@
         android:layout_below="@+id/task_time"
         android:layout_marginTop="20dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        style="@style/textViewCustom"/>
+        style="@style/textViewCustom"
+        android:layout_toStartOf="@+id/save_btn"
+        android:layout_alignEnd="@+id/task_time" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,10 +43,23 @@
         android:layout_below="@+id/task_desc"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
-        android:layout_alignParentEnd="true"
         android:onClick="timeOnClick"
-        style="@style/textViewCustom"/>
+        style="@style/textViewCustom"
+        android:layout_toStartOf="@+id/save_btn"
+        android:layout_alignEnd="@+id/task_desc" />
 
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/share_task"
+        android:id="@+id/share_btn"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/button_background"
+        style="@style/btnCustom"
+        android:layout_marginEnd="114dp"
+        android:layout_alignTop="@+id/save_btn"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -55,31 +70,8 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/button_background"
         style="@style/btnCustom"
-        android:layout_below="@+id/text_file"
-        android:layout_alignStart="@+id/share_btn"
-        android:layout_marginTop="78dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/share_task"
-        android:id="@+id/share_btn"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/button_background"
-        style="@style/btnCustom"
-        android:layout_alignTop="@+id/save_btn"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_file"
-        android:layout_below="@+id/task_date"
-        android:layout_marginTop="27dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        />
-
+        android:layout_alignTop="@+id/button_time"
+        android:layout_toEndOf="@+id/save_btn" />
 
 
     <Button
@@ -90,7 +82,7 @@
         android:onClick="timeOnClick"
         android:background="@drawable/button_background"
         style="@style/btnCustom"
-        android:layout_alignTop="@+id/change_date_btn"
+        android:layout_alignTop="@+id/task_name"
         android:layout_alignStart="@+id/save_btn" />
 
     <Button
@@ -98,12 +90,12 @@
         android:layout_height="wrap_content"
         android:text="@string/save_task"
         android:id="@+id/save_btn"
-        android:layout_marginBottom="29dp"
         android:layout_marginLeft="20dp"
         android:background="@drawable/button_background"
         style="@style/btnCustom"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
-
+        android:layout_marginEnd="64dp"
+        android:layout_alignBaseline="@+id/task_date"
+        android:layout_alignBottom="@+id/task_date"
+        android:layout_toStartOf="@+id/share_btn" />
 
 </RelativeLayout>

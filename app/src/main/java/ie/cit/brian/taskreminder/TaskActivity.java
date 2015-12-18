@@ -218,7 +218,7 @@ public class TaskActivity extends FragmentActivity {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
 
-        builder.setSmallIcon(R.drawable.ic_add_dia);
+        builder.setSmallIcon(R.drawable.speak_bubble2);
         builder.setContentTitle("You have a message");
         builder.setContentText(UtilityClass.readFromFile(this)); // adds Task from the File to the notification
         builder.setContentIntent(resultPendingIntent);
