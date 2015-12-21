@@ -8,7 +8,13 @@
         android:title="@string/action_add"
         android:showAsAction="ifRoom"/>
 
+    <item android:id="@+id/action_settings_pref"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/action_add"
+        android:showAsAction="ifRoom"
+        />
 
+    <!--android:onClick="startPreferenceScreen"-->
 
 
 

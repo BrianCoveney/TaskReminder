@@ -36,6 +36,20 @@
         </activity>
 
         <activity
+            android:name=".PreferenceActivity"
+            android:label="Preference Activity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+            <intent-filter>
+                <action android:name=".PreferenceActivity"/>
+                <category android:name="android.intent.category.PREFERENCE"/>
+            </intent-filter>
+        </activity>
+
+
+        <activity
             android:name=".NotificationActivity"
             android:label="Notifications Activity"
             android:parentActivityName=".MainActivity">

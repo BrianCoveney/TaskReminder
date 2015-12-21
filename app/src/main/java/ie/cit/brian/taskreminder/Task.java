@@ -12,9 +12,9 @@ public class Task implements Serializable{
     private String taskName;
     private String taskDescription;
     private String taskTime;
-    private String taskDate;
+    private Date taskDate;
 
-    public Task(String taskName, String taskDescription , String taskTime , String taskDate)
+    public Task(String taskName, String taskDescription , String taskTime , Date taskDate)
     {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
@@ -23,11 +23,11 @@ public class Task implements Serializable{
 
     }
 
-    public String getTaskDate() {
+    public Date getTaskDate() {
         return taskDate;
     }
 
-    public void setTaskDate(String taskDate) {
+    public void setTaskDate(Date taskDate) {
         this.taskDate = taskDate;
     }
 

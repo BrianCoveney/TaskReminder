@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,10 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.Toolbar;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 
@@ -107,8 +110,8 @@ public class TopFragment extends Fragment {
                         String time = myTimeFormat.format(Calendar.getInstance(timeZone).getTime());
 
 
-                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                        String date = dateFormat.format(Calendar.getInstance().getTime());
+//                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        Date date = Calendar.getInstance().getTime();
 
 
                         TaskController.getInstance().addTask(name, description, time, date);
@@ -128,13 +131,15 @@ public class TopFragment extends Fragment {
 
                 break;
 
-//            case R.id.action_add_spinner:
-//                // Add preferences later...
-//
-//                break;
-//
-//            case R.id.action_remove_spinner:
-//                // Add something else later...
+            case R.id.action_settings_pref:
+
+
+                //Toast.makeText(getActivity(), "Test Worked!!", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getActivity(), PreferenceActivity.class);
+                startActivity(i);
+
+
+                break;
 
             default:
                 break;

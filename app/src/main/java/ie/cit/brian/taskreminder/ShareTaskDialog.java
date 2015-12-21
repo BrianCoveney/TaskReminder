@@ -40,6 +40,7 @@ public class ShareTaskDialog extends DialogFragment {
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("text/plain");
 
+                        //add a list of known emails
                         intent.putExtra(Intent.EXTRA_EMAIL, getResources().getStringArray(R.array.intent_email));
                         intent.putExtra(Intent.EXTRA_SUBJECT, "Task Info");
 
@@ -53,7 +54,11 @@ public class ShareTaskDialog extends DialogFragment {
 
                         intent.putExtra(Intent.EXTRA_TEXT, message);
 
-                        startActivity(intent);
+                        //extra check to be sure there is something out there that is capable of dealing with the implicit intent
+                        if(intent.resolveActivity(getActivity().getPackageManager()) != null){
+                            //always present the user with all apps that can perform the action
+                            startActivity(Intent.createChooser(intent, "Sharing is caring!"));
+                        }
 
                     }
                 })

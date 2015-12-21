@@ -28,7 +28,7 @@ public class UtilityClass extends TaskActivity {
             if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
+                String receiveString = null;
                 StringBuilder stringBuilder = new StringBuilder();
 
                 while ((receiveString = bufferedReader.readLine()) != null) {
@@ -50,17 +50,16 @@ public class UtilityClass extends TaskActivity {
 
     public static void writeToFile(Context context, String data)
     {
-
         try {
-            FileOutputStream outputStreamWriter;
-
-            outputStreamWriter = context.getApplicationContext().openFileOutput("myFile",
-                    Context.MODE_PRIVATE);
+            FileOutputStream outputStreamWriter
+                    = context.getApplicationContext().openFileOutput("myFile", context.MODE_PRIVATE);
             outputStreamWriter.write(data.getBytes());
             outputStreamWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
 }

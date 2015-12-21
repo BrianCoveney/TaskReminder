@@ -11,6 +11,12 @@
     <string name="share_message1">The task you are sharing is:</string>
     <string name="share_message2">Thanks for sharing!</string>
     <string name="save_task">Save</string>
+    <string name="clear_tasks">Clear</string>
+    <string name="pref_day">Day</string>
+    <string name="pref_day_summary">Change to Day View</string>
+    <string name="pref_week">Week</string>
+    <string name="pref_week_summary">Change to Week View</string>
+    <string name="cal_pref_settings">CALENDAR SETTINGS</string>
 
 
     <string-array name="task_types">

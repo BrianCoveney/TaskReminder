@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!-- grouped checkboxes -->
+    <PreferenceCategory android:title="@string/cal_pref_settings">
+
+        <CheckBoxPreference
+            android:key="day_preference"
+            android:title="@string/pref_day"
+            android:summary="@string/pref_day_summary"
+            android:defaultValue="false"/>
+
+        <CheckBoxPreference
+            android:key="week_preference"
+            android:title="@string/pref_week"
+            android:summary="@string/pref_week_summary"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

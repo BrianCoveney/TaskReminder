@@ -105,5 +105,25 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextFile"
+        android:layout_below="@+id/text_file"
+        android:layout_alignStart="@+id/button_time"
+        android:layout_alignEnd="@+id/change_date_btn" />
+
+    <Button
+        style="@style/btnCustom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_tasks"
+        android:id="@+id/button"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/button_background"
+        android:layout_alignTop="@+id/save_btn"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickClearFile" />
+
 
 </RelativeLayout>
