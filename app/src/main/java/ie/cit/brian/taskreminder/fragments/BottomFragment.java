@@ -1,4 +1,4 @@
-package ie.cit.brian.taskreminder;
+package ie.cit.brian.taskreminder.fragments;
 
 import android.app.ListFragment;
 import android.content.Intent;
@@ -8,6 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import ie.cit.brian.taskreminder.Task;
+import ie.cit.brian.taskreminder.activities.TaskActivity;
+import ie.cit.brian.taskreminder.TaskController;
 
 /**
  * Created by briancoveney on 11/29/15.

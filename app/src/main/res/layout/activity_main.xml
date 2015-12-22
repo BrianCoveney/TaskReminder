@@ -12,14 +12,14 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_width="match_parent"
-        class="ie.cit.brian.taskreminder.TopFragment"
+        class="ie.cit.brian.taskreminder.fragments.TopFragment"
         tools:layout="@layout/fragment_first" />
     <fragment
         android:id="@+id/second_fragment"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_width="match_parent"
-        class="ie.cit.brian.taskreminder.BottomFragment" />
+        class="ie.cit.brian.taskreminder.fragments.BottomFragment" />
 
 
 </LinearLayout>

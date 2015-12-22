@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import ie.cit.brian.taskreminder.activities.TaskActivity;
+
 /**
  * Created by briancoveney on 12/16/15.
  */

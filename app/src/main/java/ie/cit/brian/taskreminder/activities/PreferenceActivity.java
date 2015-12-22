@@ -1,4 +1,4 @@
-package ie.cit.brian.taskreminder;
+package ie.cit.brian.taskreminder.activities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.Objects;
+
+import ie.cit.brian.taskreminder.R;
 
 /**
  * Created by briancoveney on 12/21/15.

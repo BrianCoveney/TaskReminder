@@ -1,4 +1,4 @@
-package ie.cit.brian.taskreminder;
+package ie.cit.brian.taskreminder.activities;
 
 
 import android.app.DatePickerDialog;
@@ -7,11 +7,9 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
@@ -20,11 +18,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
+
+import ie.cit.brian.taskreminder.R;
+import ie.cit.brian.taskreminder.ShareTaskDialog;
+import ie.cit.brian.taskreminder.Task;
+import ie.cit.brian.taskreminder.UtilityClass;
 
 
 /**

@@ -1,4 +1,4 @@
-package ie.cit.brian.taskreminder;
+package ie.cit.brian.taskreminder.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Calendar;
+
+import ie.cit.brian.taskreminder.R;
+import ie.cit.brian.taskreminder.Task;
+import ie.cit.brian.taskreminder.UtilityClass;
 
 /**
  * Created by brian on 12/10/2015.

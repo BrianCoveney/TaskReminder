@@ -1,4 +1,4 @@
-package ie.cit.brian.taskreminder;
+package ie.cit.brian.taskreminder.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,13 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import android.widget.Toolbar;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+
+import ie.cit.brian.taskreminder.activities.PreferenceActivity;
+import ie.cit.brian.taskreminder.R;
+import ie.cit.brian.taskreminder.TaskController;
 
 
 /**

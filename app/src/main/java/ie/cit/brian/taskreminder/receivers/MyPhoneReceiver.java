@@ -1,4 +1,4 @@
-package ie.cit.brian.taskreminder;
+package ie.cit.brian.taskreminder.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
