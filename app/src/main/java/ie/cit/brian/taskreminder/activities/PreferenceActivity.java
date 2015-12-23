@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -26,17 +27,15 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
     }
 
 
-
     public static class MyPreferenceFragment extends PreferenceFragment
-            implements SharedPreferences.OnSharedPreferenceChangeListener
-    {
+            implements SharedPreferences.OnSharedPreferenceChangeListener {
         @Override
-        public void onCreate(final Bundle savedInstanceState)
-        {
+        public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
         }
 
+        //3 methods of the interface that m
         @Override
         public void onResume() {
             super.onResume();
@@ -51,20 +50,30 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if(key.equals("day_preference")){
+        }
+
+
+        //Make CheckboxPreferences work as RadioButtons
+        @Override
+        public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+
+            String key = preference.getKey();
+
+            if (key.equals("day_preference")) {
                 Toast.makeText(getActivity(), "Test Day Worked!!", Toast.LENGTH_SHORT).show();
-//                CheckBoxPreference changeToDay = (CheckBoxPreference) findPreference("day_preference");
-//                changeToDay.setChecked(true);
+                CheckBoxPreference wkPref = (CheckBoxPreference) findPreference("week_preference");
+                wkPref.setChecked(false);
 
-
-            }else if(key.equals("week_preference")){
+            } else if (key.equals("week_preference")) {
                 Toast.makeText(getActivity(), "Test Week Worked!!", Toast.LENGTH_SHORT).show();
-//                CheckBoxPreference changeToWeek = (CheckBoxPreference) findPreference("day_preference");
-//                changeToWeek.setChecked(true);
+                CheckBoxPreference dayPref = (CheckBoxPreference) findPreference("day_preference");
+                dayPref.setChecked(false);
 
             }
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
+
     }
-
-
 }
+
+

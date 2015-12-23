@@ -70,6 +70,11 @@
             </intent-filter>
         </receiver>
 
+
+        <service
+            android:name=".MyIntentService"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

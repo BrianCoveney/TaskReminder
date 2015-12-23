@@ -5,20 +5,20 @@ import android.app.FragmentManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
-
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-
+import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.UtilityClass;
-import ie.cit.brian.taskreminder.activities.NotificationActivity;
 import ie.cit.brian.taskreminder.fragments.BottomFragment;
 import ie.cit.brian.taskreminder.fragments.TopFragment;
+
 
 
 /**
@@ -26,12 +26,18 @@ import ie.cit.brian.taskreminder.fragments.TopFragment;
  */
 public class MainActivity extends FragmentActivity implements TopFragment.TaskSearcher {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         createNotifications();
+
+        //Start Intentservice
+        Intent intent = new Intent(this, MyIntentService.class);
+        startService(intent);
 
     }
 
@@ -54,7 +60,8 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
     }
 
 
-    public void createNotifications() {
+    public void createNotifications()
+    {
 
         //unique ID used for multiple notifications
         int uniqueNumber = (int) System.currentTimeMillis();
@@ -92,6 +99,23 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
         }
 
     }
+
+
+
+    // Broadcast receiver for receiving status updates from the IntentService
+    private class ResponseReceiver extends BroadcastReceiver
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+
+
+
+        }
+
+    }
+
+
 
 
 }
