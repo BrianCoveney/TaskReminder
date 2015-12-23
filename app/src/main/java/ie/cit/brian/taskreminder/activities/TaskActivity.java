@@ -57,14 +57,11 @@ public class TaskActivity extends FragmentActivity {
         populateTasks();
         shareTaskDialog();
         saveOnClick();
-
-
     }
 
 
     public void populateTasks()
     {
-
         //get the Task from the bottom fragment and display it in a new activity's textview
         theTask  = (Task) getIntent().getSerializableExtra("selectedTask");
         taskName = (TextView) findViewById(R.id.task_name);
@@ -154,21 +151,22 @@ public class TaskActivity extends FragmentActivity {
     public void setCurrentTime()
     {
         //Save button - updates file and the EditText in this activity
-        DateFormat myTaskTime = new SimpleDateFormat("HH:mm a");
+        DateFormat myTimeFormat = new SimpleDateFormat("HH:mm a");
         TimeZone timeZone = TimeZone.getTimeZone("GMT");
-        myTaskTime.setTimeZone(timeZone);
-        taskTime.setText("Task Time: " + myTaskTime.format(cal.getTime()));
+        myTimeFormat.setTimeZone(timeZone);
+        taskTime.setText("Task Time: " + myTimeFormat.format(cal.getTime()));
 
         //String selectedTime passed into the saveOnClick() to save to file
-        selectedTime = myTaskTime.format(cal.getTime());
+        selectedTime = myTimeFormat.format(cal.getTime());
     }
 
 
     //Save task by clicking button - write it to file and set it in the notification
     public void saveOnClick()
     {
-        //get the result of variable selectDate from setCurrentDate()
+
         setCurrentDate();
+        setCurrentTime();
 
         saveBtn = (Button) findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -264,19 +262,3 @@ public class TaskActivity extends FragmentActivity {
 }
 
 
-//Un-used
-//    public void addCalEvent(String title, String location, Calendar begin, Calendar end)
-//    {
-//
-//        Intent intent = new Intent(Intent.ACTION_INSERT)
-//                .putExtra(CalendarContract.Events.TITLE, title)
-//                .putExtra(CalendarContract.Events.EVENT_LOCATION, location)
-//                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin)
-//                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end);
-//        if(intent.resolveActivity(getPackageManager()) != null){
-//            startActivity(intent);
-//        }
-//
-//        EditText et = (EditText) findViewById(R.id.editTextFile);
-//        et.setText(UtilityClass.readFromFile(getApplicationContext()));
-//    }

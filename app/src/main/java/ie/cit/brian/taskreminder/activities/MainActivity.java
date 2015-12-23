@@ -8,9 +8,13 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import ie.cit.brian.taskreminder.MyIntentService;
@@ -26,6 +30,7 @@ import ie.cit.brian.taskreminder.fragments.TopFragment;
  */
 public class MainActivity extends FragmentActivity implements TopFragment.TaskSearcher {
 
+    private static String TAG = "ie.cit.brian.taskreminder";
 
 
     @Override
@@ -35,11 +40,33 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
 
         createNotifications();
 
-        //Start Intentservice
-        Intent intent = new Intent(this, MyIntentService.class);
-        startService(intent);
+
+        //Services
+        Intent i = new Intent(this, MyIntentService.class);
+
+        //Create an IntentFilter for it
+        IntentFilter myIntentFilter = new IntentFilter("myBroadcast");
+
+        //Register the BroadcastReceiver and its filter with the Android OS
+        LocalBroadcastManager.getInstance(this).registerReceiver(myBroadcastReceiver, myIntentFilter);
+        startService(i);
 
     }
+
+    private BroadcastReceiver myBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String messageFromBroadcast = intent.getStringExtra("myBroadcastMessage");
+
+            //Test passed
+            Toast.makeText(getApplicationContext(), messageFromBroadcast, Toast.LENGTH_LONG).show();
+
+            //Test passed
+            Log.i(TAG, "The service has started from Activity");
+
+        }
+    };
+
 
 
     @Override
@@ -99,23 +126,5 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
         }
 
     }
-
-
-
-    // Broadcast receiver for receiving status updates from the IntentService
-    private class ResponseReceiver extends BroadcastReceiver
-    {
-        @Override
-        public void onReceive(Context context, Intent intent)
-        {
-
-
-
-        }
-
-    }
-
-
-
 
 }

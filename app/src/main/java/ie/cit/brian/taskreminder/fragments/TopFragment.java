@@ -113,10 +113,11 @@ public class TopFragment extends Fragment {
                         String time = myTimeFormat.format(Calendar.getInstance(timeZone).getTime());
 
 
-//                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
                         Date date = Calendar.getInstance().getTime();
 
 
+                        //Populate the task details
                         TaskController.getInstance().addTask(name, description, time, date);
                         searcher.refreshTaskList();
 

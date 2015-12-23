@@ -35,7 +35,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
             addPreferencesFromResource(R.xml.preferences);
         }
 
-        //3 methods of the interface that m
+
         @Override
         public void onResume() {
             super.onResume();
@@ -53,27 +53,25 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
         }
 
 
-        //Make CheckboxPreferences work as RadioButtons
+        //Configure CheckboxPreferences to work like RadioButtons
         @Override
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
             String key = preference.getKey();
 
             if (key.equals("day_preference")) {
-                Toast.makeText(getActivity(), "Test Day Worked!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Day", Toast.LENGTH_SHORT).show();
                 CheckBoxPreference wkPref = (CheckBoxPreference) findPreference("week_preference");
                 wkPref.setChecked(false);
 
             } else if (key.equals("week_preference")) {
-                Toast.makeText(getActivity(), "Test Week Worked!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Week", Toast.LENGTH_SHORT).show();
                 CheckBoxPreference dayPref = (CheckBoxPreference) findPreference("day_preference");
                 dayPref.setChecked(false);
-
             }
+
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
 
     }
 }
-
-
