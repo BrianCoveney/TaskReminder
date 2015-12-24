@@ -43,8 +43,7 @@ public class TaskActivity extends FragmentActivity {
 
     final Calendar cal = Calendar.getInstance();
 
-    public interface taskReader
-    {
+    public interface taskReader {
         public void readTasks();
     }
 
@@ -60,10 +59,9 @@ public class TaskActivity extends FragmentActivity {
     }
 
 
-    public void populateTasks()
-    {
+    public void populateTasks() {
         //get the Task from the bottom fragment and display it in a new activity's textview
-        theTask  = (Task) getIntent().getSerializableExtra("selectedTask");
+        theTask = (Task) getIntent().getSerializableExtra("selectedTask");
         taskName = (TextView) findViewById(R.id.task_name);
         taskDesc = (TextView) findViewById(R.id.task_desc);
         taskTime = (TextView) findViewById(R.id.task_time);
@@ -76,8 +74,7 @@ public class TaskActivity extends FragmentActivity {
     }
 
 
-    public void shareTaskDialog()
-    {
+    public void shareTaskDialog() {
         shareBtn = (Button) findViewById(R.id.share_btn);
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +89,6 @@ public class TaskActivity extends FragmentActivity {
             }
         });
     }
-
-
 
 
     //get Calendar Date
@@ -129,9 +124,9 @@ public class TaskActivity extends FragmentActivity {
 
     TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
         @Override
-        public void onTimeSet( TimePicker view, int hourOfDay, int minute ) {
-            cal.set( Calendar.HOUR_OF_DAY, hourOfDay );
-            cal.set( Calendar.MINUTE, minute );
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            cal.set(Calendar.MINUTE, minute);
 
             setCurrentTime();
         }
@@ -139,8 +134,7 @@ public class TaskActivity extends FragmentActivity {
 
 
     //Date and Notifications changed onClick the Change Edit Date button
-    public void setCurrentDate()
-    {
+    public void setCurrentDate() {
         DateFormat myDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         taskDate.setText("Date: " + myDateFormat.format(cal.getTime()));
         selectedDate = myDateFormat.format(cal.getTime());
@@ -148,8 +142,7 @@ public class TaskActivity extends FragmentActivity {
 
 
     //Time and Notifications changed onClick the Change Edit Time button
-    public void setCurrentTime()
-    {
+    public void setCurrentTime() {
         //Save button - updates file and the EditText in this activity
         DateFormat myTimeFormat = new SimpleDateFormat("HH:mm a");
         TimeZone timeZone = TimeZone.getTimeZone("GMT");
@@ -162,8 +155,7 @@ public class TaskActivity extends FragmentActivity {
 
 
     //Save task by clicking button - write it to file and set it in the notification
-    public void saveOnClick()
-    {
+    public void saveOnClick() {
 
         setCurrentDate();
         setCurrentTime();
@@ -182,56 +174,46 @@ public class TaskActivity extends FragmentActivity {
                 createNotifications();
 
                 //Testing file
-                EditText et = (EditText) findViewById(R.id.editTextFile);
-                et.setText(UtilityClass.readFromFile(getApplicationContext()));
+//                EditText et = (EditText) findViewById(R.id.editTextFile);
+//                et.setText(UtilityClass.readFromFile(getApplicationContext()));
             }
         });
     }
 
 
-    //Deletes the content of "myFile" (Internal Storage)
-    public void onClickClearFile(View v)
-    {
-        deleteFile("myFile");
-
-        //Testing file
-        EditText et = (EditText) findViewById(R.id.editTextFile);
-        et.setText(UtilityClass.readFromFile(getApplicationContext()));
-    }
-
-
-
-
-
     /**
      * When user rotated the screen - to Landscape/Portrait,
-     * the Date data preserved and still displays in its TextView
+     * the Date data preserved and still displays in its TextView.
+     * There's a bud here where the rotating the screen will append to
+     * instead of replacing the task in TextView.
      */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
 
+
         String savedTask =
-                taskName.getText().toString() +" - "+
+                taskName.getText().toString() + " - " +
                         taskDate.getText().toString();
 
         UtilityClass.writeToFile(this, savedTask);
         savedInstanceState.putString("savedKey", savedTask);
         super.onSaveInstanceState(savedInstanceState);
+
     }
 
 
     @Override
     public void onRestoreInstanceState(Bundle restoredInstanceState) {
+
         String restoredSate = restoredInstanceState.getString("savedKey");
+
         taskDate.setText(restoredSate);
+
         super.onRestoreInstanceState(restoredInstanceState);
     }
 
 
-
-
-    public void createNotifications()
-    {
+    public void createNotifications() {
 
         //unique ID used for multiple notifications
         int uniqueNumber = (int) System.currentTimeMillis();
@@ -258,7 +240,18 @@ public class TaskActivity extends FragmentActivity {
 
         nManager.notify(uniqueNumber, myNotification);
     }
-
 }
+
+    //Deletes the content of "myFile" (Internal Storage)
+//    public void onClickClearFile(View v)
+//    {
+//        deleteFile("myFile");
+//
+//        //Testing file
+////        EditText et = (EditText) findViewById(R.id.editTextFile);
+////        et.setText(UtilityClass.readFromFile(getApplicationContext()));
+//    }
+
+
 
 
