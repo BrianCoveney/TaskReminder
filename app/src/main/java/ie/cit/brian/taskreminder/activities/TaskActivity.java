@@ -184,33 +184,31 @@ public class TaskActivity extends FragmentActivity {
     /**
      * When user rotated the screen - to Landscape/Portrait,
      * the Date data preserved and still displays in its TextView.
-     * There's a bud here where the rotating the screen will append to
-     * instead of replacing the task in TextView.
      */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
+        String savedDate = taskDate.getText().toString();
+        String savedTime = taskTime.getText().toString();
 
+        savedInstanceState.putString("saved_date", savedDate);
+        savedInstanceState.putString("saved_time", savedTime);
 
-        String savedTask =
-                taskName.getText().toString() + " - " +
-                        taskDate.getText().toString();
-
-        UtilityClass.writeToFile(this, savedTask);
-        savedInstanceState.putString("savedKey", savedTask);
         super.onSaveInstanceState(savedInstanceState);
-
     }
 
 
     @Override
     public void onRestoreInstanceState(Bundle restoredInstanceState) {
+        String restoredDate = restoredInstanceState.getString("saved_date");
+        String restoredTime = restoredInstanceState.getString("saved_time");
 
-        String restoredSate = restoredInstanceState.getString("savedKey");
-
-        taskDate.setText(restoredSate);
+        taskDate.setText(restoredDate);
+        taskTime.setText(restoredTime);
 
         super.onRestoreInstanceState(restoredInstanceState);
     }
+
+
 
 
     public void createNotifications() {
@@ -241,17 +239,5 @@ public class TaskActivity extends FragmentActivity {
         nManager.notify(uniqueNumber, myNotification);
     }
 }
-
-    //Deletes the content of "myFile" (Internal Storage)
-//    public void onClickClearFile(View v)
-//    {
-//        deleteFile("myFile");
-//
-//        //Testing file
-////        EditText et = (EditText) findViewById(R.id.editTextFile);
-////        et.setText(UtilityClass.readFromFile(getApplicationContext()));
-//    }
-
-
 
 

@@ -28,7 +28,6 @@ public class MyIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent workIntent)
     {
-
         String dayOfWeek;
         SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.UK);
         Calendar cal = Calendar.getInstance();
