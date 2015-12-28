@@ -9,7 +9,9 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
@@ -56,6 +58,12 @@ public class TaskActivity extends FragmentActivity {
         populateTasks();
         shareTaskDialog();
         saveOnClick();
+
+        loadSavedPreferences();
+
+        // Time and Date only set after user edits
+        taskTime.setText("");
+        taskDate.setText("");
     }
 
 
@@ -69,8 +77,7 @@ public class TaskActivity extends FragmentActivity {
 
         taskName.setText("Task: " + theTask.getTaskName());
         taskDesc.setText("Description: " + theTask.getTaskDescription());
-        taskTime.setText("Time: " + theTask.getTaskTime());
-        taskDate.setText("Date: " + theTask.getTaskDate());
+        ;
     }
 
 
@@ -194,6 +201,7 @@ public class TaskActivity extends FragmentActivity {
         savedInstanceState.putString("saved_time", savedTime);
 
         super.onSaveInstanceState(savedInstanceState);
+
     }
 
 
@@ -209,7 +217,34 @@ public class TaskActivity extends FragmentActivity {
     }
 
 
+    private void loadSavedPreferences()
+    {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        taskDate.setText(sharedPref.getString("date_pref", ""));
+        taskTime.setText(sharedPref.getString("time_pref", ""));
+    }
 
+    private void savedPreferences(String key, String value)
+    {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+
+    public void saveData()
+    {
+        savedPreferences("date_pref", taskDate.getText().toString());
+        savedPreferences("time_pref", taskTime.getText().toString());
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        saveData();
+        super.onBackPressed();
+    }
 
     public void createNotifications() {
 
