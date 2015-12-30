@@ -142,9 +142,10 @@ public class TaskActivity extends FragmentActivity {
 
     //Date and Notifications changed onClick the Change Edit Date button
     public void setCurrentDate() {
-        DateFormat myDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat myDateFormat = new SimpleDateFormat("EE, dd/MM/yyyy");
         taskDate.setText("Date: " + myDateFormat.format(cal.getTime()));
         selectedDate = myDateFormat.format(cal.getTime());
+
     }
 
 
@@ -245,6 +246,8 @@ public class TaskActivity extends FragmentActivity {
         saveData();
         super.onBackPressed();
     }
+
+
 
     public void createNotifications() {
 

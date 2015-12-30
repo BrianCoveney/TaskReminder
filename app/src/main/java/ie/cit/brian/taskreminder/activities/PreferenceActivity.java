@@ -61,6 +61,11 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 
             if (key.equals("day_preference")) {
                 Toast.makeText(getActivity(), "Day", Toast.LENGTH_SHORT).show();
+
+
+
+
+
                 CheckBoxPreference wkPref = (CheckBoxPreference) findPreference("week_preference");
                 wkPref.setChecked(false);
 

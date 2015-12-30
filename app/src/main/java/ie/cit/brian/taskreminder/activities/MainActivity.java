@@ -9,14 +9,23 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
+
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.UtilityClass;
@@ -41,6 +50,34 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
         createNotifications();
 
 
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String myDate = sharedPreferences.getString("date_pref", "");
+
+        //Test passed
+        TextView tv = (TextView) findViewById(R.id.testTV);
+        tv.setText(myDate);
+
+
+        //TaskActivity's SharedPreferences - Date, passed to MainActvity
+        if(myDate.contains("Mon")){
+            Toast.makeText(this, "Task due today - Monday", Toast.LENGTH_LONG).show();
+        }else if(myDate.contains("Tue")){
+            Toast.makeText(this, "Task due today - Tuesday", Toast.LENGTH_LONG).show();
+        }else if(myDate.contains("Wed")){
+            Toast.makeText(this, "Task due today - Wednesday", Toast.LENGTH_LONG).show();
+        }else if(myDate.contains("Thurs")){
+            Toast.makeText(this, "Task due today - Thursday", Toast.LENGTH_LONG).show();
+        }else if(myDate.contains("Fri")){
+            Toast.makeText(this, "Task due today - Friday", Toast.LENGTH_LONG).show();
+        }else if(myDate.contains("Sat")){
+            Toast.makeText(this, "Task due today - Saturday", Toast.LENGTH_LONG).show();
+        }else if(myDate.contains("Sun")){
+            Toast.makeText(this, "Task due today - Sunday", Toast.LENGTH_LONG).show();
+        }
+
+
+
+
         //Services
         Intent i = new Intent(this, MyIntentService.class);
 
@@ -59,7 +96,7 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
             String messageFromBroadcast = intent.getStringExtra("myBroadcastMessage");
 
             //Test passed
-            Toast.makeText(getApplicationContext(), messageFromBroadcast, Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), messageFromBroadcast, Toast.LENGTH_LONG).show();
 
             //Test passed
             Log.i(TAG, "The service has started from Activity");
