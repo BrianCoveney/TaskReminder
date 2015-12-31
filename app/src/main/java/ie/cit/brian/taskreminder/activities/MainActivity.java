@@ -15,16 +15,19 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
@@ -50,31 +53,58 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
         createNotifications();
 
 
+//      reterived from PreferenceActivity
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String changedSettings = sPref.getString("myPrefKey", "");
+
+        if(changedSettings.contains("day")) {
+            Toast toast = Toast.makeText(this, changedSettings, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }else if(changedSettings.contains("week")) {
+            Toast toast = Toast.makeText(this, changedSettings, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+
+
+        //retreived from TaskActivity
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String myDate = sharedPreferences.getString("date_pref", "");
 
-        //Test passed
-        TextView tv = (TextView) findViewById(R.id.testTV);
-        tv.setText(myDate);
+
+
+        Calendar cal = Calendar.getInstance();
+        DateFormat myDateFormat = new SimpleDateFormat("EEEE");
+        String today = myDateFormat.format(cal.getTime());
+
+        if (myDate.contains(today) ){
+            Toast.makeText(this, "Task due today - " + today, Toast.LENGTH_SHORT).show();
+
+        }
 
 
         //TaskActivity's SharedPreferences - Date, passed to MainActvity
-        if(myDate.contains("Mon")){
-            Toast.makeText(this, "Task due today - Monday", Toast.LENGTH_LONG).show();
-        }else if(myDate.contains("Tue")){
-            Toast.makeText(this, "Task due today - Tuesday", Toast.LENGTH_LONG).show();
-        }else if(myDate.contains("Wed")){
-            Toast.makeText(this, "Task due today - Wednesday", Toast.LENGTH_LONG).show();
-        }else if(myDate.contains("Thurs")){
-            Toast.makeText(this, "Task due today - Thursday", Toast.LENGTH_LONG).show();
-        }else if(myDate.contains("Fri")){
-            Toast.makeText(this, "Task due today - Friday", Toast.LENGTH_LONG).show();
-        }else if(myDate.contains("Sat")){
-            Toast.makeText(this, "Task due today - Saturday", Toast.LENGTH_LONG).show();
-        }else if(myDate.contains("Sun")){
-            Toast.makeText(this, "Task due today - Sunday", Toast.LENGTH_LONG).show();
-        }
+//        if(myDate.contains("Mon")){
+//            Toast.makeText(this, "Task due today - Monday", Toast.LENGTH_SHORT).show();
+//        }else if(myDate.contains("Tue")){
+//            Toast.makeText(this, "Task due today - Tuesday", Toast.LENGTH_SHORT).show();
+//        }else if(myDate.contains("Wed")){
+//            Toast.makeText(this, "Task due today - Wednesday", Toast.LENGTH_SHORT).show();
+//        }else if(myDate.contains("Thu")){
+//            Toast.makeText(this, "Task due today - Thursday", Toast.LENGTH_SHORT).show();
+//        }else if(myDate.contains("Fri")){
+//            Toast.makeText(this, "Task due today - Friday", Toast.LENGTH_SHORT).show();
+//        }else if(myDate.contains("Sat")){
+//            Toast.makeText(this, "Task due today - Saturday", Toast.LENGTH_SHORT).show();
+//        }else if(myDate.contains("Sun")){
+//            Toast.makeText(this, "Task due today - Sunday", Toast.LENGTH_SHORT).show();
+//        }
 
+
+        //Test passed
+//        TextView tv = (TextView) findViewById(R.id.testTV);
+//        tv.setText(myDate);
 
 
 

@@ -14,14 +14,16 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/testTV"
-        android:layout_below="@+id/my_toolbar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp" />
+
+    <!-- test
+    <TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="New Text"-->
+        <!--android:id="@+id/testTV"-->
+        <!--android:layout_below="@+id/my_toolbar"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="48dp" />-->
 
 
 </RelativeLayout>

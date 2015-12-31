@@ -1,10 +1,12 @@
 package ie.cit.brian.taskreminder.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -27,10 +29,21 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
     }
 
 
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(PreferenceActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+        super.onBackPressed();
+    }
+
+
     public static class MyPreferenceFragment extends PreferenceFragment
             implements SharedPreferences.OnSharedPreferenceChangeListener {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
+
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
         }
@@ -60,23 +73,33 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
             String key = preference.getKey();
 
             if (key.equals("day_preference")) {
-                Toast.makeText(getActivity(), "Day", Toast.LENGTH_SHORT).show();
+                String mDay = "Change to day";
 
-
-
-
-
+                Toast.makeText(getActivity(), mDay, Toast.LENGTH_SHORT).show();
                 CheckBoxPreference wkPref = (CheckBoxPreference) findPreference("week_preference");
                 wkPref.setChecked(false);
 
+                SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor = sPref.edit();
+                editor.putString("myPrefKey", mDay);
+                editor.commit();
+                ;
+
             } else if (key.equals("week_preference")) {
-                Toast.makeText(getActivity(), "Week", Toast.LENGTH_SHORT).show();
+                String mWeek = "Change to week";
+                Toast.makeText(getActivity(), mWeek, Toast.LENGTH_SHORT).show();
                 CheckBoxPreference dayPref = (CheckBoxPreference) findPreference("day_preference");
                 dayPref.setChecked(false);
+
+                SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor = sPref.edit();
+                editor.putString("myPrefKey", mWeek);
+                editor.commit();
             }
 
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
+
 
     }
 }
