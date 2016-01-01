@@ -62,8 +62,8 @@ public class TaskActivity extends FragmentActivity {
         loadSavedPreferences();
 
         // Time and Date only set after user edits
-        taskTime.setText("");
-        taskDate.setText("");
+//        taskTime.setText("");
+//        taskDate.setText("");
     }
 
 
@@ -77,7 +77,9 @@ public class TaskActivity extends FragmentActivity {
 
         taskName.setText("Task: " + theTask.getTaskName());
         taskDesc.setText("Description: " + theTask.getTaskDescription());
-        ;
+        taskTime.setText(theTask.getTaskTime());
+        taskDate.setText(theTask.getTaskDate().toString());
+
     }
 
 
@@ -142,8 +144,8 @@ public class TaskActivity extends FragmentActivity {
 
     //Date and Notifications changed onClick the Change Edit Date button
     public void setCurrentDate() {
-        DateFormat myDateFormat = new SimpleDateFormat("EEEE, dd/MM/yyyy");
-        taskDate.setText("Date: " + myDateFormat.format(cal.getTime()));
+        DateFormat myDateFormat = new SimpleDateFormat("F, EEEE, dd/MM/yyyy");
+        taskDate.setText(myDateFormat.format(cal.getTime()));
         selectedDate = myDateFormat.format(cal.getTime());
 
     }
@@ -155,7 +157,7 @@ public class TaskActivity extends FragmentActivity {
         DateFormat myTimeFormat = new SimpleDateFormat("HH:mm a");
         TimeZone timeZone = TimeZone.getTimeZone("GMT");
         myTimeFormat.setTimeZone(timeZone);
-        taskTime.setText("Task Time: " + myTimeFormat.format(cal.getTime()));
+        taskTime.setText(myTimeFormat.format(cal.getTime()));
 
         //String selectedTime passed into the saveOnClick() to save to file
         selectedTime = myTimeFormat.format(cal.getTime());
@@ -181,9 +183,6 @@ public class TaskActivity extends FragmentActivity {
 
                 createNotifications();
 
-                //Testing file
-//                EditText et = (EditText) findViewById(R.id.editTextFile);
-//                et.setText(UtilityClass.readFromFile(getApplicationContext()));
             }
         });
     }
@@ -274,7 +273,7 @@ public class TaskActivity extends FragmentActivity {
 
 
         builder.setSmallIcon(R.drawable.speak_bubble2);
-        builder.setContentTitle("You have a message");
+        builder.setContentTitle("You have a new message");
         builder.setContentText(UtilityClass.readFromFile(getApplicationContext())); // adds Task from the File to the notification
         builder.setContentIntent(resultPendingIntent);
         Notification myNotification = builder.build();

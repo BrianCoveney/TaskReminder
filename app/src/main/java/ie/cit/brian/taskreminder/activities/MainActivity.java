@@ -17,18 +17,12 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
-import android.widget.TextView;
 import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.TimeZone;
-
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.UtilityClass;
@@ -43,6 +37,7 @@ import ie.cit.brian.taskreminder.fragments.TopFragment;
 public class MainActivity extends FragmentActivity implements TopFragment.TaskSearcher {
 
     private static String TAG = "ie.cit.brian.taskreminder";
+    private final Calendar cal = Calendar.getInstance();
 
 
     @Override
@@ -51,61 +46,7 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
         setContentView(R.layout.activity_main);
 
         createNotifications();
-
-
-//      reterived from PreferenceActivity
-        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String changedSettings = sPref.getString("myPrefKey", "");
-
-        if(changedSettings.contains("day")) {
-            Toast toast = Toast.makeText(this, changedSettings, Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
-            toast.show();
-        }else if(changedSettings.contains("week")) {
-            Toast toast = Toast.makeText(this, changedSettings, Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
-            toast.show();
-        }
-
-
-        //retreived from TaskActivity
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String myDate = sharedPreferences.getString("date_pref", "");
-
-
-
-        Calendar cal = Calendar.getInstance();
-        DateFormat myDateFormat = new SimpleDateFormat("EEEE");
-        String today = myDateFormat.format(cal.getTime());
-
-        if (myDate.contains(today) ){
-            Toast.makeText(this, "Task due today - " + today, Toast.LENGTH_SHORT).show();
-
-        }
-
-
-        //TaskActivity's SharedPreferences - Date, passed to MainActvity
-//        if(myDate.contains("Mon")){
-//            Toast.makeText(this, "Task due today - Monday", Toast.LENGTH_SHORT).show();
-//        }else if(myDate.contains("Tue")){
-//            Toast.makeText(this, "Task due today - Tuesday", Toast.LENGTH_SHORT).show();
-//        }else if(myDate.contains("Wed")){
-//            Toast.makeText(this, "Task due today - Wednesday", Toast.LENGTH_SHORT).show();
-//        }else if(myDate.contains("Thu")){
-//            Toast.makeText(this, "Task due today - Thursday", Toast.LENGTH_SHORT).show();
-//        }else if(myDate.contains("Fri")){
-//            Toast.makeText(this, "Task due today - Friday", Toast.LENGTH_SHORT).show();
-//        }else if(myDate.contains("Sat")){
-//            Toast.makeText(this, "Task due today - Saturday", Toast.LENGTH_SHORT).show();
-//        }else if(myDate.contains("Sun")){
-//            Toast.makeText(this, "Task due today - Sunday", Toast.LENGTH_SHORT).show();
-//        }
-
-
-        //Test passed
-//        TextView tv = (TextView) findViewById(R.id.testTV);
-//        tv.setText(myDate);
-
+        settingsChangedNotification();
 
 
         //Services
@@ -180,7 +121,7 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
                         (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
                 builder.setSmallIcon(R.drawable.speak_bubble2);
-                builder.setContentTitle("You have a message");
+                builder.setContentTitle("You have a new message");
                 builder.setContentText(UtilityClass.readFromFile(getApplicationContext())); // adds Task from the File to the notification
                 builder.setContentIntent(resultPendingIntent);
                 Notification myNotification = builder.build();
@@ -194,4 +135,60 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
 
     }
 
+
+    public void settingsChangedNotification()
+    {
+        //reterived from PreferenceActivity
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String changedSettings = sPref.getString("myPrefKey", "");
+
+        if(changedSettings.contains("day")) {
+
+            //Display toast if preference setting has been changed to Day
+            Toast toast = Toast.makeText(this, changedSettings, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+
+
+            //Date retreived from TaskActivity
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String myDate = sharedPreferences.getString("date_pref", "");
+
+            //get todays date
+            DateFormat dateFormatDay = new SimpleDateFormat("EEEE, dd/MM/yyyy");
+            String today = dateFormatDay.format(cal.getTime());
+
+            //compare and display toast - if task is due today
+            if (myDate.equals(today) ){
+                Toast.makeText(this, "Task due today - " + today, Toast.LENGTH_SHORT).show();
+            }
+
+
+        }else if(changedSettings.contains("week")) {
+
+            //Display toast if preference setting has been changed to Week
+            Toast toast = Toast.makeText(this, changedSettings, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+
+
+            SharedPreferences shPref = PreferenceManager.getDefaultSharedPreferences(this);
+            String mDate = shPref.getString("date_pref", "");
+            String mSubString = mDate.substring(0, 1); //get first charAT of Date - the week of month
+
+
+
+            //'F' -> Day of week in month(1-5)
+            DateFormat weekFormat = new SimpleDateFormat("F");
+            String dayOfMonth = weekFormat.format(cal.getTime());
+
+
+            // if Task is due in the current week of the month - display a toast
+            if(dayOfMonth.equals(mSubString)){
+                Toast.makeText(this, "Task due this week of the month: " + mSubString,
+                        Toast.LENGTH_LONG).show();
+
+            }
+        }
+    }
 }

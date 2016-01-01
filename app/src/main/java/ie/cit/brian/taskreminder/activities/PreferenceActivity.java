@@ -73,7 +73,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
             String key = preference.getKey();
 
             if (key.equals("day_preference")) {
-                String mDay = "Change to day";
+                String mDay = "Changed to day";
 
                 Toast.makeText(getActivity(), mDay, Toast.LENGTH_SHORT).show();
                 CheckBoxPreference wkPref = (CheckBoxPreference) findPreference("week_preference");
@@ -83,10 +83,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
                 SharedPreferences.Editor editor = sPref.edit();
                 editor.putString("myPrefKey", mDay);
                 editor.commit();
-                ;
+
 
             } else if (key.equals("week_preference")) {
-                String mWeek = "Change to week";
+                String mWeek = "Changed to week";
                 Toast.makeText(getActivity(), mWeek, Toast.LENGTH_SHORT).show();
                 CheckBoxPreference dayPref = (CheckBoxPreference) findPreference("day_preference");
                 dayPref.setChecked(false);
