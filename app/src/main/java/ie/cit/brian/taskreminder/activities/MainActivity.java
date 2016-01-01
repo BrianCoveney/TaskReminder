@@ -155,12 +155,12 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
             String myDate = sharedPreferences.getString("date_pref", "");
 
             //get todays date
-            DateFormat dateFormatDay = new SimpleDateFormat("EEEE, dd/MM/yyyy");
+            DateFormat dateFormatDay = new SimpleDateFormat("F, EEEE, dd/MM/yyyy");
             String today = dateFormatDay.format(cal.getTime());
 
             //compare and display toast - if task is due today
             if (myDate.equals(today) ){
-                Toast.makeText(this, "Task due today - " + today, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Task due today - Week:" + today, Toast.LENGTH_SHORT).show();
             }
 
 
