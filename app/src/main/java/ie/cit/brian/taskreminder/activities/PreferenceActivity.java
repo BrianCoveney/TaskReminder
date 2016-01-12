@@ -46,6 +46,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+
         }
 
 
@@ -71,12 +72,24 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
             String key = preference.getKey();
+            CheckBoxPreference wkPref = (CheckBoxPreference) findPreference("week_preference");
+            CheckBoxPreference dayPref = (CheckBoxPreference) findPreference("day_preference");
 
-            if (key.equals("day_preference")) {
+
+
+            if(key.equals(null)){
+                String none = "not changed";
+
+                Toast.makeText(getActivity(), none, Toast.LENGTH_SHORT).show();
+                wkPref.setChecked(false);
+                dayPref.setChecked(false);
+
+            }
+
+            else if (key.equals("day_preference")) {
                 String mDay = "Changed to day";
 
                 Toast.makeText(getActivity(), mDay, Toast.LENGTH_SHORT).show();
-                CheckBoxPreference wkPref = (CheckBoxPreference) findPreference("week_preference");
                 wkPref.setChecked(false);
 
                 SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -88,7 +101,6 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
             } else if (key.equals("week_preference")) {
                 String mWeek = "Changed to week";
                 Toast.makeText(getActivity(), mWeek, Toast.LENGTH_SHORT).show();
-                CheckBoxPreference dayPref = (CheckBoxPreference) findPreference("day_preference");
                 dayPref.setChecked(false);
 
                 SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getActivity());

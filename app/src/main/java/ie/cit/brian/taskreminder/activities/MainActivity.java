@@ -76,7 +76,6 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
     };
 
 
-
     @Override
     public void refreshTaskList() {
         FragmentManager mgr = getFragmentManager();
@@ -95,8 +94,7 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
     }
 
 
-    public void createNotifications()
-    {
+    public void createNotifications() {
 
         //unique ID used for multiple notifications
         int uniqueNumber = (int) System.currentTimeMillis();
@@ -136,13 +134,12 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
     }
 
 
-    public void settingsChangedNotification()
-    {
+    public void settingsChangedNotification() {
         //reterived from PreferenceActivity
         SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(this);
         String changedSettings = sPref.getString("myPrefKey", "");
 
-        if(changedSettings.contains("day")) {
+        if (changedSettings.contains("day")) {
 
             //Display toast if preference setting has been changed to Day
             Toast toast = Toast.makeText(this, changedSettings, Toast.LENGTH_LONG);
@@ -154,17 +151,19 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             String myDate = sharedPreferences.getString("date_pref", "");
 
+
             //get todays date
-            DateFormat dateFormatDay = new SimpleDateFormat("F, EEEE, dd/MM/yyyy");
-            String today = dateFormatDay.format(cal.getTime());
+            DateFormat dateFormatDay = new SimpleDateFormat("F EEEE, dd/MM/yyyy");
+            String mDate = dateFormatDay.format(cal.getTime());
+
 
             //compare and display toast - if task is due today
-            if (myDate.equals(today) ){
-                Toast.makeText(this, "Task due today - Week:" + today, Toast.LENGTH_SHORT).show();
+            if (myDate.equals(myDateFormat())) {
+                Toast.makeText(this, "Task due today: " + myDateFormat(), Toast.LENGTH_LONG).show();
             }
 
 
-        }else if(changedSettings.contains("week")) {
+        } else if (changedSettings.contains("week")) {
 
             //Display toast if preference setting has been changed to Week
             Toast toast = Toast.makeText(this, changedSettings, Toast.LENGTH_LONG);
@@ -176,8 +175,6 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
             String mDate = shPref.getString("date_pref", "");
             String mSubString = mDate.substring(0, 1); //get first charAT of Date - the week of month
 
-
-
             //'F' -> Day of week in month(1-5)
             DateFormat weekFormat = new SimpleDateFormat("F");
             String dayOfMonth = weekFormat.format(cal.getTime());
@@ -185,10 +182,43 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
 
             // if Task is due in the current week of the month - display a toast
             if(dayOfMonth.equals(mSubString)){
-                Toast.makeText(this, "Task due this week of the month: " + mSubString,
+                Toast.makeText(this, "Task due this week: "+ myDateFormat().substring(0, 3) +" of the month",
                         Toast.LENGTH_LONG).show();
-
             }
         }
     }
+
+
+    public String myDateFormat()
+    {
+        DateFormat dateFormatDay = new SimpleDateFormat("F EEEE, dd/MM/yyyy");
+        String mDate = dateFormatDay.format(cal.getTime());
+        String subMyDate = mDate.substring(0, 1);
+
+        String a = "st Week, ";
+        String b = "nd Week, ";
+        String c = "rd Week, ";
+        String d = "th Week, ";
+
+        if (subMyDate.equals("1")) {
+            StringBuilder str = new StringBuilder(mDate);
+            str.insert(1, a).toString();
+            mDate = str.toString();
+        } else if (subMyDate.equals("2")) {
+            StringBuilder str = new StringBuilder(mDate);
+            str.insert(1, b).toString();
+            mDate = str.toString();
+        } else if (subMyDate.equals("3")) {
+            StringBuilder str = new StringBuilder(mDate);
+            str.insert(1, c).toString();
+            mDate = str.toString();
+        } else if (subMyDate.equals("4")
+                || subMyDate.equals("5")) {
+            StringBuilder str = new StringBuilder(mDate);
+            str.insert(1, d).toString();
+            mDate = str.toString();
+        }
+        return mDate;
+    }
+
 }

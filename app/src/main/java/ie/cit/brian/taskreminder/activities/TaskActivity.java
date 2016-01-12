@@ -144,9 +144,37 @@ public class TaskActivity extends FragmentActivity {
 
     //Date and Notifications changed onClick the Change Edit Date button
     public void setCurrentDate() {
-        DateFormat myDateFormat = new SimpleDateFormat("F, EEEE, dd/MM/yyyy");
-        taskDate.setText(myDateFormat.format(cal.getTime()));
-        selectedDate = myDateFormat.format(cal.getTime());
+
+
+        DateFormat dateFormatDay = new SimpleDateFormat("F EEEE, dd/MM/yyyy");
+        String mDate = dateFormatDay.format(cal.getTime());
+        String subMyDate = mDate.substring(0, 1);
+        String a = "st Week, ";
+        String b = "nd Week, ";
+        String c = "rd Week, ";
+        String d = "th Week, ";
+
+        if(subMyDate.equals("1")){
+            StringBuilder str = new StringBuilder(mDate);
+            str.insert(1, a).toString();
+            mDate = str.toString();
+        }else if(subMyDate.equals("2")) {
+            StringBuilder str = new StringBuilder(mDate);
+            str.insert(1, b).toString();
+            mDate = str.toString();
+        }else if(subMyDate.equals("3")) {
+            StringBuilder str = new StringBuilder(mDate);
+            str.insert(1, c).toString();
+            mDate = str.toString();
+        }else if(subMyDate.equals("4")
+                 || subMyDate.equals("5")) {
+            StringBuilder str = new StringBuilder(mDate);
+            str.insert(1, d).toString();
+            mDate = str.toString();
+        }
+
+        taskDate.setText(mDate);
+        selectedDate = mDate;
 
     }
 
