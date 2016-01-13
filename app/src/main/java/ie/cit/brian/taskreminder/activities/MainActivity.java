@@ -21,7 +21,9 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
@@ -32,6 +34,8 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.UtilityClass;
@@ -43,15 +47,19 @@ import ie.cit.brian.taskreminder.fragments.TopFragment;
 /**
  * Created by briancoveney on 11/25/15.
  */
-public class MainActivity extends FragmentActivity implements TopFragment.TaskSearcher, GoogleApiClient.ConnectionCallbacks {
+public class MainActivity extends FragmentActivity implements TopFragment.TaskSearcher,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private static String TAG = "ie.cit.brian.taskreminder";
     private final Calendar cal = Calendar.getInstance();
     private GoogleApiClient mGoogleApiClient;
 
-    protected Location mLastLocation;
-    protected TextView mLatitudeText;
-    protected TextView mLongitudeText;
+
+    protected Location mCurrentLocation;
+    protected LocationRequest mLocationRequest;
+    protected TextView mLatitudeText,mLongitudeText,mLastUpdateTimeTextView;
+    protected Boolean mRequestingLocationUpdates;
+    protected String mLastUpdateTime;
 
 
     @Override
@@ -61,6 +69,7 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
 
         createNotifications();
         settingsChangedNotification();
+        createLocationRequest();
 
         //create an instance of GoogleApiClient
         GoogleApiClient.Builder builder =
@@ -76,6 +85,7 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
 
         mLatitudeText = (TextView)findViewById(R.id.mLatitudeText);
         mLongitudeText = (TextView)findViewById(R.id.mLongitudeText);
+        mLastUpdateTimeTextView = (TextView) findViewById(R.id.mLastUpdateTimeTextView);
 
 
         //Services
@@ -253,18 +263,57 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
 
     //** Google Play Services & Location API **//
 
-    //Get Last Known Location
     @Override
     public void onConnected(Bundle bundle) {
 
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+        // get Last Known Location - display current Lat Log in a textview
+//        mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(
+//                mGoogleApiClient);
+//        if (mCurrentLocation != null) {
+//            mLatitudeText.setText(String.valueOf(mCurrentLocation.getLatitude()));
+//            mLongitudeText.setText(String.valueOf(mCurrentLocation.getLongitude()));
+//        }else{
+//            Toast.makeText(this, "Location test failed", Toast.LENGTH_LONG).show();
+//        }
+
+
+        mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
-        if (mLastLocation != null) {
-            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
-        }else{
-            Toast.makeText(this, "Location test failed", Toast.LENGTH_LONG).show();
-        }
+            startLocationUpdates();
+
+    }
+
+    protected void createLocationRequest()
+    {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(50000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    protected void startLocationUpdates() {
+
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    }
+
+
+    // define the LocationListener's interface method to display the current Lat, Long and Timestamp
+    @Override
+    public void onLocationChanged(Location location) {
+        mCurrentLocation = location;
+        mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
+        updateUI();
+    }
+
+    private void updateUI()
+    {
+        mLatitudeText.setText(String.valueOf(mCurrentLocation.getLatitude()));
+        mLongitudeText.setText(String.valueOf(mCurrentLocation.getLongitude()));
+        mLastUpdateTimeTextView.setText(mLastUpdateTime);
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
 
     }
 
