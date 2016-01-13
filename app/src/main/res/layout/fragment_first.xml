@@ -14,6 +14,23 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/mLatitudeText"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/mLongitudeText"
+        android:layout_below="@+id/mLatitudeText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp" />
 
 
 </RelativeLayout>

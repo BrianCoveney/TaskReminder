@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_id": "taskreminder-46dfe",
+    "project_number": "408006783755",
+    "name": "TaskReminder"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408006783755:android:476a9082b489484f",
+        "client_id": "android:ie.cit.brian.taskreminder",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "ie.cit.brian.taskreminder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

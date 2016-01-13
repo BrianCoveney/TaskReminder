@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
@@ -17,7 +18,15 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+
+import org.w3c.dom.Text;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.DateFormat;
@@ -34,10 +43,15 @@ import ie.cit.brian.taskreminder.fragments.TopFragment;
 /**
  * Created by briancoveney on 11/25/15.
  */
-public class MainActivity extends FragmentActivity implements TopFragment.TaskSearcher {
+public class MainActivity extends FragmentActivity implements TopFragment.TaskSearcher, GoogleApiClient.ConnectionCallbacks {
 
     private static String TAG = "ie.cit.brian.taskreminder";
     private final Calendar cal = Calendar.getInstance();
+    private GoogleApiClient mGoogleApiClient;
+
+    protected Location mLastLocation;
+    protected TextView mLatitudeText;
+    protected TextView mLongitudeText;
 
 
     @Override
@@ -47,6 +61,21 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
 
         createNotifications();
         settingsChangedNotification();
+
+        //create an instance of GoogleApiClient
+        GoogleApiClient.Builder builder =
+                new GoogleApiClient.Builder(this);
+
+        //Add the location api
+        builder.addApi(LocationServices.API);
+        //tell it what to call back to when it has connected to the Google Service
+        builder.addConnectionCallbacks(this);
+
+        mGoogleApiClient = builder.build();
+
+
+        mLatitudeText = (TextView)findViewById(R.id.mLatitudeText);
+        mLongitudeText = (TextView)findViewById(R.id.mLongitudeText);
 
 
         //Services
@@ -221,4 +250,41 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
         return mDate;
     }
 
+
+    //** Google Play Services & Location API **//
+
+    //Get Last Known Location
+    @Override
+    public void onConnected(Bundle bundle) {
+
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+        }else{
+            Toast.makeText(this, "Location test failed", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
 }
