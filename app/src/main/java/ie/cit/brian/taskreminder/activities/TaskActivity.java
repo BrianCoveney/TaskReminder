@@ -16,15 +16,12 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
-
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.ShareTaskDialog;
 import ie.cit.brian.taskreminder.Task;

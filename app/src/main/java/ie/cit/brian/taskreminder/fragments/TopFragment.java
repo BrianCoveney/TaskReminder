@@ -2,7 +2,7 @@ package ie.cit.brian.taskreminder.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-
 import ie.cit.brian.taskreminder.activities.PreferenceActivity;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.TaskController;
@@ -30,7 +29,6 @@ import ie.cit.brian.taskreminder.TaskController;
  * Created by briancoveney on 11/29/15.
  */
 public class TopFragment extends Fragment {
-
 
     private TaskSearcher searcher;
 
@@ -47,9 +45,11 @@ public class TopFragment extends Fragment {
         getActivity().setActionBar(myToolBar);
         getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 
+
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
 
 
     @Override
@@ -137,11 +137,8 @@ public class TopFragment extends Fragment {
 
             case R.id.action_settings_pref:
 
-
-                //Toast.makeText(getActivity(), "Test Worked!!", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getActivity(), PreferenceActivity.class);
                 startActivity(i);
-
 
                 break;
 
