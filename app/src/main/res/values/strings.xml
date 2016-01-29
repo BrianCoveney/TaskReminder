@@ -22,7 +22,6 @@
     <string name="start_loc_updates">Start Location Updates</string>
 
 
-
     <string-array name="task_types">
         <item>Running</item>
         <item>Shopping</item>
@@ -35,5 +34,6 @@
         <item>bricoveney@yahoo.co.uk</item>
         <item>simon.long@cit.ie</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

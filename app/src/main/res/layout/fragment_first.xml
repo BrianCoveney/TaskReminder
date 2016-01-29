@@ -24,5 +24,14 @@
         android:layout_marginTop="25dp"
         android:onClick="startLocationActivity" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Google Maps"
+        android:id="@+id/google_map_btn"
+        android:layout_below="@+id/start_location_activity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp" />
+
 
 </RelativeLayout>

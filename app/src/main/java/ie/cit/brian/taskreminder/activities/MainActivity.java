@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.UtilityClass;
@@ -40,7 +41,7 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
 
     private static String TAG = "ie.cit.brian.taskreminder";
     private final Calendar cal = Calendar.getInstance();
-    private Button locationStartBtn;
+    private Button locationStartBtn, googleMapsBtn;
 
 
 
@@ -65,6 +66,17 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
             }
         });
 
+
+        googleMapsBtn = (Button) findViewById(R.id.google_map_btn);
+        googleMapsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, MapsActivity.class);
+                if(i.resolveActivity(MainActivity.this.getPackageManager()) != null) {
+                    startActivity(i);
+                }
+            }
+        });
 
         //Services
         Intent i = new Intent(this, MyIntentService.class);
@@ -243,3 +255,4 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
     }
 
 }
+

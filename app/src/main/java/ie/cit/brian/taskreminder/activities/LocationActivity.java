@@ -1,6 +1,7 @@
 package ie.cit.brian.taskreminder.activities;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
@@ -70,6 +71,9 @@ public class LocationActivity extends FragmentActivity implements
         locationButton = (Button) findViewById(R.id.location_btn);
 
 
+
+
+
         //restore the saved values from the previous instance of the activity
         updateValuesFromBundle(savedInstanceState);
 
@@ -134,6 +138,20 @@ public class LocationActivity extends FragmentActivity implements
         if(mRequestingLocationUpdates) {
             startLocationUpdates();
         }
+
+        // save Lat Long for use in Maps Activity
+        Double mLat = mCurrentLocation.getLatitude();
+        Double mLong = mCurrentLocation.getLongitude();
+        SharedPreferences sharedPref = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putLong("latitude_key", Double.doubleToLongBits((mLat)));
+        editor.putLong("longitude_key", Double.doubleToLongBits((mLong)));
+        editor.commit();
+
+
+
+
+
     }
 
     protected void createLocationRequest()
@@ -178,6 +196,9 @@ public class LocationActivity extends FragmentActivity implements
         }
 
         mTimeText.setText(mLastUpdateTime);
+
+
+
     }
 
 
@@ -275,6 +296,7 @@ public class LocationActivity extends FragmentActivity implements
             updateUI();
         }
     }
+
 }
 
 

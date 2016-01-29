@@ -12,6 +12,13 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/stop_loc_updates"/>
 
+    <Button
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
