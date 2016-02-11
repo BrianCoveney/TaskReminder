@@ -16,7 +16,7 @@ import ie.cit.brian.taskreminder.TaskController;
 /**
  * Created by briancoveney on 11/29/15.
  */
-public class BottomFragment extends ListFragment {
+public class SecondFragment extends ListFragment {
 
 
     private ArrayAdapter<Task> adapter;

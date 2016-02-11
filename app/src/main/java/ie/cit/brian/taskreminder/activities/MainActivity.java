@@ -28,15 +28,15 @@ import java.util.Calendar;
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.UtilityClass;
-import ie.cit.brian.taskreminder.fragments.BottomFragment;
-import ie.cit.brian.taskreminder.fragments.TopFragment;
+import ie.cit.brian.taskreminder.fragments.SecondFragment;
+import ie.cit.brian.taskreminder.fragments.FirstFragment;
 
 
 
 /**
  * Created by briancoveney on 11/25/15.
  */
-public class MainActivity extends FragmentActivity implements TopFragment.TaskSearcher {
+public class MainActivity extends FragmentActivity implements FirstFragment.TaskSearcher {
 
 
     private static String TAG = "ie.cit.brian.taskreminder";
@@ -112,8 +112,8 @@ public class MainActivity extends FragmentActivity implements TopFragment.TaskSe
     @Override
     public void refreshTaskList() {
         FragmentManager mgr = getFragmentManager();
-        BottomFragment secondFragmentRef =
-                (BottomFragment) mgr.findFragmentById(R.id.second_fragment);
+        SecondFragment secondFragmentRef =
+                (SecondFragment) mgr.findFragmentById(R.id.second_fragment);
         secondFragmentRef.refreshList();
     }
 
