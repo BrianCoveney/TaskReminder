@@ -14,10 +14,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -43,6 +47,10 @@ public class MainActivity extends FragmentActivity implements FirstFragment.Task
     private final Calendar cal = Calendar.getInstance();
     private Button locationStartBtn, googleMapsBtn;
 
+    private String[] mTaskTitles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+
 
 
     @Override
@@ -52,6 +60,7 @@ public class MainActivity extends FragmentActivity implements FirstFragment.Task
 
         createNotifications();
         settingsChangedNotification();
+        addDrawerItems();
 
 
         //button to launch the Location Activity
@@ -91,6 +100,23 @@ public class MainActivity extends FragmentActivity implements FirstFragment.Task
     }
 
 
+    private void addDrawerItems(){
+        mTaskTitles = getResources().getStringArray(R.array.task_types);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, mTaskTitles));
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, "Item clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
 
 
@@ -121,7 +147,7 @@ public class MainActivity extends FragmentActivity implements FirstFragment.Task
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        //Inflate the ActionBar 
+        //Inflate the ActionBar
         getMenuInflater().inflate(R.menu.mainmenu, menu);
         return super.onCreateOptionsMenu(menu);
     }
