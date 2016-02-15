@@ -40,6 +40,9 @@ public class ShareTaskDialog extends DialogFragment {
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("text/plain");
 
+                        intent.addFlags(
+                                Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
                         //add a list of known emails
                         intent.putExtra(Intent.EXTRA_EMAIL, getResources().getStringArray(R.array.intent_email));
                         intent.putExtra(Intent.EXTRA_SUBJECT, "Task Info");

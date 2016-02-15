@@ -6,33 +6,58 @@
     android:layout_height="match_parent">
 
 
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+
+        <!-- Toolbar wrapping over the three fragments below -->
+        <Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            />
+
+    </LinearLayout>
+
+
+
     <!-- Content inside LinearLayout, which needs to be used to keep correct positioning of the fragments -->
     <LinearLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <fragment
             android:id="@+id/first_fragment"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:layout_width="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             class="ie.cit.brian.taskreminder.fragments.FirstFragment"
             tools:layout="@layout/fragment_first" />
 
         <fragment
             android:id="@+id/second_fragment"
-            android:layout_height="0dp"
+            android:layout_marginTop="50dp"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_width="match_parent"
             class="ie.cit.brian.taskreminder.fragments.SecondFragment" />
 
         <fragment
             android:id="@+id/third_fragment"
-            android:layout_height="0dp"
+            android:layout_marginTop="50dp"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_width="match_parent"
             class="ie.cit.brian.taskreminder.fragments.ThirdFragment" />
+
     </LinearLayout>
 
 

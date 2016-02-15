@@ -31,6 +31,12 @@
         <item>Studying</item>
     </string-array>
 
+    <string-array name="menu_items">
+        <item>Settings</item>
+        <item>Google Map</item>
+        <item>Find Location</item>
+    </string-array>
+
     <string-array name="intent_email">
         <item>brian.coveney@mycit.ie</item>
         <item>bricoveney@yahoo.co.uk</item>
