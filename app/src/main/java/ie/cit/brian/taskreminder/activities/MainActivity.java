@@ -109,7 +109,7 @@ public class MainActivity extends FragmentActivity implements FirstFragment.Task
 
         // Set the adapter for the list view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mTaskItems));
+                R.layout.drawer_list_item, R.id.mNavDrawerListTV, mTaskItems));
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
