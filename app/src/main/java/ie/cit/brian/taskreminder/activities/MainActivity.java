@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import ie.cit.brian.taskreminder.CustomAdapter;
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.UtilityClass;
@@ -51,6 +54,7 @@ public class MainActivity extends FragmentActivity implements FirstFragment.Task
     private String[] mTaskItems;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
+    private ImageView navImages;
 
 
 
@@ -103,33 +107,40 @@ public class MainActivity extends FragmentActivity implements FirstFragment.Task
 
     private void addDrawerItems(){
         mTaskItems = getResources().getStringArray(R.array.menu_items);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navImages = (ImageView) findViewById(R.id.mNavDrawerListIcons);
 
 
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, R.id.mNavDrawerListTV, mTaskItems));
+
+        // add a Header to the Nav Drawer
+        View headerView = View.inflate(this, R.layout.nav_header, null);
+        mDrawerList.addHeaderView(headerView);
+
+
+        CustomAdapter customAdapter = new CustomAdapter(this, mTaskItems);
+        mDrawerList.setAdapter(customAdapter);
+        
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                switch (position){
-                    case 0:
+                switch (position) {
+                    case 1:
                         Intent a = new Intent(MainActivity.this, PreferenceActivity.class);
-                        if(a.resolveActivity(MainActivity.this.getPackageManager()) != null) {
+                        if (a.resolveActivity(MainActivity.this.getPackageManager()) != null) {
                             startActivity(a);
                         }
                         break;
-                    case 1:
+                    case 2:
                         Intent b = new Intent(MainActivity.this, MapsActivity.class);
-                        if(b.resolveActivity(MainActivity.this.getPackageManager()) != null) {
+                        if (b.resolveActivity(MainActivity.this.getPackageManager()) != null) {
                             startActivity(b);
                         }
-                    case 2:
+                    case 3:
                         Intent c = new Intent(MainActivity.this, LocationActivity.class);
-                        if(c.resolveActivity(MainActivity.this.getPackageManager()) != null) {
+                        if (c.resolveActivity(MainActivity.this.getPackageManager()) != null) {
                             startActivity(c);
                         }
                     default:

@@ -31,7 +31,7 @@
         android:id="@+id/mLongitudeText"
         android:layout_below="@+id/mLatitudeText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal" />
 
     <TextView

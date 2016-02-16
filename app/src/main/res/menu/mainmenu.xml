@@ -4,12 +4,12 @@
 
 
     <item android:id="@+id/action_add_dialog"
-        android:icon="@drawable/ic_add_dia"
+        android:icon="@drawable/ic_add_24dp"
         android:title="@string/action_add"
         android:showAsAction="ifRoom"/>
 
     <item android:id="@+id/action_settings_pref"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_settings_applications_24dp"
         android:title="@string/action_add"
         android:showAsAction="ifRoom"
         />
