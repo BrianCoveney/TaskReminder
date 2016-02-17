@@ -3,19 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+    <!--To ensure Items are visible and not displayed as 3 dots on RHS of Actionbar
+    Change android:showAsAction="always" to app:showAsAction="always"-->
     <item android:id="@+id/action_add_dialog"
-        android:icon="@drawable/ic_add_24dp"
+        android:icon="@drawable/ic_map_48dp"
         android:title="@string/action_add"
-        android:showAsAction="ifRoom"/>
+        app:showAsAction="always"
+        android:visible="true" />
 
     <item android:id="@+id/action_settings_pref"
-        android:icon="@drawable/ic_settings_applications_24dp"
+        android:icon="@drawable/ic_satellite_48dp"
         android:title="@string/action_add"
-        android:showAsAction="ifRoom"
-        />
-
-    <!--android:onClick="startPreferenceScreen"-->
-
-
-
+        app:showAsAction="always"
+        android:visible="true"/>
 </menu>

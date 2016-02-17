@@ -42,9 +42,7 @@ public class FirstFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 
-        Toolbar myToolBar = (Toolbar)getActivity().findViewById(R.id.my_toolbar);
-        getActivity().setActionBar(myToolBar);
-        getActivity().getActionBar().setDisplayShowTitleEnabled(true);
+
         addTaskFloatingButton();
 
 
@@ -87,29 +85,29 @@ public class FirstFragment extends Fragment {
     }
 
 
-    //Action bar options
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //Dialog user entries
-        switch (item.getItemId()) {
-            case R.id.action_add_dialog:
-
-                myCustomAddTaskDiaglog();
-
-                break;
-
-            case R.id.action_settings_pref:
-
-                Intent i = new Intent(getActivity(), PreferenceActivity.class);
-                startActivity(i);
-
-                break;
-
-            default:
-                break;
-        }
-        return true;
-    }
+//    //Action bar options
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        //Dialog user entries
+//        switch (item.getItemId()) {
+//            case R.id.action_add_dialog:
+//
+//                myCustomAddTaskDiaglog();
+//
+//                break;
+//
+//            case R.id.action_settings_pref:
+//
+//                Intent i = new Intent(getActivity(), PreferenceActivity.class);
+//                startActivity(i);
+//
+//                break;
+//
+//            default:
+//                break;
+//        }
+//        return true;
+//    }
 
     // display customer dialog to add tasks
     public void myCustomAddTaskDiaglog(){

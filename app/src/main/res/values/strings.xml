@@ -51,6 +51,8 @@
         <item>simon.long@cit.ie</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
+    <string name="drawer_close">drawer close</string>
+    <string name="action_settings">action_settings</string>
 
 
 </resources>

@@ -50,10 +50,12 @@
         <item name="android:background">#fdf998</item>
         <!-- Used for the title and text -->
         <item name="android:textColorPrimary">@color/red_A700</item>
-
-
-
     </style>
 
+    <!-- Hamburger menu -->
+    <style name="Theme.Test.DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
 
 </resources>
