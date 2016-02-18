@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@drawable/mystyles">
 
     <ImageView
         android:id="@+id/mNavDrawerListIcons"
@@ -21,10 +22,11 @@
         android:textColor="#fff"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
-        android:background="?android:attr/activatedBackgroundIndicator"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:layout_gravity="center_vertical"
         />
+    <!--android:background="?android:attr/activatedBackgroundIndicator"-->
+
 
 </LinearLayout>
 

@@ -32,7 +32,7 @@ import ie.cit.brian.taskreminder.R;
 /**
  * Created by briancoveney on 11/25/15.
  */
-public class LocationActivity extends FragmentActivity implements
+public class LocationActivity extends Activity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private Button locationButton;
@@ -191,7 +191,7 @@ public class LocationActivity extends FragmentActivity implements
 //            CharSequence ln = mLongitudeText.getText();
             mLongitudeText.setVisibility(View.VISIBLE);
         }else {
-            mLatitudeText.setText("Connection failed. Is location enabled?");
+            mLatitudeText.setText(R.string.connection_failed);
             mLongitudeText.setVisibility(View.INVISIBLE);
         }
 

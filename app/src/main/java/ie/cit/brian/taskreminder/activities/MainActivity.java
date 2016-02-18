@@ -62,7 +62,6 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
 
     private static String TAG = "ie.cit.brian.taskreminder";
     private final Calendar cal = Calendar.getInstance();
-    private Button locationStartBtn, googleMapsBtn;
 
     private FirstFragment.TaskSearcher searcher;
 
@@ -82,7 +81,7 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
 
         createNotifications();
         settingsChangedNotification();
-//        addTaskFloatingButton();
+
 
         addDrawerItems();
         setupDrawer();
@@ -91,29 +90,7 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
         getSupportActionBar().setHomeButtonEnabled(true);
 //        getSupportActionBar().setTitle(null);
 
-        //button to launch the Location Activity
-        locationStartBtn = (Button) findViewById(R.id.start_location_activity);
-        locationStartBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, LocationActivity.class);
-                if (i.resolveActivity(MainActivity.this.getPackageManager()) != null) {
-                    startActivity(i);
-                }
-            }
-        });
 
-
-        googleMapsBtn = (Button) findViewById(R.id.google_map_btn);
-        googleMapsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, MapsActivity.class);
-                if (i.resolveActivity(MainActivity.this.getPackageManager()) != null) {
-                    startActivity(i);
-                }
-            }
-        });
 
         //Services
         Intent i = new Intent(this, MyIntentService.class);
@@ -178,12 +155,16 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
         // when items in Actionbar are pressed
         switch (item.getItemId()) {
             case R.id.action_add_dialog:
-                Intent a = new Intent(this, MapsActivity.class);
-                startActivity(a);
+                Intent a = new Intent(MainActivity.this, LocationActivity.class);
+                if (a.resolveActivity(MainActivity.this.getPackageManager()) != null) {
+                    startActivity(a);
+                }
                 break;
             case R.id.action_settings_pref:
-                Intent b = new Intent(this, LocationActivity.class);
-                startActivity(b);
+                Intent b = new Intent(MainActivity.this, MapsActivity.class);
+                if (b.resolveActivity(MainActivity.this.getPackageManager()) != null) {
+                    startActivity(b);
+                }
                 break;
             default:
                 break;
@@ -210,7 +191,7 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
         CustomAdapter customAdapter = new CustomAdapter(this, mTaskItems);
         mDrawerList.setAdapter(customAdapter);
 
-
+        // when items in Navigation Drawer are pressed
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -227,6 +208,7 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
                         if (b.resolveActivity(MainActivity.this.getPackageManager()) != null) {
                             startActivity(b);
                         }
+                        break;
                     case 3:
                         Intent c = new Intent(MainActivity.this, LocationActivity.class);
                         if (c.resolveActivity(MainActivity.this.getPackageManager()) != null) {
@@ -234,6 +216,7 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
                         }
                     default:
                 }
+
             }
         });
     } /*** end Navigation Drawer and ActionBar ***/

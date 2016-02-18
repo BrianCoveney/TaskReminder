@@ -53,6 +53,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="drawer_close">drawer close</string>
     <string name="action_settings">action_settings</string>
+    <string name="connection_failed">Connection failed. Is location enabled?</string>
 
 
 </resources>
