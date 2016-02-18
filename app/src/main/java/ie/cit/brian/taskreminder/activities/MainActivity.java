@@ -1,53 +1,39 @@
 package ie.cit.brian.taskreminder.activities;
 
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
-
 import ie.cit.brian.taskreminder.CustomAdapter;
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
-import ie.cit.brian.taskreminder.TaskController;
 import ie.cit.brian.taskreminder.UtilityClass;
 import ie.cit.brian.taskreminder.fragments.SecondFragment;
 import ie.cit.brian.taskreminder.fragments.FirstFragment;
@@ -57,7 +43,7 @@ import ie.cit.brian.taskreminder.fragments.FirstFragment;
 /**
  * Created by briancoveney on 11/25/15.
  */
-public class MainActivity extends ActionBarActivity implements FirstFragment.TaskSearcher {
+public class MainActivity extends AppCompatActivity implements FirstFragment.TaskSearcher {
 
 
     private static String TAG = "ie.cit.brian.taskreminder";
@@ -73,7 +59,6 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
     private ActionBarDrawerToggle mDrawerToggle;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +71,8 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
         addDrawerItems();
         setupDrawer();
 
+
+        assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 //        getSupportActionBar().setTitle(null);
@@ -154,17 +141,11 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
 
         // when items in Actionbar are pressed
         switch (item.getItemId()) {
-            case R.id.action_add_dialog:
-                Intent a = new Intent(MainActivity.this, LocationActivity.class);
-                if (a.resolveActivity(MainActivity.this.getPackageManager()) != null) {
-                    startActivity(a);
-                }
+            case R.id.action_location:
+                UtilityClass.launchLocationActivity(this);
                 break;
-            case R.id.action_settings_pref:
-                Intent b = new Intent(MainActivity.this, MapsActivity.class);
-                if (b.resolveActivity(MainActivity.this.getPackageManager()) != null) {
-                    startActivity(b);
-                }
+            case R.id.action_googlemaps:
+                UtilityClass.launchGoogleMapsActivity(this);
                 break;
             default:
                 break;
@@ -198,22 +179,13 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
 
                 switch (position) {
                     case 1:
-                        Intent a = new Intent(MainActivity.this, PreferenceActivity.class);
-                        if (a.resolveActivity(MainActivity.this.getPackageManager()) != null) {
-                            startActivity(a);
-                        }
+                        UtilityClass.launchSettingsActivity(getApplicationContext());
                         break;
                     case 2:
-                        Intent b = new Intent(MainActivity.this, MapsActivity.class);
-                        if (b.resolveActivity(MainActivity.this.getPackageManager()) != null) {
-                            startActivity(b);
-                        }
+                        UtilityClass.launchGoogleMapsActivity(getApplicationContext());
                         break;
                     case 3:
-                        Intent c = new Intent(MainActivity.this, LocationActivity.class);
-                        if (c.resolveActivity(MainActivity.this.getPackageManager()) != null) {
-                            startActivity(c);
-                        }
+                        UtilityClass.launchLocationActivity(getApplicationContext());
                     default:
                 }
 
@@ -335,24 +307,29 @@ public class MainActivity extends ActionBarActivity implements FirstFragment.Tas
         String c = "rd Week, ";
         String d = "th Week, ";
 
-        if (subMyDate.equals("1")) {
-            StringBuilder str = new StringBuilder(mDate);
-            str.insert(1, a).toString();
-            mDate = str.toString();
-        } else if (subMyDate.equals("2")) {
-            StringBuilder str = new StringBuilder(mDate);
-            str.insert(1, b).toString();
-            mDate = str.toString();
-        } else if (subMyDate.equals("3")) {
-            StringBuilder str = new StringBuilder(mDate);
-            str.insert(1, c).toString();
-            mDate = str.toString();
-        } else if (subMyDate.equals("4")
-                || subMyDate.equals("5")) {
-            StringBuilder str = new StringBuilder(mDate);
-            str.insert(1, d).toString();
-            mDate = str.toString();
+        StringBuilder str = new StringBuilder(mDate);
+
+
+        switch (subMyDate){
+            case "1":
+                str.insert(1, a);
+                mDate = str.toString();
+                break;
+            case "2":
+                str.insert(1, b);
+                mDate = str.toString();
+                break;
+            case "3":
+                str.insert(1, c);
+                mDate = str.toString();
+                break;
+            case "4":
+            case "5":
+                str.insert(1, d);
+                mDate = str.toString();
+                break;
         }
+
         return mDate;
     }
 }

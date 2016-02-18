@@ -2,7 +2,10 @@ package ie.cit.brian.taskreminder;
 
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,6 +13,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import ie.cit.brian.taskreminder.activities.LocationActivity;
+import ie.cit.brian.taskreminder.activities.MainActivity;
+import ie.cit.brian.taskreminder.activities.MapsActivity;
+import ie.cit.brian.taskreminder.activities.PreferenceActivity;
 import ie.cit.brian.taskreminder.activities.TaskActivity;
 
 /**
@@ -63,5 +70,22 @@ public class UtilityClass extends TaskActivity {
     }
 
 
+    public static void launchGoogleMapsActivity(Context context){
+        Intent map = new Intent(context, MapsActivity.class);
+        map.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(map);
+    }
 
+    public static void launchLocationActivity(Context context){
+        Intent loc = new Intent(context, LocationActivity.class);
+        loc.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(loc);
+    }
+
+
+    public static void launchSettingsActivity(Context context){
+        Intent pref = new Intent(context, PreferenceActivity.class);
+        pref.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(pref);
+    }
 }

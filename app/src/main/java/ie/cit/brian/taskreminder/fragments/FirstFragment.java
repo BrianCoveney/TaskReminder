@@ -4,24 +4,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toolbar;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-import ie.cit.brian.taskreminder.activities.PreferenceActivity;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.TaskController;
 
@@ -85,29 +81,6 @@ public class FirstFragment extends Fragment {
     }
 
 
-//    //Action bar options
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        //Dialog user entries
-//        switch (item.getItemId()) {
-//            case R.id.action_add_dialog:
-//
-//                myCustomAddTaskDiaglog();
-//
-//                break;
-//
-//            case R.id.action_settings_pref:
-//
-//                Intent i = new Intent(getActivity(), PreferenceActivity.class);
-//                startActivity(i);
-//
-//                break;
-//
-//            default:
-//                break;
-//        }
-//        return true;
-//    }
 
     // display customer dialog to add tasks
     public void myCustomAddTaskDiaglog(){

@@ -12,6 +12,8 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,8 @@ import com.google.android.gms.location.LocationServices;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import ie.cit.brian.taskreminder.CustomAdapter;
 import ie.cit.brian.taskreminder.R;
 
 
@@ -36,6 +40,7 @@ public class LocationActivity extends Activity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private Button locationButton;
+    private Switch locationSwitch;
     private static String TAG = "ie.cit.brian.taskreminder";
     private final Calendar cal = Calendar.getInstance();
     private GoogleApiClient mGoogleApiClient;
@@ -68,33 +73,31 @@ public class LocationActivity extends Activity implements
         mLatitudeText = (TextView)findViewById(R.id.mLatitudeText);
         mLongitudeText = (TextView)findViewById(R.id.mLongitudeText);
         mTimeText = (TextView) findViewById(R.id.mLastUpdateTimeTextView);
-        locationButton = (Button) findViewById(R.id.location_btn);
+        locationSwitch = (Switch) findViewById(R.id.switch_location);
 
 
 
 
-
-        //restore the saved values from the previous instance of the activity
-        updateValuesFromBundle(savedInstanceState);
-
-        locationButton.setOnClickListener(new View.OnClickListener() {
+        locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 togglePeriodicLocUpdates();
             }
         });
+
+
     }
 
 
 
     private void togglePeriodicLocUpdates() {
         if(!mRequestingLocationUpdates){
-            locationButton.setText(R.string.stop_loc_updates);
+            locationSwitch.setText(R.string.stop_loc_updates);
             mRequestingLocationUpdates = true;
 
             startLocationUpdates();
         }else{
-            locationButton.setText(R.string.start_loc_updates);
+            locationSwitch.setText(R.string.start_loc_updates);
             mRequestingLocationUpdates = false;
 
             stopLocationUpdates();
