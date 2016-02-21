@@ -34,12 +34,15 @@ public class CustomAdapter extends ArrayAdapter<String> {
         // add Icons to the Nav Drawer Items
         switch (position){
             case 0:
-                imageView.setImageResource(R.drawable.ic_settings_applications_48dp);
+                imageView.setImageResource(R.drawable.ic_home_24dp);
                 break;
             case 1:
-                imageView.setImageResource(R.drawable.ic_satellite_48dp);
+                imageView.setImageResource(R.drawable.ic_settings_applications_48dp);
                 break;
             case 2:
+                imageView.setImageResource(R.drawable.ic_satellite_48dp);
+                break;
+            case 3:
                 imageView.setImageResource(R.drawable.ic_map_48dp);
                 break;
             default:

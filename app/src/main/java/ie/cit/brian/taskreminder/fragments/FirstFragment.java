@@ -27,6 +27,8 @@ import ie.cit.brian.taskreminder.TaskController;
  */
 public class FirstFragment extends Fragment {
 
+    protected ImageButton floatingBtn;
+
     private TaskSearcher searcher;
 
     //The interface which this fragment uses to communicate up to its Activity
@@ -71,11 +73,12 @@ public class FirstFragment extends Fragment {
 
     public void addTaskFloatingButton(){
 
-        ImageButton floatingBtn = (ImageButton)getActivity().findViewById(R.id.add_task_floatBtn);
+        floatingBtn = (ImageButton)getActivity().findViewById(R.id.add_task_floatBtn);
         floatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myCustomAddTaskDiaglog();
+//                floatingBtn.setVisibility(View.INVISIBLE);
             }
         });
     }

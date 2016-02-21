@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name=".activities.TaskActivity"
-            android:label="Task Activity"
+            android:label=""
             android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -90,9 +90,7 @@
             android:name=".MyIntentService"
             android:exported="false" />
 
-        <service
-            android:name=".FetchAddressIntentService"
-            android:exported="false"/>
+
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

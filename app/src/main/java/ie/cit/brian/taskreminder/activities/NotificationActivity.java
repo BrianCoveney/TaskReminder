@@ -14,7 +14,7 @@ import ie.cit.brian.taskreminder.UtilityClass;
 /**
  * Created by brian on 12/10/2015.
  */
-public class NotificationActivity extends Activity {
+public class NotificationActivity extends BaseActivity {
 
     private Task theTask;
     private TextView notificationResult;

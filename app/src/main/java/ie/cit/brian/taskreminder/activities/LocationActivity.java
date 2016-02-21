@@ -36,7 +36,7 @@ import ie.cit.brian.taskreminder.R;
 /**
  * Created by briancoveney on 11/25/15.
  */
-public class LocationActivity extends Activity implements
+public class LocationActivity extends BaseActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private Button locationButton;
@@ -60,7 +60,11 @@ public class LocationActivity extends Activity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location);
+
+        /* We will not use setContentView in this activty
+           Rather than we will use layout inflater to add view in FrameLayout of our base activity layout*/
+        getLayoutInflater().inflate(R.layout.activity_location, frameLayout);
+//        setContentView(R.layout.activity_location);
 
 
         createLocationRequest();

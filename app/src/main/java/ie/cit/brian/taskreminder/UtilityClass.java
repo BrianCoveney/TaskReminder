@@ -26,7 +26,7 @@ public class UtilityClass extends TaskActivity {
 
 
 
-
+    /** Writing and Reading to Internal Storage  **/
     public static String readFromFile(Context context)
     {
         String result = "";
@@ -70,6 +70,13 @@ public class UtilityClass extends TaskActivity {
     }
 
 
+    /** launch Activities  **/
+    public static void launchMainActivity(Context context){
+        Intent main = new Intent(context, MainActivity.class);
+        main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(main);
+    }
+
     public static void launchGoogleMapsActivity(Context context){
         Intent map = new Intent(context, MapsActivity.class);
         map.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -81,7 +88,6 @@ public class UtilityClass extends TaskActivity {
         loc.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(loc);
     }
-
 
     public static void launchSettingsActivity(Context context){
         Intent pref = new Intent(context, PreferenceActivity.class);

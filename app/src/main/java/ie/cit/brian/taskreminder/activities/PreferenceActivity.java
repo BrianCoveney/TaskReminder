@@ -1,5 +1,6 @@
 package ie.cit.brian.taskreminder.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import ie.cit.brian.taskreminder.R;
 /**
  * Created by briancoveney on 12/21/15.
  */
-public class PreferenceActivity extends android.preference.PreferenceActivity {
+public class PreferenceActivity extends Activity {
 
 
     @Override

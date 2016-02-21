@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,7 +32,7 @@ import ie.cit.brian.taskreminder.UtilityClass;
 /**
  * Created by briancoveney on 11/28/15.
  */
-public class TaskActivity extends FragmentActivity {
+public class TaskActivity extends AppCompatActivity {
 
     private Task theTask;
     private TextView taskName, taskDesc, taskTime, taskDate;
@@ -50,6 +51,11 @@ public class TaskActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+//        getLayoutInflater().inflate(R.layout.activity_task, frameLayout);
+
+        // keep the original setContentView which provides a back arrow in the toolbar
         setContentView(R.layout.activity_task);
 
         populateTasks();
@@ -58,9 +64,6 @@ public class TaskActivity extends FragmentActivity {
 
         loadSavedPreferences();
 
-        // Time and Date only set after user edits
-//        taskTime.setText("");
-//        taskDate.setText("");
     }
 
 
