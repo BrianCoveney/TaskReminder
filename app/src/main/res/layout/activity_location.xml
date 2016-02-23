@@ -10,8 +10,9 @@
         android:id="@+id/mLatitudeText"
         android:layout_below="@+id/my_toolbar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/blue_grey_900"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,7 +22,8 @@
         android:layout_below="@+id/mLatitudeText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/blue_grey_900"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,7 +33,8 @@
         android:layout_below="@+id/mLongitudeText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/blue_grey_900"/>
 
     <Switch
         android:layout_width="wrap_content"
@@ -39,5 +42,6 @@
         android:id="@+id/switch_location"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:textColor="@color/blue_grey_900"
         android:text="@string/start_loc_updates"/>
 </LinearLayout>

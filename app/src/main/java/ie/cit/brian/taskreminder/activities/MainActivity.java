@@ -10,28 +10,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import ie.cit.brian.taskreminder.CustomAdapter;
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.UtilityClass;
@@ -62,6 +51,8 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
            Rather than we will use layout inflater to add view in FrameLayout of our base activity layout*/
         getLayoutInflater().inflate(R.layout.activity_main, frameLayout);
 //        setContentView(R.layout.activity_main);
+
+
 
 
 
@@ -102,10 +93,8 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
 
 
     public void createNotifications() {
-
         //unique ID used for multiple notifications
         int uniqueNumber = (int) System.currentTimeMillis();
-
         try {
             InputStream inputStream = openFileInput("myFile");
 
@@ -133,21 +122,19 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
 
                 nManager.notify(uniqueNumber, myNotification);
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
 
     public void settingsChangedNotification() {
-        //reterived from PreferenceActivity
+        //retrieved from PreferenceActivity
         SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(this);
         String changedSettings = sPref.getString("myPrefKey", "");
 
         if (changedSettings.contains("day")) {
-            //Date retreived from TaskActivity
+            //Date retrieved from TaskActivity
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             String myDate = sharedPreferences.getString("date_pref", "");
 

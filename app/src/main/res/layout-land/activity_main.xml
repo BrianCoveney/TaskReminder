@@ -1,81 +1,36 @@
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal" >
 
-
-    <!--<LinearLayout-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:orientation="horizontal">-->
-
-
-        <!--&lt;!&ndash; Toolbar wrapping over the three fragments below &ndash;&gt;-->
-        <!--<Toolbar-->
-            <!--android:id="@+id/my_toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:minHeight="?attr/actionBarSize"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--android:elevation="4dp"-->
-            <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-            <!--/>-->
-
-    <!--</LinearLayout>-->
-
-
-
-    <!-- Content inside LinearLayout, which needs to be used to keep correct positioning of the fragments -->
-    <LinearLayout
+    <fragment
+        android:id="@+id/first_fragment"
         android:layout_height="match_parent"
+        android:layout_weight="2"
         android:layout_width="match_parent"
-        android:orientation="horizontal">
+        class="ie.cit.brian.taskreminder.fragments.FirstFragment"
+        tools:layout="@layout/fragment_first" />
 
-        <fragment
-            android:id="@+id/first_fragment"
-            android:layout_marginTop="50dp"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            class="ie.cit.brian.taskreminder.fragments.FirstFragment"
-            tools:layout="@layout/fragment_first" />
-
-        <fragment
-            android:id="@+id/second_fragment"
-            android:layout_marginTop="50dp"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            class="ie.cit.brian.taskreminder.fragments.SecondFragment" />
-
-        <fragment
-            android:id="@+id/third_fragment"
-            android:layout_marginTop="50dp"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            class="ie.cit.brian.taskreminder.fragments.ThirdFragment" />
-
-    </LinearLayout>
-
-
-
-    <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-    <!-- The navigation drawer -->
-    <ListView android:id="@+id/left_drawer"
-        android:layout_width="240dp"
+    <fragment
+        android:id="@+id/second_fragment"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
-        android:background="#111"/>
+        android:layout_marginTop="50dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        class="ie.cit.brian.taskreminder.fragments.SecondFragment" />
 
-</android.support.v4.widget.DrawerLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_add_32dp"
+        app:layout_anchorGravity="bottom|right|end"
+        android:layout_gravity="bottom" />
+
+</LinearLayout>

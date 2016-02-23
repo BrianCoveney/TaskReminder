@@ -22,7 +22,13 @@ import ie.cit.brian.taskreminder.activities.TaskActivity;
 /**
  * Created by briancoveney on 12/16/15.
  */
-public class UtilityClass extends TaskActivity {
+public final class UtilityClass extends TaskActivity {
+
+
+    // Effective Java Item 4: "Enforce non-insatiability with a private constructor"
+    private UtilityClass(){
+        //Not Called
+    }
 
 
 
@@ -94,4 +100,10 @@ public class UtilityClass extends TaskActivity {
         pref.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(pref);
     }
+
+
+    /** Notifications **/
+
+
+
 }

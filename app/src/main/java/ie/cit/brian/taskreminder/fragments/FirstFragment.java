@@ -2,6 +2,7 @@ package ie.cit.brian.taskreminder.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ import ie.cit.brian.taskreminder.TaskController;
  */
 public class FirstFragment extends Fragment {
 
-    protected ImageButton floatingBtn;
+    protected FloatingActionButton floatingBtn;
 
     private TaskSearcher searcher;
 
@@ -64,21 +65,20 @@ public class FirstFragment extends Fragment {
     }
 
 
-    //Inflate ActionBar
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+//    //Inflate ActionBar
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
 
 
     public void addTaskFloatingButton(){
 
-        floatingBtn = (ImageButton)getActivity().findViewById(R.id.add_task_floatBtn);
+        floatingBtn = (FloatingActionButton)getActivity().findViewById(R.id.fab);
         floatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myCustomAddTaskDiaglog();
-//                floatingBtn.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -97,6 +97,8 @@ public class FirstFragment extends Fragment {
         final EditText taskDesc = new EditText(getActivity());
         taskName.setHint("Task name");
         taskDesc.setHint("Task description");
+        taskName.setHintTextColor(getResources().getColor(R.color.lightBlue));
+        taskDesc.setHintTextColor(getResources().getColor(R.color.lightBlue));
 
 
         //Custom Dialog

@@ -32,7 +32,7 @@ import ie.cit.brian.taskreminder.UtilityClass;
 /**
  * Created by briancoveney on 11/28/15.
  */
-public class TaskActivity extends AppCompatActivity {
+public class TaskActivity extends BaseActivity {
 
     private Task theTask;
     private TextView taskName, taskDesc, taskTime, taskDate;
@@ -52,11 +52,9 @@ public class TaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-//        getLayoutInflater().inflate(R.layout.activity_task, frameLayout);
-
-        // keep the original setContentView which provides a back arrow in the toolbar
-        setContentView(R.layout.activity_task);
+        /* We will not use setContentView in this activty
+           Rather than we will use layout inflater to add view in FrameLayout of our base activity layout*/
+        getLayoutInflater().inflate(R.layout.activity_task, frameLayout);
 
         populateTasks();
         shareTaskDialog();
