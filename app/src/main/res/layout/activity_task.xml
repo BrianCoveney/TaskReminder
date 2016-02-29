@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,64 +47,96 @@
         style="@style/textViewCustom"/>
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/change_date_btn"
-        android:id="@+id/change_date_btn"
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/change_date_btn"-->
+        <!--android:id="@+id/change_date_btn"-->
+        <!--android:onClick="dateOnClick"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:background="@drawable/button_background"-->
+        <!--style="@style/btnCustom"-->
+        <!--android:layout_alignTop="@+id/share_btn"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/share_task"-->
+        <!--android:id="@+id/share_btn"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:background="@drawable/button_background"-->
+        <!--style="@style/btnCustom"-->
+        <!--android:layout_below="@+id/task_date"-->
+        <!--android:layout_toStartOf="@+id/change_date_btn"-->
+        <!--android:layout_marginTop="64dp" />-->
+
+
+
+
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_save"
         android:onClick="dateOnClick"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/button_background"
-        style="@style/btnCustom"
-        android:layout_above="@+id/save_btn"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="5dp"/>
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/share_task"
-        android:id="@+id/share_btn"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/button_background"
-        style="@style/btnCustom"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/change_time"
-        android:id="@+id/button_time"
-        android:onClick="timeOnClick"
-        android:background="@drawable/button_background"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        style="@style/btnCustom"
-        android:layout_above="@+id/change_date_btn"
-        android:layout_alignParentStart="true"
+        android:clickable="true"
+        android:src="@drawable/ic_save_24dp"
+        app:layout_anchorGravity="top|end"
+        android:layout_gravity="right"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignTop="@+id/fab_time"
         android:layout_alignParentEnd="true" />
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_time"
+        android:onClick="timeOnClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save_task"
-        android:id="@+id/save_btn"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/button_background"
-        style="@style/btnCustom"
-        android:layout_above="@+id/share_btn"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"/>
+        android:clickable="true"
+        android:src="@drawable/ic_access_alarm_24dp"
+        app:layout_anchorGravity="bottom"
+        android:layout_gravity="right"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="53dp"
+        android:layout_below="@+id/fab_calendar"
+        android:layout_alignParentStart="true" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/ic_email_24dp"
+        app:layout_anchorGravity="bottom"
+        android:layout_gravity="right"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="87dp"
+        android:layout_below="@+id/task_date"
+        android:layout_alignParentEnd="true" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_calendar"
+        android:onClick="dateOnClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/calendar"
+        app:layout_anchorGravity="bottom"
+        android:layout_gravity="right"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignTop="@+id/fab_send"
+        android:layout_alignParentStart="true" />
+
 
 
 </RelativeLayout>

@@ -50,13 +50,8 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
         /* We will not use setContentView in this activty
            Rather than we will use layout inflater to add view in FrameLayout of our base activity layout*/
         getLayoutInflater().inflate(R.layout.activity_main, frameLayout);
-//        setContentView(R.layout.activity_main);
 
 
-
-
-
-        createNotifications();
         settingsChangedNotification();
 
         //Services
@@ -92,42 +87,7 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
 
 
 
-    public void createNotifications() {
-        //unique ID used for multiple notifications
-        int uniqueNumber = (int) System.currentTimeMillis();
-        try {
-            InputStream inputStream = openFileInput("myFile");
-
-            //When app is first launched, or there's no saved tasks - a notification is not displayed
-            if (inputStream != null) {
-
-                android.support.v7.app.NotificationCompat.Builder builder = new android.support.v7.app.NotificationCompat.Builder(this);
-                Intent resultIntent = new Intent(this, NotificationActivity.class);
-
-                PendingIntent resultPendingIntent =
-                        PendingIntent.getActivity(
-                                this,   // Context
-                                0,
-                                resultIntent,
-                                PendingIntent.FLAG_UPDATE_CURRENT);
-
-                NotificationManager nManager =
-                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-                builder.setSmallIcon(R.drawable.speak_bubble2);
-                builder.setContentTitle("You have a new message");
-                builder.setContentText(UtilityClass.readFromFile(getApplicationContext())); // adds Task from the File to the notification
-                builder.setContentIntent(resultPendingIntent);
-                Notification myNotification = builder.build();
-
-                nManager.notify(uniqueNumber, myNotification);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-
+    // listen for changes in the Settings Activity
     public void settingsChangedNotification() {
         //retrieved from PreferenceActivity
         SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(this);

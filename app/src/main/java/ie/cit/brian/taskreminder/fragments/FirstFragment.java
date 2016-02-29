@@ -6,11 +6,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -47,6 +50,7 @@ public class FirstFragment extends Fragment {
 
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
 
@@ -61,15 +65,12 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_first, container, false);
+
+
     }
 
-
-//    //Inflate ActionBar
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu, inflater);
-//    }
 
 
     public void addTaskFloatingButton(){
@@ -92,29 +93,24 @@ public class FirstFragment extends Fragment {
         alertDialog.setTitle(R.string.dialog_task_title);
         alertDialog.setMessage(R.string.dialog_task_message);
 
+
         //EditText to get user input
         final EditText taskName = new EditText(getActivity());
         final EditText taskDesc = new EditText(getActivity());
         taskName.setHint("Task name");
         taskDesc.setHint("Task description");
-        taskName.setHintTextColor(getResources().getColor(R.color.lightBlue));
-        taskDesc.setHintTextColor(getResources().getColor(R.color.lightBlue));
 
 
-        //Custom Dialog
         LinearLayout dialogLayout = new LinearLayout(getActivity().getApplicationContext());
         dialogLayout.setOrientation(LinearLayout.VERTICAL);
         dialogLayout.addView(taskName);
         dialogLayout.addView(taskDesc);
 
-
         alertDialog.setView(dialogLayout);
-
         alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String name = taskName.getText().toString();
                 String description = taskDesc.getText().toString();
-
 
                 TimeZone timeZone = TimeZone.getTimeZone("GMT");
                 DateFormat myTimeFormat = new SimpleDateFormat("HH:mm, a");
@@ -134,8 +130,11 @@ public class FirstFragment extends Fragment {
             }
         });
 
+
         alertDialog.show();
     }
+
+
 
 }
 

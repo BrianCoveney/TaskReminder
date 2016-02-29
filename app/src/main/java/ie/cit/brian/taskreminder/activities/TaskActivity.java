@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,7 +37,7 @@ public class TaskActivity extends BaseActivity {
 
     private Task theTask;
     private TextView taskName, taskDesc, taskTime, taskDate;
-    private Button shareBtn, saveBtn;
+    private FloatingActionButton saveFabBtn, shareBtn;
     String selectedDate;
     String selectedTime;
 
@@ -82,7 +83,7 @@ public class TaskActivity extends BaseActivity {
 
 
     public void shareTaskDialog() {
-        shareBtn = (Button) findViewById(R.id.share_btn);
+        shareBtn = (FloatingActionButton) findViewById(R.id.fab_send);
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,11 +197,10 @@ public class TaskActivity extends BaseActivity {
         setCurrentDate();
         setCurrentTime();
 
-        saveBtn = (Button) findViewById(R.id.save_btn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        saveFabBtn = (FloatingActionButton)findViewById(R.id.fab_save);
+        saveFabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 UtilityClass.writeToFile(TaskActivity.this,
                         theTask.getTaskName() + " - " +
                                 theTask.getTaskDescription() + " - " +
