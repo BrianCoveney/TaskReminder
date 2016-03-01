@@ -63,7 +63,7 @@
 
             <intent-filter>
                 <action android:name=".PreferenceActivity" />
-
+               <!--<action android:theme="@style/MyPreferencesStyle"/>-->
                 <category android:name="android.intent.category.PREFERENCE" />
             </intent-filter>
         </activity>

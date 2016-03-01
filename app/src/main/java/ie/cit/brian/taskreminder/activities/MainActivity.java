@@ -10,12 +10,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.mikhaellopez.circularimageview.CircularImageView;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.DateFormat;
@@ -37,6 +43,7 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
 
     private static String TAG = "ie.cit.brian.taskreminder";
     private final Calendar cal = Calendar.getInstance();
+    private CoordinatorLayout coordinatorLayout;
 
 
     private FirstFragment.TaskSearcher searcher;
@@ -54,13 +61,31 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
 
         settingsChangedNotification();
 
+        // for the snackbar layout
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id
+                .coordinator_layout);
+
+
+        CircularImageView circularImageView = (CircularImageView)findViewById(R.id.myCircularImageView);
+        // Set Border
+        circularImageView.setBorderColor(getResources().getColor(R.color.light_grey));
+        circularImageView.setBorderWidth(10);
+        // Add Shadow with default param
+        circularImageView.addShadow();
+        // or with custom param
+        circularImageView.setShadowRadius(15);
+        circularImageView.setShadowColor(Color.RED);
+
+
+
         //Services
-        Intent i = new Intent(this, MyIntentService.class);
+        Intent intent = new Intent(this, MyIntentService.class);
         //Create an IntentFilter for it
         IntentFilter myIntentFilter = new IntentFilter("myBroadcast");
         //Register the BroadcastReceiver and its filter with the Android OS
         LocalBroadcastManager.getInstance(this).registerReceiver(myBroadcastReceiver, myIntentFilter);
-        startService(i);
+        startService(intent);
+
 
     }
 
@@ -72,6 +97,13 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
         public void onReceive(Context context, Intent intent) {
             //Test passed
             Log.i(TAG, "The service has started from Activity");
+
+            String messageFromBroadcast = intent.getStringExtra("myBroadcastMessage");
+
+            Snackbar snackbar = Snackbar
+                    .make(coordinatorLayout, "Today is " + messageFromBroadcast, Snackbar.LENGTH_LONG);
+            snackbar.show();
+
         }
     };
 

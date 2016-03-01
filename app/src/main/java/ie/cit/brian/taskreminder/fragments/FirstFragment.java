@@ -89,7 +89,7 @@ public class FirstFragment extends Fragment {
     // display customer dialog to add tasks
     public void myCustomAddTaskDiaglog(){
         AlertDialog.Builder alertDialog
-                = new AlertDialog.Builder(getActivity(), R.style.MyAlertDialogStyle);
+                = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         alertDialog.setTitle(R.string.dialog_task_title);
         alertDialog.setMessage(R.string.dialog_task_message);
 

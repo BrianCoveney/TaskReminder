@@ -33,12 +33,19 @@ public class MyIntentService extends IntentService {
         Calendar cal = Calendar.getInstance();
         dayOfWeek = dayFormat.format(cal.getTime());
 
-        Intent i = new Intent("myBroadcast");
-        i.putExtra("myBroadcastMessage", dayOfWeek);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(i);
+        try {
+            Intent i = new Intent("myBroadcast");
+            i.putExtra("myBroadcastMessage", dayOfWeek);
+            LocalBroadcastManager.getInstance(this).sendBroadcast(i);
 
-        //Test passed
-        Log.i(TAG, "The service has started from MyIntentService");
+            //Test passed
+            Log.i(TAG, "The service has started from MyIntentService");
+
+            // put the worker thread to sleep for 5sec, each time we get an intent
+            Thread.sleep(5000);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
 
 
         int day = cal.get(Calendar.DAY_OF_WEEK);

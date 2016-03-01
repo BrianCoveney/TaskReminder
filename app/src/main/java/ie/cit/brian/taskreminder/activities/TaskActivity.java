@@ -78,7 +78,6 @@ public class TaskActivity extends BaseActivity {
         taskDesc.setText("Description: " + theTask.getTaskDescription());
         taskTime.setText(theTask.getTaskTime());
         taskDate.setText(theTask.getTaskDate().toString());
-
     }
 
 

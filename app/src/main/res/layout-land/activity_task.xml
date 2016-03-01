@@ -1,96 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/task_name"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         style="@style/textViewCustom"
-        android:layout_above="@+id/button_time"
-        android:layout_alignParentStart="true" />
+        />
 
     <TextView
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/task_desc"
-        style="@style/textViewCustom"
-        android:layout_above="@+id/change_date_btn"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/task_name"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        style="@style/textViewCustom"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/task_date"
-        style="@style/textViewCustom"
-        android:layout_alignBottom="@+id/save_btn"
+        android:layout_below="@+id/task_time"
+        android:layout_marginTop="10dp"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/task_time" />
+        android:layout_alignParentEnd="true"
+        style="@style/textViewCustom"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/task_time"
-        android:onClick="timeOnClick"
-        style="@style/textViewCustom"
-        android:layout_above="@+id/save_btn"
+        android:layout_below="@+id/task_desc"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/task_desc" />
-
-
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="@string/share_task"
-        android:id="@+id/share_btn"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/button_background"
-        style="@style/btnCustom"
-        android:layout_marginEnd="24dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/change_date_btn"
-        android:id="@+id/change_date_btn"
-        android:onClick="dateOnClick"
-        android:background="@drawable/button_background"
-        style="@style/btnCustom"
-        android:layout_above="@+id/save_btn"
-        android:layout_alignStart="@+id/save_btn"
-        android:layout_marginTop="5dp"
-        android:layout_alignEnd="@+id/save_btn" />
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/change_time"
-        android:id="@+id/button_time"
         android:onClick="timeOnClick"
-        android:background="@drawable/button_background"
-        style="@style/btnCustom"
-        android:layout_above="@+id/change_date_btn"
-        android:layout_alignStart="@+id/change_date_btn"
-        android:layout_alignEnd="@+id/change_date_btn" />
+        style="@style/textViewCustom"/>
 
-    <Button
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_save"
+        android:onClick="dateOnClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/save_task"
-        android:id="@+id/save_btn"
-        android:background="@drawable/button_background"
-        style="@style/btnCustom"
-        android:layout_above="@+id/share_btn"
-        android:layout_alignStart="@+id/share_btn"
-        android:layout_alignEnd="@+id/share_btn"
-        android:layout_marginTop="5dp"
-        />
+        android:clickable="true"
+        android:src="@drawable/ic_save_24dp"
+        app:layout_anchorGravity="top|end"
+        android:layout_gravity="right"
+        android:layout_marginLeft="@dimen/action_button_margin"
+        android:layout_marginRight="@dimen/action_button_margin"
+        android:layout_alignTop="@+id/fab_send"
+        android:layout_alignParentEnd="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_time"
+        android:onClick="timeOnClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/ic_access_alarm_24dp"
+        app:layout_anchorGravity="bottom"
+        android:layout_gravity="right"
+        android:layout_marginLeft="@dimen/action_button_margin"
+        android:layout_marginRight="@dimen/action_button_margin"
+        android:layout_alignTop="@+id/fab_calendar"
+        android:layout_toStartOf="@+id/fab_calendar" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/ic_email_24dp"
+        app:layout_anchorGravity="bottom"
+        android:layout_gravity="right"
+        android:layout_marginLeft="@dimen/action_button_margin"
+        android:layout_marginRight="@dimen/action_button_margin"
+        android:layout_marginBottom="43dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/fab_save" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_calendar"
+        android:onClick="dateOnClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/calendar"
+        app:layout_anchorGravity="bottom"
+        android:layout_gravity="right"
+        android:layout_marginLeft="@dimen/action_button_margin"
+        android:layout_marginRight="@dimen/action_button_margin"
+        android:layout_alignTop="@+id/fab_send"
+        android:layout_toStartOf="@+id/fab_send" />
 
 </RelativeLayout>

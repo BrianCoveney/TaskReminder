@@ -25,7 +25,6 @@
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:layout_gravity="center_vertical"
         />
-    <!--android:background="?android:attr/activatedBackgroundIndicator"-->
 
 
 </LinearLayout>
