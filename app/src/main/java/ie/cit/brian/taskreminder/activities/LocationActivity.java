@@ -39,7 +39,7 @@ import ie.cit.brian.taskreminder.R;
 public class LocationActivity extends BaseActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    private Button locationButton;
+    private static Bundle bundle = new Bundle();
     private Switch locationSwitch;
     private static String TAG = "ie.cit.brian.taskreminder";
     private final Calendar cal = Calendar.getInstance();
@@ -71,40 +71,51 @@ public class LocationActivity extends BaseActivity implements
         buildGoogleApiClient();
 
 
-        mRequestingLocationUpdates = false;
-        mLastUpdateTime = "";
-
         mLatitudeText = (TextView)findViewById(R.id.mLatitudeText);
         mLongitudeText = (TextView)findViewById(R.id.mLongitudeText);
         mTimeText = (TextView) findViewById(R.id.mLastUpdateTimeTextView);
         locationSwitch = (Switch) findViewById(R.id.switch_location);
 
 
+        mRequestingLocationUpdates = false;
+        mLastUpdateTime = "";
+
+        // Update values using data stored in the Bundle.
+        updateValuesFromBundle(savedInstanceState);
 
 
         locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                togglePeriodicLocUpdates();
+
+                // deals with the app crashing due to "GoogleApiClient is not Connected yet"
+                try {
+                    togglePeriodicLocUpdates();
+                }catch (IllegalStateException i){
+                    Log.i(TAG, "togglePeriodicLocUpdates GoogleApiClient is not Connected yet = " + i.getMessage());
+                }
             }
         });
-
-
     }
 
 
 
     private void togglePeriodicLocUpdates() {
-        if(!mRequestingLocationUpdates){
-            locationSwitch.setText(R.string.stop_loc_updates);
-            mRequestingLocationUpdates = true;
 
-            startLocationUpdates();
-        }else{
-            locationSwitch.setText(R.string.start_loc_updates);
-            mRequestingLocationUpdates = false;
+        try {
+            if (!mRequestingLocationUpdates) {
+                locationSwitch.setText(R.string.stop_loc_updates);
+                mRequestingLocationUpdates = true;
 
-            stopLocationUpdates();
+                startLocationUpdates();
+            } else {
+                locationSwitch.setText(R.string.start_loc_updates);
+                mRequestingLocationUpdates = false;
+
+                stopLocationUpdates();
+            }
+        }catch (SecurityException se){
+            se.printStackTrace();
         }
 
     }
@@ -118,14 +129,16 @@ public class LocationActivity extends BaseActivity implements
 
         //Add the location api
         builder.addApi(LocationServices.API);
+
+
+//        builder.addApiIfAvailable(LocationServices.API);
+
         //tell it what to call back to when it has connected to the Google Service
         builder.addConnectionCallbacks(this);
         // connection error checking
         builder.addOnConnectionFailedListener(this);
 
         mGoogleApiClient = builder.build();
-
-
     }
 
 
@@ -134,18 +147,20 @@ public class LocationActivity extends BaseActivity implements
     public void onConnected(Bundle bundle) {
         Log.i(TAG, "Connected to the GoogleAPIClient");
 
-        if (mCurrentLocation == null) {
-            mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
-            updateUI();
+        try {
+            if (mCurrentLocation == null) {
+                mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
+                updateUI();
+            }
+
+            if(mRequestingLocationUpdates) {
+                startLocationUpdates();
+            }
+
+        }catch (SecurityException se){
+            se.printStackTrace();
         }
-
-
-
-        if(mRequestingLocationUpdates) {
-            startLocationUpdates();
-        }
-
         // save Lat Long for use in Maps Activity
         Double mLat = mCurrentLocation.getLatitude();
         Double mLong = mCurrentLocation.getLongitude();
@@ -155,28 +170,38 @@ public class LocationActivity extends BaseActivity implements
         editor.putLong("longitude_key", Double.doubleToLongBits((mLong)));
         editor.commit();
 
-
-
-
-
     }
+
+
+
+
 
     protected void createLocationRequest()
     {
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(50000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        if (mLocationRequest == null) {
+            mLocationRequest = new LocationRequest();
+            mLocationRequest.setInterval(10000);
+            mLocationRequest.setFastestInterval(50000);
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        }
     }
 
     protected void startLocationUpdates()
     {
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        try {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        }catch (SecurityException se){
+            se.printStackTrace();
+        }
     }
 
     protected void stopLocationUpdates()
     {
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        try {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }catch (SecurityException se){
+            se.printStackTrace();
+        }
     }
 
 
@@ -194,23 +219,15 @@ public class LocationActivity extends BaseActivity implements
         if(mCurrentLocation != null) {
             mLatitudeText.setText(String.valueOf(mCurrentLocation.getLatitude()));
             mLongitudeText.setText(String.valueOf(mCurrentLocation.getLongitude()));
-//            CharSequence la = mLatitudeText.getText();
-//            CharSequence ln = mLongitudeText.getText();
             mLongitudeText.setVisibility(View.VISIBLE);
+            mTimeText.setText(mLastUpdateTime);
+
         }else {
             mLatitudeText.setText(R.string.connection_failed);
             mLongitudeText.setVisibility(View.INVISIBLE);
         }
 
-        mTimeText.setText(mLastUpdateTime);
-
-
-
     }
-
-
-
-
 
 
 
@@ -224,7 +241,10 @@ public class LocationActivity extends BaseActivity implements
 
     @Override
     public void onConnectionSuspended(int i) {
-
+        // The connection to Google Play services was lost for some reason. We call connect() to
+        // attempt to re-establish the connection.
+        Log.i(TAG, "Connection suspended");
+        mGoogleApiClient.connect();
     }
 
 
@@ -236,16 +256,13 @@ public class LocationActivity extends BaseActivity implements
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        // Within {@code onPause()}, we pause location updates, but leave the
-        // connection to GoogleApiClient intact.  Here, we resume receiving
-        // location updates if the user has requested them.
-
-        if (mGoogleApiClient.isConnected() && mRequestingLocationUpdates) {
-            startLocationUpdates();
+    protected void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
         }
     }
+
 
     @Override
     protected void onPause() {
@@ -254,14 +271,25 @@ public class LocationActivity extends BaseActivity implements
         if (mGoogleApiClient.isConnected()) {
             stopLocationUpdates();
         }
+
+        bundle.putBoolean("SwitchState", locationSwitch.isChecked());
     }
 
+
     @Override
-    protected void onStop() {
-        super.onStop();
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
+    public void onResume() {
+        super.onResume();
+        // Within {@code onPause()}, we pause location updates, but leave the
+        // connection to GoogleApiClient intact.  Here, we resume receiving
+        // location updates if the user has requested them.
+        try {
+            if (mGoogleApiClient.isConnected() && mRequestingLocationUpdates) {
+                startLocationUpdates();
+            }
+        }catch (IllegalStateException i){
+            Log.i(TAG, "onResume GoogleApiClient is not Connected yet = " + i.getMessage());
         }
+        locationSwitch.setChecked(bundle.getBoolean("SwitchState", false));
     }
 
 
@@ -274,9 +302,16 @@ public class LocationActivity extends BaseActivity implements
         savedInstanceState.putParcelable(LOCATION_KEY, mCurrentLocation);
         savedInstanceState.putString(LAST_UPDATED_TIME_STRING_KEY, mLastUpdateTime);
 
+        savedInstanceState.putBoolean("SwitchButtonState", locationSwitch.isChecked());
         super.onSaveInstanceState(savedInstanceState);
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        locationSwitch.setChecked(savedInstanceState.getBoolean("SwitchButtonState", false));
+
+    }
 
     private void updateValuesFromBundle(Bundle savedInstanceState) {
         Log.i(TAG, "Updating values from bundle");
