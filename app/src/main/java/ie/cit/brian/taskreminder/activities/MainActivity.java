@@ -2,9 +2,6 @@ package ie.cit.brian.taskreminder.activities;
 
 
 import android.app.FragmentManager;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,20 +13,14 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
-
 import com.mikhaellopez.circularimageview.CircularImageView;
-
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
-import ie.cit.brian.taskreminder.UtilityClass;
 import ie.cit.brian.taskreminder.fragments.SecondFragment;
 import ie.cit.brian.taskreminder.fragments.FirstFragment;
 
@@ -46,7 +37,6 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
     private CoordinatorLayout coordinatorLayout;
 
 
-    private FirstFragment.TaskSearcher searcher;
 
 
     @Override
@@ -57,7 +47,6 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
         /* We will not use setContentView in this activty
            Rather than we will use layout inflater to add view in FrameLayout of our base activity layout*/
         getLayoutInflater().inflate(R.layout.activity_main, frameLayout);
-
 
         settingsChangedNotification();
 
@@ -132,7 +121,7 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
 
 
             //get todays date
-            DateFormat dateFormatDay = new SimpleDateFormat("F EEEE, dd/MM/yyyy");
+            SimpleDateFormat dateFormatDay = new SimpleDateFormat("F EEEE, dd/MM/yyyy");
             String mDate = dateFormatDay.format(cal.getTime());
 
 
@@ -143,27 +132,39 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
 
 
         } else if (changedSettings.contains("week")) {
-            SharedPreferences shPref = PreferenceManager.getDefaultSharedPreferences(this);
-            String mDate = shPref.getString("date_pref", "");
-            String mSubString = mDate.substring(0, 1); //get first charAT of Date - the week of month
-
-            //'F' -> Day of week in month(1-5)
-            DateFormat weekFormat = new SimpleDateFormat("F");
-            String dayOfMonth = weekFormat.format(cal.getTime());
 
 
-            // if Task is due in the current week of the month - display a toast
-            if(dayOfMonth.equals(mSubString)){
-                Toast.makeText(this, "Task due this week: "+ myDateFormat().substring(0, 3) +" of the month",
-                        Toast.LENGTH_LONG).show();
+            try {
+
+                SharedPreferences shPref = PreferenceManager.getDefaultSharedPreferences(this);
+                String mDate = shPref.getString("date_pref", "");
+                String mSubString = mDate.substring(0, 1); //get first charAT of Date - the week of month
+
+
+                //'F' -> Day of week in month(1-5)
+                SimpleDateFormat weekFormat = new SimpleDateFormat("F");
+                String dayOfMonth = weekFormat.format(cal.getTime());
+
+
+                // if Task is due in the current week of the month - display a toast
+                if (dayOfMonth.equals(mSubString)) {
+                    Toast.makeText(this, "Task due this week: " + myDateFormat().substring(0, 3) + " of the month",
+                            Toast.LENGTH_LONG).show();
+                }
+            }catch (StringIndexOutOfBoundsException e){
+                Log.i(TAG, "Exception = " + e.getMessage());
+            }
+
+
             }
         }
-    }
+
+
 
 
     public String myDateFormat()
     {
-        DateFormat dateFormatDay = new SimpleDateFormat("F EEEE, dd/MM/yyyy");
+        SimpleDateFormat dateFormatDay = new SimpleDateFormat("F EEEE, dd/MM/yyyy");
         String mDate = dateFormatDay.format(cal.getTime());
         String subMyDate = mDate.substring(0, 1);
 

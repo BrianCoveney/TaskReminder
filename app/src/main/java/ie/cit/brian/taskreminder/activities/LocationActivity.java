@@ -108,14 +108,18 @@ public class LocationActivity extends BaseActivity implements
                 mRequestingLocationUpdates = true;
 
                 startLocationUpdates();
+//              mGoogleApiClient.connect();
+
             } else {
                 locationSwitch.setText(R.string.start_loc_updates);
                 mRequestingLocationUpdates = false;
 
                 stopLocationUpdates();
+//              mGoogleApiClient.disconnect();
+
             }
         }catch (SecurityException se){
-            se.printStackTrace();
+            se.getMessage();
         }
 
     }

@@ -179,7 +179,7 @@ public class TaskActivity extends BaseActivity {
 
     //Time and Notifications changed onClick the Change Edit Time button
     public void setCurrentTime() {
-        //Save button - updates file and the EditText in this activity
+        //Save button - updates file and the TextView in this activity
         DateFormat myTimeFormat = new SimpleDateFormat("HH:mm a");
         TimeZone timeZone = TimeZone.getTimeZone("GMT");
         myTimeFormat.setTimeZone(timeZone);

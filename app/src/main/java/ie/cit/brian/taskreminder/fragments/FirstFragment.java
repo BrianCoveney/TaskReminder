@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -88,25 +89,22 @@ public class FirstFragment extends Fragment {
 
     // display customer dialog to add tasks
     public void myCustomAddTaskDiaglog(){
-        AlertDialog.Builder alertDialog
-                = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
-        alertDialog.setTitle(R.string.dialog_task_title);
-        alertDialog.setMessage(R.string.dialog_task_message);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                getContext());
+        alertDialog.setTitle("Create Task");
+        alertDialog.setMessage("... and description");
 
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_alert, null);
+        alertDialog.setView(dialogView);
 
-        //EditText to get user input
-        final EditText taskName = new EditText(getActivity());
-        final EditText taskDesc = new EditText(getActivity());
+        final EditText taskName = (EditText) dialogView.findViewById(R.id.edT_name);
+        final EditText taskDesc = (EditText) dialogView.findViewById(R.id.edT_desc);
+
         taskName.setHint("Task name");
         taskDesc.setHint("Task description");
 
 
-        LinearLayout dialogLayout = new LinearLayout(getActivity().getApplicationContext());
-        dialogLayout.setOrientation(LinearLayout.VERTICAL);
-        dialogLayout.addView(taskName);
-        dialogLayout.addView(taskDesc);
-
-        alertDialog.setView(dialogLayout);
         alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String name = taskName.getText().toString();
@@ -130,7 +128,7 @@ public class FirstFragment extends Fragment {
             }
         });
 
-
+        alertDialog.create();
         alertDialog.show();
     }
 

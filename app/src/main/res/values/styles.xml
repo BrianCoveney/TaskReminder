@@ -73,13 +73,15 @@
 
     <!-- Alert Dialog -->
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColorPrimary">@color/blue_A700</item>
-        <item name="android:background">@color/cream</item>
+        <!--<item name="colorPrimary">@color/white</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <!--<item name="android:textColorPrimary">@color/blue_A700</item>-->
+        <!--<item name="android:background">@drawable/screen_background_dark_transparent</item>-->
+
+        <!-- full screen layout -->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
     </style>
-
-
 
 
 

@@ -25,4 +25,6 @@
     <color name="light_grey">#eeeeee</color>
     <color name="material_brown">#efebe9</color>
     <color name="cream">#fdf998</color>
+
+    <drawable name="screen_background_dark_transparent">#80000000</drawable>
 </resources>
