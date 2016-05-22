@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import ie.cit.brian.taskreminder.activities.LocationActivity;
+import ie.cit.brian.taskreminder.activities.LoginActivity;
 import ie.cit.brian.taskreminder.activities.MainActivity;
 import ie.cit.brian.taskreminder.activities.MapsActivity;
 import ie.cit.brian.taskreminder.activities.PreferenceActivity;
@@ -99,6 +100,12 @@ public final class UtilityClass extends TaskActivity {
         Intent pref = new Intent(context, PreferenceActivity.class);
         pref.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(pref);
+    }
+
+    public static void launchLoginActivity(Context context){
+        Intent login = new Intent(context, LoginActivity.class);
+        login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(login);
     }
 
 

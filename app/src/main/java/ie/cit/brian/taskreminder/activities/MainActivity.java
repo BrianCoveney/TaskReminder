@@ -3,22 +3,28 @@ package ie.cit.brian.taskreminder.activities;
 
 import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
+import android.content.ContentProvider;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import ie.cit.brian.taskreminder.ContactProvider;
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.fragments.SecondFragment;
@@ -35,9 +41,6 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
     private static String TAG = "ie.cit.brian.taskreminder";
     private final Calendar cal = Calendar.getInstance();
     private CoordinatorLayout coordinatorLayout;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +69,6 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
         circularImageView.setShadowColor(Color.RED);
 
 
-
         //Services
         Intent intent = new Intent(this, MyIntentService.class);
         //Create an IntentFilter for it
@@ -75,10 +77,7 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
         LocalBroadcastManager.getInstance(this).registerReceiver(myBroadcastReceiver, myIntentFilter);
         startService(intent);
 
-
     }
-
-
 
 
     private BroadcastReceiver myBroadcastReceiver = new BroadcastReceiver() {
@@ -155,10 +154,8 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
                 Log.i(TAG, "Exception = " + e.getMessage());
             }
 
-
             }
         }
-
 
 
 
@@ -198,9 +195,6 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
 
         return mDate;
     }
-
-
-
 }
 
 

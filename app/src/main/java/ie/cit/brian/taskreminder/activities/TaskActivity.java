@@ -7,9 +7,11 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -18,12 +20,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
+
+import ie.cit.brian.taskreminder.ContactProvider;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.ShareTaskDialog;
 import ie.cit.brian.taskreminder.Task;
@@ -214,8 +221,8 @@ public class TaskActivity extends BaseActivity {
 
 
     /**
-     * When user rotated the screen - to Landscape/Portrait,
-     * the Date data preserved and still displays in its TextView.
+     * When the phone is flipped between orientations,
+     * the Date and Timestamp data is preserved.
      */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -299,12 +306,16 @@ public class TaskActivity extends BaseActivity {
 
         builder.setSmallIcon(R.drawable.speak_bubble2);
         builder.setContentTitle("You have a new message");
-        builder.setContentText(UtilityClass.readFromFile(getApplicationContext())); // adds Task from the File to the notification
+        builder.setContentText(UtilityClass.readFromFile(getApplicationContext()));
         builder.setContentIntent(resultPendingIntent);
         Notification myNotification = builder.build();
 
         nManager.notify(uniqueNumber, myNotification);
     }
+
+
+
+
 }
 
 

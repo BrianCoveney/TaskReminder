@@ -37,6 +37,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activities.LoginActivity"
+            android:label="Login Activity"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity
             android:name=".activities.LocationActivity"
             android:label="Location Activity"
             android:parentActivityName=".activities.MainActivity">
@@ -107,10 +115,19 @@
             android:value="@string/google_maps_key" />
 
 
-
         <activity
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
+
+
+        <!-- The Content Provider is declared -->
+        <provider
+            android:authorities="ie.cit.brian.taskreminder.ContactProvider"
+            android:name=".ContactProvider"
+            android:exported="true"
+            android:multiprocess="true">
+        </provider>
+
     </application>
 
 </manifest>

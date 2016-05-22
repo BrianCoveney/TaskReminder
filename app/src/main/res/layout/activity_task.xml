@@ -64,6 +64,22 @@
         android:layout_alignTop="@+id/fab_time"
         android:layout_alignParentEnd="true" />
 
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_saveDB"
+        android:onClick="addName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/ic_save_24dp"
+        app:layout_anchorGravity="top|end"
+        android:layout_gravity="right"
+        android:layout_marginLeft="@dimen/action_button_margin"
+        android:layout_marginRight="@dimen/action_button_margin"
+        android:layout_alignTop="@+id/fab_save"
+        android:layout_centerHorizontal="true" />
+
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_time"
         android:onClick="timeOnClick"
@@ -108,5 +124,14 @@
         android:layout_marginRight="@dimen/action_button_margin"
         android:layout_alignTop="@+id/fab_send"
         android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/contactNameEditText"
+        android:layout_above="@+id/fab_calendar"
+        android:layout_alignStart="@+id/fab_calendar"
+        android:layout_alignEnd="@+id/fab_send"
+        android:hint="@string/add_name" />
 
 </RelativeLayout>

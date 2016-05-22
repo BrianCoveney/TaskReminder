@@ -48,6 +48,9 @@
     <string name="drawer_close">drawer close</string>
     <string name="action_settings">action_settings</string>
     <string name="connection_failed">Connection failed. Is location enabled?</string>
+    <string name="add_name">Add Name</string>
+    <string name="add_email">Add Email</string>
+    <string name="delete_database">Delete Database</string>
 
 
 </resources>

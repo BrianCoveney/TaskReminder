@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.TimeZone;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.TaskController;
+import ie.cit.brian.taskreminder.UtilityClass;
 
 
 /**
@@ -32,7 +33,7 @@ import ie.cit.brian.taskreminder.TaskController;
  */
 public class FirstFragment extends Fragment {
 
-    protected FloatingActionButton floatingBtn;
+    protected FloatingActionButton floatingBtn, floatingBtnLogin;
 
     private TaskSearcher searcher;
 
@@ -47,6 +48,14 @@ public class FirstFragment extends Fragment {
 
 
         addTaskFloatingButton();
+
+        floatingBtnLogin = (FloatingActionButton)getActivity().findViewById(R.id.fab_login);
+        floatingBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilityClass.launchLoginActivity(getActivity());
+            }
+        });
 
 
         super.onActivityCreated(savedInstanceState);
