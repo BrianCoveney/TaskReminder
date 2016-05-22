@@ -195,7 +195,5 @@ public class ContactProvider extends android.content.ContentProvider {
 //
 //        }
 
-
-
     }
 }
