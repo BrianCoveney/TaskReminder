@@ -6,7 +6,7 @@
     android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -29,7 +29,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            class="ie.cit.brian.taskreminder.fragments.SecondFragment" />
+            class="ie.cit.brian.taskreminder.fragments.SecondFragment"
+            tools:layout="@layout/fragment_second" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"

@@ -63,7 +63,7 @@
         </activity>
         <activity
             android:name=".activities.PreferenceActivity"
-            android:theme="@style/AppTheme"
+            android:theme="@style/Theme.AppCompat.Light"
             android:label="Preference Activity"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
