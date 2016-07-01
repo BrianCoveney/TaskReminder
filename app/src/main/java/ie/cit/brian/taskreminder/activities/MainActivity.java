@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
         super.onCreate(savedInstanceState);
 
 
-        /* We will not use setContentView in this activty
+        /* We will not use setContentView in this activity
            Rather than we will use layout inflater to add view in FrameLayout of our base activity layout*/
         getLayoutInflater().inflate(R.layout.activity_main, frameLayout);
 
