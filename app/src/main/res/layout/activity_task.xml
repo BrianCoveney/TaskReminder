@@ -48,6 +48,7 @@
         style="@style/textViewCustom"
         android:layout_alignStart="@+id/task_name"
         android:layout_alignEnd="@+id/task_name"
+        android:layout_marginBottom="30dp"
         />
 
     <TextView
@@ -57,40 +58,41 @@
         android:layout_marginLeft="0dp"
         android:layout_marginRight="16dp"
         android:backgroundTint="@color/off_white"
-        android:layout_above="@+id/task_time"
-        android:layout_toEndOf="@+id/task_name"
         android:text="Task Description"
         android:textStyle="italic"
         android:textSize="12dp"
         android:textColor="@color/black"
-        />
+        android:layout_below="@+id/imageView_taskName"
+        android:layout_alignStart="@+id/task_name_lable" />
 
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:id="@+id/task_date"
         android:layout_below="@+id/task_time"
         android:layout_marginTop="20dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="16dp"
+        android:layout_alignParentEnd="false"
+        android:layout_marginRight="0dp"
         style="@style/textViewCustom"
         android:layout_alignStart="@+id/task_desc"
         android:onClick="dateOnClick"
         android:hint="tap to add task date"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:id="@+id/task_time"
         android:layout_below="@+id/task_desc"
         android:layout_marginTop="20dp"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentEnd="false"
         android:onClick="timeOnClick"
         android:layout_marginRight="16dp"
         style="@style/textViewCustom"
         android:layout_alignStart="@+id/task_desc"
-        android:hint="tap to add task time"/>
+        android:hint="@string/tap_to_add_task_time"
+        android:layout_marginBottom="30dp"
+        />
 
 
     <android.support.design.widget.FloatingActionButton
@@ -151,6 +153,34 @@
         android:onClick="dateOnClick"
         />
 
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_taskDate_cancel"
+        android:src="@drawable/ic_cross_24dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:tint="@color/red_A700"
+        android:onClick="clearDateOnClick"
+        android:layout_marginRight="15dp"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/imageView_taskTime_cancel"
+        android:layout_marginStart="0dp" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_taskTime_cancel"
+        android:src="@drawable/ic_cross_24dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:tint="@color/red_A700"
+        android:onClick="clearTimeOnClick"
+        android:layout_marginRight="15dp"
+        android:layout_alignTop="@+id/task_time"
+        android:layout_toEndOf="@+id/fab_save" />
 
 
     <ImageView

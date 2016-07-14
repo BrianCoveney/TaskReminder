@@ -48,7 +48,7 @@ public class TaskActivity extends BaseActivity {
     private Task theTask;
     private TextView taskName, taskDesc, taskTime, taskDate;
     private FloatingActionButton saveFabBtn, shareBtn;
-    private ImageView emailIcon;
+    protected ImageView deleteDateIcon, deleteTimeIcon;
     String selectedDate;
     String selectedTime;
 
@@ -96,24 +96,28 @@ public class TaskActivity extends BaseActivity {
 
     public void shareTaskDialog() {
 
-        emailIcon = (ImageView) findViewById(R.id.imageView_taskEmail);
-        emailIcon.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                DialogFragment dialogFragment = new ShareTaskDialog();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("taskObject", theTask);
-                dialogFragment.setArguments(bundle);
-                dialogFragment.show(getFragmentManager(), "share_key");
-            }
-        });
+        try {
 
+            ImageView emailIcon = (ImageView) findViewById(R.id.imageView_taskEmail);
+            emailIcon.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
+                    DialogFragment dialogFragment = new ShareTaskDialog();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("taskObject", theTask);
+                    dialogFragment.setArguments(bundle);
+                    dialogFragment.show(getFragmentManager(), "share_key");
+                }
+            });
+        }catch (NullPointerException np){
+            np.printStackTrace();
+        }
     }
 
 
-    //get Calendar Date
+    //get Date
     public void dateOnClick(View view) {
         new DatePickerDialog(this, date,
                 cal.get(Calendar.YEAR),
@@ -123,7 +127,7 @@ public class TaskActivity extends BaseActivity {
     }
 
 
-    //get Calendar Time
+    //get Time
     public void timeOnClick(View view) {
         new TimePickerDialog(this, time,
                 cal.get(Calendar.HOUR),
@@ -153,6 +157,32 @@ public class TaskActivity extends BaseActivity {
             setCurrentTime();
         }
     };
+
+
+
+    public void clearDateOnClick(View view){
+
+        deleteDateIcon = (ImageView) findViewById(R.id.imageView_taskDate_cancel);
+        deleteDateIcon.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                taskDate.setText(null);
+            }
+        });
+    }
+
+    public void clearTimeOnClick(View view) {
+
+        deleteTimeIcon = (ImageView) findViewById(R.id.imageView_taskTime_cancel);
+        deleteTimeIcon.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                taskTime.setText(null);
+            }
+        });
+
+    }
+
 
 
     //Date and Notifications changed onClick the Change Edit Date button
@@ -269,7 +299,7 @@ public class TaskActivity extends BaseActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(key, value);
-        editor.commit();
+        editor.apply();
     }
 
 

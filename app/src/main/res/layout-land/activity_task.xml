@@ -4,18 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/z"
+    >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/task_name"
         android:layout_alignParentTop="true"
         android:layout_marginTop="60dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="false"
         style="@style/textViewCustom"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="16dp"
+        android:layout_toEndOf="@+id/imageView_taskName"
+        android:backgroundTint="@color/white"/>
+
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/task_name_lable"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="@color/off_white"
+        android:layout_above="@+id/task_desc"
+        android:layout_toEndOf="@+id/task_name"
+        android:text="Task Name"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="#000"
         />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,30 +44,56 @@
         android:id="@+id/task_desc"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/task_name"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        style="@style/textViewCustom"/>
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        style="@style/textViewCustom"
+        android:layout_alignStart="@+id/task_name"
+        android:layout_alignEnd="@+id/task_name"
+        android:layout_marginBottom="30dp"
+        />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/task_desc_lable"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="@color/off_white"
+        android:text="Task Description"
+        android:textStyle="italic"
+        android:textSize="12dp"
+        android:textColor="@color/black"
+        android:layout_below="@+id/imageView_taskName"
+        android:layout_alignStart="@+id/task_name_lable" />
+
+
+    <TextView
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:id="@+id/task_date"
         android:layout_below="@+id/task_time"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        style="@style/textViewCustom"/>
+        android:layout_marginTop="20dp"
+        android:layout_alignParentEnd="false"
+        android:layout_marginRight="0dp"
+        style="@style/textViewCustom"
+        android:layout_alignStart="@+id/task_desc"
+        android:onClick="dateOnClick"
+        android:hint="tap to add task date"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:id="@+id/task_time"
         android:layout_below="@+id/task_desc"
-        android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentEnd="false"
         android:onClick="timeOnClick"
-        style="@style/textViewCustom"/>
+        android:layout_marginRight="16dp"
+        style="@style/textViewCustom"
+        android:layout_alignStart="@+id/task_desc"
+        android:hint="@string/tap_to_add_task_time"
+        android:layout_marginBottom="30dp"
+        />
 
 
     <android.support.design.widget.FloatingActionButton
@@ -56,55 +103,108 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:src="@drawable/ic_save_24dp"
-        app:layout_anchorGravity="top|end"
+        app:layout_anchorGravity="bottom|end"
         android:layout_gravity="right"
         android:layout_marginLeft="@dimen/action_button_margin_side"
         android:layout_marginRight="@dimen/action_button_margin_side"
-        android:layout_alignTop="@+id/fab_send"
+        android:layout_alignBottom="@+id/imageView_taskEmail"
         android:layout_alignParentEnd="true" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_time"
-        android:onClick="timeOnClick"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
+        android:id="@+id/imageView_taskName"
+        android:layout_alignTop="@+id/task_name"
+        android:background="@drawable/ic_assignment_black_24dp"
+        android:minWidth="25dp"
+        android:minHeight="25dp"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:layout_marginTop="20dp"
+        />
+
+
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_taskTime"
+        android:layout_alignTop="@+id/task_time"
         android:src="@drawable/ic_access_alarm_24dp"
-        app:layout_anchorGravity="bottom"
-        android:layout_gravity="right"
+        android:minWidth="25dp"
+        android:minHeight="25dp"
         android:layout_marginLeft="@dimen/action_button_margin_side"
-        android:layout_marginRight="@dimen/action_button_margin_side"
-        android:layout_alignTop="@+id/fab_calendar"
-        android:layout_toStartOf="@+id/fab_calendar" />
+        android:tint="@color/black"
+        android:onClick="timeOnClick"
+        />
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_send"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:src="@drawable/ic_email_24dp"
-        app:layout_anchorGravity="bottom"
-        android:layout_gravity="right"
-        android:layout_marginLeft="@dimen/action_button_margin_side"
-        android:layout_marginRight="@dimen/action_button_margin_side"
-        android:layout_marginBottom="43dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/fab_save" />
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_calendar"
-        android:onClick="dateOnClick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
+        android:id="@+id/imageView_taskDate"
+        android:layout_alignTop="@+id/task_date"
         android:src="@drawable/calendar"
-        app:layout_anchorGravity="bottom"
-        android:layout_gravity="right"
+        android:minWidth="0dp"
+        android:minHeight="25dp"
         android:layout_marginLeft="@dimen/action_button_margin_side"
-        android:layout_marginRight="@dimen/action_button_margin_side"
-        android:layout_alignTop="@+id/fab_send"
-        android:layout_toStartOf="@+id/fab_send" />
+        android:tint="@color/black"
+        android:onClick="dateOnClick"
+        />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_taskDate_cancel"
+        android:src="@drawable/ic_cross_24dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:tint="@color/red_A700"
+        android:onClick="clearDateOnClick"
+        android:layout_alignTop="@+id/task_date"
+        android:layout_alignEnd="@+id/task_desc_lable" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_taskTime_cancel"
+        android:src="@drawable/ic_cross_24dp"
+        android:backgroundTint="@color/white"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:tint="@color/red_A700"
+        android:onClick="clearTimeOnClick"
+        android:layout_marginEnd="50dp"
+        android:layout_alignBottom="@+id/task_time"
+        android:layout_alignStart="@+id/imageView_taskDate_cancel" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_taskEmail"
+        android:src="@drawable/ic_email_24dp"
+        android:minWidth="40dp"
+        android:minHeight="40dp"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:tint="@color/black"
+        android:onClick="dateOnClick"
+        android:layout_below="@+id/imageView_taskDate"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email_task"
+        android:textSize="16dp"
+        android:textStyle="italic"
+        android:id="@+id/textView"
+        android:layout_alignBottom="@+id/imageView_taskEmail"
+        android:layout_alignStart="@+id/task_date"
+        android:layout_marginBottom="10dp"
+        android:textColor="#000" />
+
 
 </RelativeLayout>
