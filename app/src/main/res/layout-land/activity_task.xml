@@ -58,8 +58,8 @@
         android:src="@drawable/ic_save_24dp"
         app:layout_anchorGravity="top|end"
         android:layout_gravity="right"
-        android:layout_marginLeft="@dimen/action_button_margin"
-        android:layout_marginRight="@dimen/action_button_margin"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:layout_marginRight="@dimen/action_button_margin_side"
         android:layout_alignTop="@+id/fab_send"
         android:layout_alignParentEnd="true" />
 
@@ -72,8 +72,8 @@
         android:src="@drawable/ic_access_alarm_24dp"
         app:layout_anchorGravity="bottom"
         android:layout_gravity="right"
-        android:layout_marginLeft="@dimen/action_button_margin"
-        android:layout_marginRight="@dimen/action_button_margin"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:layout_marginRight="@dimen/action_button_margin_side"
         android:layout_alignTop="@+id/fab_calendar"
         android:layout_toStartOf="@+id/fab_calendar" />
 
@@ -86,8 +86,8 @@
         android:src="@drawable/ic_email_24dp"
         app:layout_anchorGravity="bottom"
         android:layout_gravity="right"
-        android:layout_marginLeft="@dimen/action_button_margin"
-        android:layout_marginRight="@dimen/action_button_margin"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:layout_marginRight="@dimen/action_button_margin_side"
         android:layout_marginBottom="43dp"
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/fab_save" />
@@ -102,8 +102,8 @@
         android:src="@drawable/calendar"
         app:layout_anchorGravity="bottom"
         android:layout_gravity="right"
-        android:layout_marginLeft="@dimen/action_button_margin"
-        android:layout_marginRight="@dimen/action_button_margin"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:layout_marginRight="@dimen/action_button_margin_side"
         android:layout_alignTop="@+id/fab_send"
         android:layout_toStartOf="@+id/fab_send" />
 

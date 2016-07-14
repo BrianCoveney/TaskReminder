@@ -16,4 +16,13 @@
         android:title="@string/action_add"
         app:showAsAction="always"
         android:visible="true"/>
+
+
+
+    <item android:id="@+id/action_login"
+        android:icon="@drawable/ic_account_box_black_24dp"
+        android:title="@string/action_add"
+        app:showAsAction="always"
+        android:visible="true"/>
+
 </menu>

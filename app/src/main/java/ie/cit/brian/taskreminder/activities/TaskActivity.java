@@ -11,6 +11,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,9 +19,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -45,6 +48,7 @@ public class TaskActivity extends BaseActivity {
     private Task theTask;
     private TextView taskName, taskDesc, taskTime, taskDate;
     private FloatingActionButton saveFabBtn, shareBtn;
+    private ImageView emailIcon;
     String selectedDate;
     String selectedTime;
 
@@ -81,27 +85,31 @@ public class TaskActivity extends BaseActivity {
         taskTime = (TextView) findViewById(R.id.task_time);
         taskDate = (TextView) findViewById(R.id.task_date);
 
-        taskName.setText("Task: " + theTask.getTaskName());
-        taskDesc.setText("Description: " + theTask.getTaskDescription());
+        taskName.setText(theTask.getTaskName());
+        taskDesc.setText(theTask.getTaskDescription());
         taskTime.setText(theTask.getTaskTime());
+        taskTime.setHintTextColor((Color.LTGRAY));
         taskDate.setText(theTask.getTaskDate().toString());
+        taskDate.setHintTextColor((Color.LTGRAY));
     }
 
 
     public void shareTaskDialog() {
-        shareBtn = (FloatingActionButton) findViewById(R.id.fab_send);
-        shareBtn.setOnClickListener(new View.OnClickListener() {
+
+        emailIcon = (ImageView) findViewById(R.id.imageView_taskEmail);
+        emailIcon.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
                 DialogFragment dialogFragment = new ShareTaskDialog();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("taskObject", theTask);
                 dialogFragment.setArguments(bundle);
                 dialogFragment.show(getFragmentManager(), "share_key");
-
             }
         });
+
+
     }
 
 
@@ -204,7 +212,7 @@ public class TaskActivity extends BaseActivity {
         setCurrentTime();
 
         saveFabBtn = (FloatingActionButton)findViewById(R.id.fab_save);
-        saveFabBtn.setOnClickListener(new View.OnClickListener() {
+        saveFabBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 UtilityClass.writeToFile(TaskActivity.this,

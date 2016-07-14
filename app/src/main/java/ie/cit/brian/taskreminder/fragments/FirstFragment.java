@@ -18,11 +18,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.TaskController;
 import ie.cit.brian.taskreminder.UtilityClass;
@@ -35,34 +37,22 @@ public class FirstFragment extends Fragment {
 
     protected FloatingActionButton floatingBtn, floatingBtnLogin;
 
+
     private TaskSearcher searcher;
 
     //The interface which this fragment uses to communicate up to its Activity
-    public interface TaskSearcher
-    {
+    public interface TaskSearcher {
         public void refreshTaskList();
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-
-
+        // Moving login button to top menu bar
         addTaskFloatingButton();
-
-        floatingBtnLogin = (FloatingActionButton)getActivity().findViewById(R.id.fab_login);
-        floatingBtnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UtilityClass.launchLoginActivity(getActivity());
-            }
-        });
-
-
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
 
     }
-
 
 
     @Override
@@ -82,10 +72,9 @@ public class FirstFragment extends Fragment {
     }
 
 
+    public void addTaskFloatingButton() {
 
-    public void addTaskFloatingButton(){
-
-        floatingBtn = (FloatingActionButton)getActivity().findViewById(R.id.fab);
+        floatingBtn = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         floatingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,9 +84,8 @@ public class FirstFragment extends Fragment {
     }
 
 
-
     // display customer dialog to add tasks
-    public void myCustomAddTaskDiaglog(){
+    public void myCustomAddTaskDiaglog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(
                 getContext());
         alertDialog.setTitle("Create Task");
@@ -140,7 +128,6 @@ public class FirstFragment extends Fragment {
         alertDialog.create();
         alertDialog.show();
     }
-
 
 
 }

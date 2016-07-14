@@ -6,6 +6,8 @@ import android.test.suitebuilder.annotation.LargeTest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import ie.cit.brian.taskreminder.activities.LocationActivity;
 import ie.cit.brian.taskreminder.activities.LoginActivity;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -23,8 +25,12 @@ public class MainActivityTest {
     private String mStringToBetyped;
 
     @Rule
-    public ActivityTestRule<LoginActivity> mActivityRule =
+    public ActivityTestRule<LoginActivity> mLoginActivityRule =
             new ActivityTestRule<>(LoginActivity.class);
+
+    @Rule
+    public ActivityTestRule<LocationActivity> mLocationOffActRule =
+            new ActivityTestRule(LocationActivity.class);
 
     @Test
     public void greeterSaysHello(){
@@ -36,4 +42,8 @@ public class MainActivityTest {
                 .check(matches(isDisplayed()));
 
     }
+
+
+
+
 }

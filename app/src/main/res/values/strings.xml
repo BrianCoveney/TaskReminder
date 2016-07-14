@@ -51,6 +51,7 @@
     <string name="add_name">Add Name</string>
     <string name="add_email">Add Email</string>
     <string name="delete_database">Delete Database</string>
+    <string name="email_task">Email Task</string>
 
 
 </resources>

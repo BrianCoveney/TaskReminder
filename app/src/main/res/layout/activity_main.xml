@@ -40,28 +40,9 @@
             android:src="@drawable/ic_add_32dp"
             app:layout_anchorGravity="bottom|right|end"
             android:layout_gravity="right"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/action_button_margin_side"
+            android:layout_marginBottom="@dimen/action_button_margin_end"
             />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello"
-            android:id="@+id/textView" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_login"
-            android:layout_width="115dp"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:src="@drawable/ic_add_32dp"
-            app:layout_anchorGravity="bottom|left|end"
-            android:layout_gravity="right"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            />
-
 
     </LinearLayout>
 

@@ -111,6 +111,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             case R.id.action_googlemaps:
                 UtilityClass.launchGoogleMapsActivity(this);
                 break;
+            case R.id.action_login:
+                UtilityClass.launchLoginActivity(this);
             default:
                 break;
         }
