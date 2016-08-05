@@ -65,7 +65,7 @@ public class TaskActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         /* We will not use setContentView in this activity
-           Rather than we will use layout inflater to add view in FrameLayout of our base activity layout*/
+           Rather than we will use layout inflater to add view in FrameLayout of our base activity layout**/
         getLayoutInflater().inflate(R.layout.activity_task, frameLayout);
 
         populateTasks();
