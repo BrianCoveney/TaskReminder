@@ -88,9 +88,9 @@ public class TaskActivity extends BaseActivity {
         taskName.setText(theTask.getTaskName());
         taskDesc.setText(theTask.getTaskDescription());
         taskTime.setText(theTask.getTaskTime());
-        taskTime.setHintTextColor((Color.LTGRAY));
+        taskTime.setHintTextColor((Color.BLACK));
         taskDate.setText(theTask.getTaskDate().toString());
-        taskDate.setHintTextColor((Color.LTGRAY));
+        taskDate.setHintTextColor((Color.BLACK));
     }
 
 

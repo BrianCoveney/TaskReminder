@@ -22,7 +22,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @LargeTest
 public class MainActivityTest {
 
-    private String mStringToBetyped;
+    private static final String STRING_TYPED = "Brian";
 
     @Rule
     public ActivityTestRule<LoginActivity> mLoginActivityRule =
@@ -35,10 +35,10 @@ public class MainActivityTest {
     @Test
     public void greeterSaysHello(){
         onView(withId(R.id.edT_login_name))
-                .perform(typeText("Brian"));
+                .perform(typeText(STRING_TYPED));
         onView(withId(R.id.login_btn_name))
                 .perform(click());
-        onView(withText("Brian"))
+        onView(withText(STRING_TYPED))
                 .check(matches(isDisplayed()));
 
     }

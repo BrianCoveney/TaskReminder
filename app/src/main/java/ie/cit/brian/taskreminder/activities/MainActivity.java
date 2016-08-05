@@ -20,7 +20,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.mikhaellopez.circularimageview.CircularImageView;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -29,7 +31,6 @@ import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.fragments.SecondFragment;
 import ie.cit.brian.taskreminder.fragments.FirstFragment;
-
 
 
 /**
@@ -58,7 +59,7 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
                 .coordinator_layout);
 
 
-        CircularImageView circularImageView = (CircularImageView)findViewById(R.id.myCircularImageView);
+        CircularImageView circularImageView = (CircularImageView) findViewById(R.id.myCircularImageView);
         // Set Border
         circularImageView.setBorderColor(getResources().getColor(R.color.light_grey));
         circularImageView.setBorderWidth(10);
@@ -106,7 +107,6 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
     }
 
 
-
     // listen for changes in the Settings Activity
     public void settingsChangedNotification() {
         //retrieved from PreferenceActivity
@@ -150,17 +150,15 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
                     Toast.makeText(this, "Task due this week: " + myDateFormat().substring(0, 3) + " of the month",
                             Toast.LENGTH_LONG).show();
                 }
-            }catch (StringIndexOutOfBoundsException e){
+            } catch (StringIndexOutOfBoundsException e) {
                 Log.i(TAG, "Exception = " + e.getMessage());
             }
 
-            }
         }
+    }
 
 
-
-    public String myDateFormat()
-    {
+    public String myDateFormat() {
         SimpleDateFormat dateFormatDay = new SimpleDateFormat("F EEEE, dd/MM/yyyy");
         String mDate = dateFormatDay.format(cal.getTime());
         String subMyDate = mDate.substring(0, 1);
@@ -173,7 +171,7 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
         StringBuilder str = new StringBuilder(mDate);
 
 
-        switch (subMyDate){
+        switch (subMyDate) {
             case "1":
                 str.insert(1, a);
                 mDate = str.toString();

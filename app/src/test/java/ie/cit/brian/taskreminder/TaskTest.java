@@ -5,6 +5,8 @@ import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -13,18 +15,19 @@ import static org.junit.Assert.*;
 public class TaskTest {
 
     private Task mTask;
-
+    private Date mDate;
 
     @Before
     public void setUp() throws Exception {
 
+        mDate = new Date();
         mTask = new Task("Running", "in park", "at 3pm",
-                null);
+                mDate);
     }
 
     @Test
     public void testGetTaskDate() throws Exception {
-        assertNull(null, mTask.getTaskDate());
+        assertEquals(mDate, mTask.getTaskDate());
     }
 
     @Test
@@ -34,7 +37,7 @@ public class TaskTest {
 
     @Test
     public void testGetTaskDescription() throws Exception {
-        assertEquals("in park", "in park");
+        assertEquals("in park", mTask.getTaskDescription());
     }
 
     @Test
