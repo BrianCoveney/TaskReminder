@@ -30,20 +30,13 @@ public class TaskTest {
         assertEquals(mDate, mTask.getTaskDate());
     }
 
-    @Test
-    public void testSetTaskDate() throws Exception {
 
-    }
 
     @Test
     public void testGetTaskDescription() throws Exception {
         assertEquals("in park", mTask.getTaskDescription());
     }
 
-    @Test
-    public void testSetTaskDescription() throws Exception {
-
-    }
 
     @Test
     public void testGetTaskTime() throws Exception {
@@ -60,12 +53,4 @@ public class TaskTest {
         assertEquals("Running", mTask.getTaskName());
     }
 
-    @Test
-    public void testSetTaskName() throws Exception {
-    }
-
-    @Test
-    public void testToString() throws Exception {
-
-    }
 }
