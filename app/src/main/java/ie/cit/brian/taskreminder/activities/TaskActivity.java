@@ -87,15 +87,11 @@ public class TaskActivity extends BaseActivity {
         taskName.setText(theTask.getTaskName());
         taskDesc.setText(theTask.getTaskDescription());
         taskTime.setText(theTask.getTaskTime());
-        taskTime.setHintTextColor((Color.BLACK));
         taskDate.setText(theTask.getTaskDate().toString());
-        taskDate.setHintTextColor((Color.BLACK));
     }
 
 
     public void shareTaskDialog() {
-
-
         try {
 
             ImageView emailIcon = (ImageView) findViewById(R.id.imageView_taskEmail);
@@ -160,7 +156,6 @@ public class TaskActivity extends BaseActivity {
 
 
     public void clearDateOnClick(View view){
-
         deleteDateIcon = (ImageView) findViewById(R.id.imageView_taskDate_cancel);
         deleteDateIcon.setOnClickListener(new OnClickListener() {
             @Override
@@ -171,7 +166,6 @@ public class TaskActivity extends BaseActivity {
     }
 
     public void clearTimeOnClick(View view) {
-
         deleteTimeIcon = (ImageView) findViewById(R.id.imageView_taskTime_cancel);
         deleteTimeIcon.setOnClickListener(new OnClickListener() {
             @Override
@@ -179,15 +173,11 @@ public class TaskActivity extends BaseActivity {
                 taskTime.setText(null);
             }
         });
-
     }
-
 
 
     //Date and Notifications changed onClick the Change Edit Date button
     public void setCurrentDate() {
-
-
         DateFormat dateFormatDay = new SimpleDateFormat("F EEEE, dd/MM/yyyy");
         String mDate = dateFormatDay.format(cal.getTime());
         String subMyDate = mDate.substring(0, 1);
@@ -214,10 +204,8 @@ public class TaskActivity extends BaseActivity {
             str.insert(1, d).toString();
             mDate = str.toString();
         }
-
         taskDate.setText(mDate);
         selectedDate = mDate;
-
     }
 
 
@@ -236,7 +224,6 @@ public class TaskActivity extends BaseActivity {
 
     //Save task by clicking button - write it to file and set it in the notification
     public void saveOnClick() {
-
         setCurrentDate();
         setCurrentTime();
 

@@ -5,7 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/z">
+    android:id="@+id/z"
+    >
+
+
+
 
     <TextView
         android:layout_width="150dp"
@@ -18,7 +22,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="16dp"
         android:layout_toEndOf="@+id/imageView_taskName"
-        android:backgroundTint="@color/white"/>
+        />
 
 
     <TextView
@@ -51,6 +55,16 @@
         android:layout_marginBottom="30dp"
         />
 
+
+    <View style="@style/Divider"
+        android:layout_below="@+id/task_desc"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:layout_marginRight="@dimen/action_button_margin_side"
+        android:background="@color/dark_grey" />
+
+
     <TextView
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -69,19 +83,6 @@
     <TextView
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:id="@+id/task_date"
-        android:layout_below="@+id/task_time"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentEnd="false"
-        android:layout_marginRight="0dp"
-        style="@style/textViewCustom"
-        android:layout_alignStart="@+id/task_desc"
-        android:onClick="dateOnClick"
-        android:hint="tap to add task date"/>
-
-    <TextView
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
         android:id="@+id/task_time"
         android:layout_below="@+id/task_desc"
         android:layout_marginTop="20dp"
@@ -94,6 +95,30 @@
         android:layout_marginBottom="30dp"
         />
 
+    <View style="@style/Divider"
+        android:layout_below="@+id/task_time"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:layout_marginRight="@dimen/action_button_margin_side"
+        android:background="@color/dark_grey" />
+
+
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/task_date"
+        android:layout_below="@+id/task_time"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentEnd="false"
+        android:layout_marginRight="0dp"
+        style="@style/textViewCustom"
+        android:layout_alignStart="@+id/task_desc"
+        android:onClick="dateOnClick"
+        android:hint="tap to add task date"/>
+
+
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_save"
@@ -104,11 +129,9 @@
         android:src="@drawable/ic_save_24dp"
         app:layout_anchorGravity="bottom|end"
         android:layout_gravity="right"
-        android:layout_marginLeft="@dimen/action_button_margin_side"
-        android:layout_marginRight="@dimen/action_button_margin_side"
-        android:layout_marginBottom="47dp"
+        android:layout_marginBottom="39dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/task_date" />
+        android:layout_alignEnd="@+id/view" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -121,9 +144,6 @@
         android:layout_marginLeft="@dimen/action_button_margin_side"
         android:layout_marginTop="20dp"
         />
-
-
-
 
 
     <ImageView
@@ -180,7 +200,7 @@
         android:onClick="clearTimeOnClick"
         android:layout_marginRight="15dp"
         android:layout_alignTop="@+id/task_time"
-        android:layout_toEndOf="@+id/fab_save" />
+        android:layout_toEndOf="@+id/task_time" />
 
 
     <ImageView
@@ -199,14 +219,25 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView_taskEmail"
         android:text="@string/email_task"
         android:textSize="16dp"
         android:textStyle="italic"
         android:id="@+id/textView"
-        android:layout_alignBottom="@+id/imageView_taskEmail"
         android:layout_alignStart="@+id/task_date"
         android:layout_marginBottom="10dp"
         android:textColor="#000" />
+
+
+    <View style="@style/Divider"
+        android:background="@color/dark_grey"
+        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:layout_marginRight="@dimen/action_button_margin_side"
+        android:id="@+id/view"
+        android:layout_below="@+id/task_date"
+        android:layout_marginTop="50dp"
+
+        />
 
 
 </RelativeLayout>
