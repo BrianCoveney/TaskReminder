@@ -3,7 +3,8 @@ android todo app
 
 A basic ToDo list app for a college assignment.  
 
-<p align="center">
-  <img src="https://cloud.githubusercontent.com/assets/8080260/13494176/855100f8-e13a-11e5-8b66-1a9d06388e57.png" width="350"/> 
-  <img src="https://cloud.githubusercontent.com/assets/8080260/13494166/7d420ec0-e13a-11e5-8fec-318aede3c1c7.png" width="350" />
-</p>
+
+<img src="https://cloud.githubusercontent.com/assets/8080260/17549538/98f43f0e-5ee8-11e6-869a-b0d2a60dd5fb.png" width="350"/>
+<img src="https://cloud.githubusercontent.com/assets/8080260/17549547/9eda1812-5ee8-11e6-910b-c562e2d2154b.png" width="350"/>
+<img src="https://cloud.githubusercontent.com/assets/8080260/17549588/ce60e322-5ee8-11e6-81ad-47fc200df7c0.png"width="350"/>
+
