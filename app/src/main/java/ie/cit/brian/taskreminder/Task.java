@@ -1,8 +1,13 @@
 package ie.cit.brian.taskreminder;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+
+import javax.xml.validation.Validator;
 
 /**
  * Created by briancoveney on 11/25/15.
@@ -16,12 +21,27 @@ public class Task implements Serializable{
 
     public Task(String taskName, String taskDescription , String taskTime , Date taskDate)
     {
-        this.taskName = taskName;
-        this.taskDescription = taskDescription;
         this.taskTime = taskTime;
         this.taskDate = taskDate;
 
+        Validate(taskName);
+        Validate(taskDescription);
+        this.taskDescription = taskDescription;
+        this.taskName = taskName;
+
     }
+
+    public String Validate(String input)
+    {
+        if(!input.matches("^[a-zA-Z]*$")){
+            throw new IllegalArgumentException("The task name or description cannot contain number.");
+        }
+        if(input.isEmpty()){
+            throw new NullPointerException("The task name or description cannot be null.");
+        }
+        return input;
+    }
+
 
     public Date getTaskDate() {
         return taskDate;
