@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -46,7 +47,8 @@ import ie.cit.brian.taskreminder.UtilityClass;
 public class TaskActivity extends BaseActivity {
 
     private Task theTask;
-    private TextView taskName, taskDesc, taskTime, taskDate;
+    private TextView taskTime, taskDate;
+    private EditText taskName, taskDesc;
     private FloatingActionButton saveFabBtn, shareBtn;
     protected ImageView deleteDateIcon, deleteTimeIcon;
     String selectedDate;
@@ -69,9 +71,10 @@ public class TaskActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_task, frameLayout);
 
         populateTasks();
+        ValidateInput();
+
         shareTaskDialog();
         saveOnClick();
-
         loadSavedPreferences();
     }
 
@@ -79,16 +82,35 @@ public class TaskActivity extends BaseActivity {
     public void populateTasks() {
         //get the Task from the bottom fragment and display it in a new activity's textview
         theTask = (Task) getIntent().getSerializableExtra("selectedTask");
-        taskName = (TextView) findViewById(R.id.task_name);
-        taskDesc = (TextView) findViewById(R.id.task_desc);
+        taskName = (EditText) findViewById(R.id.task_name);
+        taskDesc = (EditText) findViewById(R.id.task_desc);
         taskTime = (TextView) findViewById(R.id.task_time);
         taskDate = (TextView) findViewById(R.id.task_date);
 
         taskName.setText(theTask.getTaskName());
         taskDesc.setText(theTask.getTaskDescription());
+
         taskTime.setText(theTask.getTaskTime());
         taskDate.setText(theTask.getTaskDate().toString());
     }
+
+
+    public void ValidateInput()
+    {
+        int[] etViewIds = new int[] { R.id.task_name, R.id.task_desc };
+
+        for(int i = 0; i < etViewIds.length; i++){
+            EditText etView = (EditText) findViewById(etViewIds[i]);
+
+            if(etView.getText().toString().matches("-?\\d+(\\.\\d+)?")){
+                etView.setError("Text only please!");
+                etView.requestFocus();
+
+            }
+        }
+
+    }
+
 
 
     public void shareTaskDialog() {
@@ -231,12 +253,12 @@ public class TaskActivity extends BaseActivity {
         saveFabBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 UtilityClass.writeToFile(TaskActivity.this,
                         theTask.getTaskName() + " - " +
                                 theTask.getTaskDescription() + " - " +
                                 selectedTime + " - " +
                                 selectedDate);
-
                 createNotifications();
 
             }

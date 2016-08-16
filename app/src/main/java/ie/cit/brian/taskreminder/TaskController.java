@@ -27,9 +27,18 @@ public class TaskController
         return instance;
     }
 
+
+
     public void addTask(String taskName, String taskDesc, String taskTime, Date taskDate){
         Task task = new Task(taskName, taskDesc, taskTime, taskDate);
         this.taskList.add(task);
+    }
+
+
+    public void addEditableTask(String newTaskName, String newTaskDesc){
+        Task newTask = new Task(newTaskName, newTaskDesc);
+        this.taskList.add(newTask);
+
     }
 
     public ArrayList<Task> getTask()

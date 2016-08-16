@@ -24,12 +24,22 @@ public class Task implements Serializable{
         this.taskTime = taskTime;
         this.taskDate = taskDate;
 
-        Validate(taskName);
-        Validate(taskDescription);
+//        Validate(taskName);
+//        Validate(taskDescription);
         this.taskDescription = taskDescription;
         this.taskName = taskName;
 
     }
+
+
+
+    public Task(String taskName, String taskDescription)
+    {
+        this.taskDescription = taskDescription;
+        this.taskName = taskName;
+    }
+
+
 
     public String Validate(String input)
     {
@@ -71,8 +81,8 @@ public class Task implements Serializable{
 
     public String toString()
     {
-        return this.taskName ;
-    } //+ " - " + this.taskTime
+        return this.taskName;
+    }
 
 
 }

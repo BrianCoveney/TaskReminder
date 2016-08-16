@@ -11,37 +11,23 @@
 
 
 
-    <TextView
+    <EditText
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/task_name"
         android:layout_alignParentTop="true"
         android:layout_marginTop="100dp"
         android:layout_alignParentEnd="false"
-        style="@style/textViewCustom"
+        style="@android:style/Widget.EditText"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="16dp"
         android:layout_toEndOf="@+id/imageView_taskName"
         />
 
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/task_name_lable"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="16dp"
-        android:backgroundTint="@color/off_white"
-        android:layout_above="@+id/task_desc"
-        android:layout_toEndOf="@+id/task_name"
-        android:text="Task Name"
-        android:textStyle="italic"
-        android:textSize="12dp"
-        android:textColor="#000"
-        />
 
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/task_desc"
@@ -49,7 +35,7 @@
         android:layout_below="@+id/task_name"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-        style="@style/textViewCustom"
+        style="@android:style/Widget.EditText"
         android:layout_alignStart="@+id/task_name"
         android:layout_alignEnd="@+id/task_name"
         android:layout_marginBottom="30dp"
@@ -65,19 +51,6 @@
         android:background="@color/dark_grey" />
 
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/task_desc_lable"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="16dp"
-        android:backgroundTint="@color/off_white"
-        android:text="Task Description"
-        android:textStyle="italic"
-        android:textSize="12dp"
-        android:textColor="@color/black"
-        android:layout_below="@+id/imageView_taskName"
-        android:layout_alignStart="@+id/task_name_lable" />
 
 
     <TextView
@@ -180,13 +153,12 @@
         android:id="@+id/imageView_taskDate_cancel"
         android:src="@drawable/ic_cross_24dp"
         android:backgroundTint="@color/white"
-        android:layout_marginLeft="@dimen/action_button_margin_side"
+        android:layout_marginLeft="0dp"
         android:tint="@color/red_A700"
         android:onClick="clearDateOnClick"
-        android:layout_marginRight="15dp"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/imageView_taskTime_cancel"
-        android:layout_marginStart="0dp" />
+        android:layout_marginRight="0dp"
+        android:layout_alignTop="@+id/task_date"
+        android:layout_alignStart="@+id/imageView_taskTime_cancel" />
 
 
     <ImageView

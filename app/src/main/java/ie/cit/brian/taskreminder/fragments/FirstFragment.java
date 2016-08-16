@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +30,7 @@ import java.util.TimeZone;
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.TaskController;
 import ie.cit.brian.taskreminder.UtilityClass;
+import ie.cit.brian.taskreminder.activities.MainActivity;
 
 
 /**
@@ -36,6 +39,7 @@ import ie.cit.brian.taskreminder.UtilityClass;
 public class FirstFragment extends Fragment {
 
     protected FloatingActionButton floatingBtn, floatingBtnLogin;
+    private EditText taskName, taskDesc;
 
 
     private TaskSearcher searcher;
@@ -69,6 +73,8 @@ public class FirstFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_first, container, false);
 
 
+
+
     }
 
 
@@ -95,8 +101,14 @@ public class FirstFragment extends Fragment {
         final View dialogView = inflater.inflate(R.layout.dialog_alert, null);
         alertDialog.setView(dialogView);
 
-        final EditText taskName = (EditText) dialogView.findViewById(R.id.edT_name);
-        final EditText taskDesc = (EditText) dialogView.findViewById(R.id.edT_desc);
+        taskName = (EditText) dialogView.findViewById(R.id.edT_name);
+        taskDesc = (EditText) dialogView.findViewById(R.id.edT_desc);
+
+        taskName.addTextChangedListener(validateInput);
+        taskDesc.addTextChangedListener(validateInput);
+
+
+
 
         taskName.setHint("Task name");
         taskDesc.setHint("Task description");
@@ -107,6 +119,8 @@ public class FirstFragment extends Fragment {
                 String name = taskName.getText().toString();
                 String description = taskDesc.getText().toString();
 
+
+
                 TimeZone timeZone = TimeZone.getTimeZone("GMT");
                 DateFormat myTimeFormat = new SimpleDateFormat("HH:mm, a");
                 myTimeFormat.setTimeZone(timeZone);
@@ -115,6 +129,7 @@ public class FirstFragment extends Fragment {
                 Date date = Calendar.getInstance().getTime();
                 //Populate the task details
                 TaskController.getInstance().addTask(name, description, time, date);
+
                 searcher.refreshTaskList();
             }
         });
@@ -127,10 +142,55 @@ public class FirstFragment extends Fragment {
 
         alertDialog.create();
         alertDialog.show();
+
     }
 
 
+
+    private final TextWatcher validateInput = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+
+            //Catches when user enter a number instead of a string
+            String regexStr = "^[0-9]*$";
+
+            if(editable == taskName.getEditableText()) {
+                if (!(editable.toString().trim().matches(regexStr))) {
+                    taskName.setError(null);
+                } else {
+                    taskName.setError("Input Error!");
+                }
+                // removes error message when numbers are deleted
+                if (editable.toString().equals("")) {
+                    taskName.setError(null);
+                }
+            }
+            else if (editable == taskDesc.getEditableText()){
+                if (!(editable.toString().trim().matches(regexStr))) {
+                    taskDesc.setError(null);
+                } else {
+                    taskDesc.setError("Input Error!");
+                }
+
+                if (editable.toString().equals("")) {
+                    taskName.setError(null);
+                }
+            }
+        }
+    };
 }
+
 
 
 
