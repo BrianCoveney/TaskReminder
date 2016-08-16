@@ -71,10 +71,6 @@ public class FirstFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_first, container, false);
-
-
-
-
     }
 
 
@@ -92,29 +88,24 @@ public class FirstFragment extends Fragment {
 
     // display customer dialog to add tasks
     public void myCustomAddTaskDiaglog() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+        final AlertDialog.Builder builder = new AlertDialog.Builder(
                 getContext());
-        alertDialog.setTitle("Create Task");
-        alertDialog.setMessage("... and description");
+
+        builder.setTitle("Create Task");
+        builder.setMessage("... and description");
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialog_alert, null);
-        alertDialog.setView(dialogView);
+        builder.setView(dialogView);
 
         taskName = (EditText) dialogView.findViewById(R.id.edT_name);
         taskDesc = (EditText) dialogView.findViewById(R.id.edT_desc);
-
-        taskName.addTextChangedListener(validateInput);
-        taskDesc.addTextChangedListener(validateInput);
-
-
-
 
         taskName.setHint("Task name");
         taskDesc.setHint("Task description");
 
 
-        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String name = taskName.getText().toString();
                 String description = taskDesc.getText().toString();
@@ -134,61 +125,47 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Cancel", new AlertDialog.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // Canceled by default.
             }
         });
 
-        alertDialog.create();
+
+        final AlertDialog alertDialog = builder.create();
+
         alertDialog.show();
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setSaveEnabled(false);
+        taskName.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //Catches when user enter a number instead of a string
+                String regexStr = "^[0-9]*$";
+
+                if(editable == taskName.getEditableText()) {
+                    if (!(editable.toString().trim().matches(regexStr))) {
+                        taskName.setError(null);
+                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                    } else {
+                        taskName.setError("Computer says no!");
+                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+
+                    }
+                    // removes error message when numbers are deleted
+                    if (editable.toString().equals("")) {
+                        taskName.setError(null);
+                    }
+                }
+            }
+        });
     }
-
-
-
-    private final TextWatcher validateInput = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
-
-            //Catches when user enter a number instead of a string
-            String regexStr = "^[0-9]*$";
-
-            if(editable == taskName.getEditableText()) {
-                if (!(editable.toString().trim().matches(regexStr))) {
-                    taskName.setError(null);
-                } else {
-                    taskName.setError("Input Error!");
-                }
-                // removes error message when numbers are deleted
-                if (editable.toString().equals("")) {
-                    taskName.setError(null);
-                }
-            }
-            else if (editable == taskDesc.getEditableText()){
-                if (!(editable.toString().trim().matches(regexStr))) {
-                    taskDesc.setError(null);
-                } else {
-                    taskDesc.setError("Input Error!");
-                }
-
-                if (editable.toString().equals("")) {
-                    taskName.setError(null);
-                }
-            }
-        }
-    };
 }
 
 
