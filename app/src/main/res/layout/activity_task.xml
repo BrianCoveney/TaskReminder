@@ -11,14 +11,14 @@
 
 
 
-    <EditText
+    <TextView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:id="@+id/task_name"
         android:layout_alignParentTop="true"
         android:layout_marginTop="100dp"
         android:layout_alignParentEnd="false"
-        style="@android:style/Widget.EditText"
+        style="@style/textViewCustom"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="16dp"
         android:layout_toEndOf="@+id/imageView_taskName"
@@ -27,7 +27,7 @@
 
 
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/task_desc"
@@ -35,7 +35,7 @@
         android:layout_below="@+id/task_name"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-        style="@android:style/Widget.EditText"
+        style="@style/textViewCustom"
         android:layout_alignStart="@+id/task_name"
         android:layout_alignEnd="@+id/task_name"
         android:layout_marginBottom="30dp"

@@ -47,8 +47,7 @@ import ie.cit.brian.taskreminder.UtilityClass;
 public class TaskActivity extends BaseActivity {
 
     private Task theTask;
-    private TextView taskTime, taskDate;
-    private EditText taskName, taskDesc;
+    private TextView taskTime, taskDate, taskName, taskDesc;
     private FloatingActionButton saveFabBtn, shareBtn;
     protected ImageView deleteDateIcon, deleteTimeIcon;
     String selectedDate;
@@ -71,7 +70,6 @@ public class TaskActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_task, frameLayout);
 
         populateTasks();
-        ValidateInput();
 
         shareTaskDialog();
         saveOnClick();
@@ -82,8 +80,8 @@ public class TaskActivity extends BaseActivity {
     public void populateTasks() {
         //get the Task from the bottom fragment and display it in a new activity's textview
         theTask = (Task) getIntent().getSerializableExtra("selectedTask");
-        taskName = (EditText) findViewById(R.id.task_name);
-        taskDesc = (EditText) findViewById(R.id.task_desc);
+        taskName = (TextView) findViewById(R.id.task_name);
+        taskDesc = (TextView) findViewById(R.id.task_desc);
         taskTime = (TextView) findViewById(R.id.task_time);
         taskDate = (TextView) findViewById(R.id.task_date);
 
@@ -93,24 +91,6 @@ public class TaskActivity extends BaseActivity {
         taskTime.setText(theTask.getTaskTime());
         taskDate.setText(theTask.getTaskDate().toString());
     }
-
-
-    public void ValidateInput()
-    {
-        int[] etViewIds = new int[] { R.id.task_name, R.id.task_desc };
-
-        for(int i = 0; i < etViewIds.length; i++){
-            EditText etView = (EditText) findViewById(etViewIds[i]);
-
-            if(etView.getText().toString().matches("-?\\d+(\\.\\d+)?")){
-                etView.setError("Text only please!");
-                etView.requestFocus();
-
-            }
-        }
-
-    }
-
 
 
     public void shareTaskDialog() {

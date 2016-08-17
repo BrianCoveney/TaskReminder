@@ -38,7 +38,7 @@ import ie.cit.brian.taskreminder.activities.MainActivity;
  */
 public class FirstFragment extends Fragment {
 
-    protected FloatingActionButton floatingBtn, floatingBtnLogin;
+    protected FloatingActionButton floatingBtn;
     private EditText taskName, taskDesc;
 
 
@@ -47,6 +47,12 @@ public class FirstFragment extends Fragment {
     //The interface which this fragment uses to communicate up to its Activity
     public interface TaskSearcher {
         public void refreshTaskList();
+    }
+
+    private GoopDoop doop;
+
+    public interface GoopDoop{
+        public void doSometin();
     }
 
     @Override
@@ -135,7 +141,7 @@ public class FirstFragment extends Fragment {
         final AlertDialog alertDialog = builder.create();
 
         alertDialog.show();
-        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setSaveEnabled(false);
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
         taskName.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -156,7 +162,6 @@ public class FirstFragment extends Fragment {
                     } else {
                         taskName.setError("Computer says no!");
                         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-
                     }
                     // removes error message when numbers are deleted
                     if (editable.toString().equals("")) {
