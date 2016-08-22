@@ -1,6 +1,5 @@
 # TaskReminder
 Android todo app.
-
 A basic ToDo list app for a college assignment.  
 
 <img src="https://cloud.githubusercontent.com/assets/8080260/17549538/98f43f0e-5ee8-11e6-869a-b0d2a60dd5fb.png" width="350"/>
