@@ -28,18 +28,13 @@ public class TaskController
     }
 
 
-
-    public void addTask(String taskName, String taskDesc, String taskTime, Date taskDate){
-        Task task = new Task(taskName, taskDesc, taskTime, taskDate);
+    public void addTask(String taskName, String taskDesc, String taskTime, Date taskDate)
+    {
+        // replacing call to Constructor, with a call to a Factory Method
+        Task task = Task.createTask(taskName, taskDesc, taskTime, taskDate);
         this.taskList.add(task);
     }
 
-
-    public void addEditableTask(String newTaskName, String newTaskDesc){
-        Task newTask = new Task(newTaskName, newTaskDesc);
-        this.taskList.add(newTask);
-
-    }
 
     public ArrayList<Task> getTask()
     {

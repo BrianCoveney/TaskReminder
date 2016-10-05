@@ -19,31 +19,27 @@ public class Task implements Serializable{
     private String taskTime;
     private Date taskDate;
 
-    public Task(String taskName, String taskDescription , String taskTime , Date taskDate)
+    private Task(String taskName, String taskDescription , String taskTime , Date taskDate)
     {
         this.taskTime = taskTime;
         this.taskDate = taskDate;
-
-//        Validate(taskName);
-//        Validate(taskDescription);
+        Validate(taskName);
+        Validate(taskDescription);
         this.taskDescription = taskDescription;
         this.taskName = taskName;
-
     }
 
-
-
-    public Task(String taskName, String taskDescription)
+    public static Task createTask(String taskName, String taskDescription , String taskTime , Date taskDate)
     {
-        this.taskDescription = taskDescription;
-        this.taskName = taskName;
+        return new Task(taskName, taskDescription, taskTime, taskDate);
     }
+
 
 
 
     public String Validate(String input)
     {
-        if(!input.matches("^[a-zA-Z]*$")){
+        if(input.matches("^[0-9]*$")){
             throw new IllegalArgumentException("The task name or description cannot contain number.");
         }
         if(input.isEmpty()){

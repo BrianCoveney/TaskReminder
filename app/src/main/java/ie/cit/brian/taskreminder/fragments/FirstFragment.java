@@ -49,11 +49,6 @@ public class FirstFragment extends Fragment {
         public void refreshTaskList();
     }
 
-    private GoopDoop doop;
-
-    public interface GoopDoop{
-        public void doSometin();
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
