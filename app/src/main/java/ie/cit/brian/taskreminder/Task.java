@@ -1,13 +1,7 @@
 package ie.cit.brian.taskreminder;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
-
-import javax.xml.validation.Validator;
 
 /**
  * Created by briancoveney on 11/25/15.

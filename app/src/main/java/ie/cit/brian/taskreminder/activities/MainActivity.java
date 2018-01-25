@@ -3,22 +3,17 @@ package ie.cit.brian.taskreminder.activities;
 
 import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
-import android.content.ContentProvider;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -26,11 +21,10 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import ie.cit.brian.taskreminder.ContactProvider;
 import ie.cit.brian.taskreminder.MyIntentService;
 import ie.cit.brian.taskreminder.R;
-import ie.cit.brian.taskreminder.fragments.SecondFragment;
 import ie.cit.brian.taskreminder.fragments.FirstFragment;
+import ie.cit.brian.taskreminder.fragments.SecondFragment;
 
 
 /**
@@ -47,6 +41,8 @@ public class MainActivity extends BaseActivity implements FirstFragment.TaskSear
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        System.out.println();
 
         /* We will not use setContentView in this activity
            Rather than we will use layout inflater to add view in FrameLayout of our base activity layout*/

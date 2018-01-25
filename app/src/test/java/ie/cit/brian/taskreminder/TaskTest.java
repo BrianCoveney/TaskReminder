@@ -1,13 +1,11 @@
 package ie.cit.brian.taskreminder;
 
-import org.joda.time.DateTime;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by brian on 25/07/16.
@@ -21,7 +19,7 @@ public class TaskTest {
     public void setUp() throws Exception {
 
         mDate = new Date();
-        mTask = new Task("Running", "in park", "at 3pm",
+        mTask = Task.createTask("Running", "in park", "at 3pm",
                 mDate);
     }
 
