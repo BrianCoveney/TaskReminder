@@ -14,12 +14,13 @@ public class TaskTest {
 
     private Task mTask;
     private Date mDate;
+    private String taskType = "Running";
 
     @Before
     public void setUp() throws Exception {
 
         mDate = new Date();
-        mTask = Task.createTask("Running", "in park", "at 3pm",
+        mTask = Task.createTask(taskType, "in park", "at 3pm",
                 mDate);
     }
 
