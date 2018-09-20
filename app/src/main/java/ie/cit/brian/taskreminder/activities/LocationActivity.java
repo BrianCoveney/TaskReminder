@@ -2,24 +2,19 @@ package ie.cit.brian.taskreminder.activities;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -38,11 +33,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import ie.cit.brian.taskreminder.CustomAdapter;
 import ie.cit.brian.taskreminder.R;
-
-
-
 
 
 /**
@@ -78,9 +69,11 @@ public class LocationActivity extends BaseActivity implements
 
     protected Location mCurrentLocation;
     protected LocationRequest mLocationRequest;
-    protected TextView mLatitudeText,mLongitudeText,mTimeText;
+    protected TextView mLatitudeText, mLongitudeText, mTimeText;
     protected Boolean mRequestingLocationUpdates;
     protected String mLastUpdateTime;
+    private boolean mLocationPermissionGranted;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
 
     @Override
@@ -93,10 +86,11 @@ public class LocationActivity extends BaseActivity implements
 
         buildGoogleApiClient();
         createLocationRequest();
+        getLocationPermission();
 
 
-        mLatitudeText = (TextView)findViewById(R.id.mLatitudeText);
-        mLongitudeText = (TextView)findViewById(R.id.mLongitudeText);
+        mLatitudeText = (TextView) findViewById(R.id.mLatitudeText);
+        mLongitudeText = (TextView) findViewById(R.id.mLongitudeText);
         mTimeText = (TextView) findViewById(R.id.mLastUpdateTimeTextView);
         locationSwitch = (Switch) findViewById(R.id.switch_location);
 
@@ -106,20 +100,35 @@ public class LocationActivity extends BaseActivity implements
         // Update values using data stored in the Bundle.
         updateValuesFromBundle(savedInstanceState);
 
+
         locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                // deals with the app crashing due to "GoogleApiClient is not Connected yet"
-                try {
-                    togglePeriodicLocUpdates();
-                }catch (IllegalStateException i){
-                    Log.i(TAG, "togglePeriodicLocUpdates GoogleApiClient is not Connected yet = " + i.getMessage());
-                }
+                togglePeriodicLocUpdates();
             }
         });
     }
 
+
+    /**
+     * Prompts the user for permission to use the device location.
+     */
+    private void getLocationPermission() {
+        /*
+         * Request location permission, so that we can get the location of the
+         * device. The result of the permission request is handled by a callback,
+         * onRequestPermissionsResult.
+         */
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mLocationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
 
 
     private void togglePeriodicLocUpdates() {
@@ -134,15 +143,14 @@ public class LocationActivity extends BaseActivity implements
                 mRequestingLocationUpdates = false;
                 stopLocationUpdates();
             }
-        }catch (SecurityException se){
+        } catch (SecurityException se) {
             se.getMessage();
         }
 
     }
 
 
-    protected synchronized void buildGoogleApiClient()
-    {
+    protected synchronized void buildGoogleApiClient() {
         //create an instance of GoogleApiClient
         GoogleApiClient.Builder builder =
                 new GoogleApiClient.Builder(this);
@@ -155,9 +163,10 @@ public class LocationActivity extends BaseActivity implements
         // connection error checking
         builder.addOnConnectionFailedListener(this);
 
+
         mGoogleApiClient = builder.build();
 
-        if(mGoogleApiClient != null){
+        if (mGoogleApiClient != null) {
             isConnected();
         }
     }
@@ -171,6 +180,7 @@ public class LocationActivity extends BaseActivity implements
                 .addLocationRequest(mLocationRequestHighAccuracy)
                 .addLocationRequest(mLocationRequestBalancedPowerAccuracy);
 
+        builder.setAlwaysShow(true);
 
         final PendingResult<LocationSettingsResult> result =
                 LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
@@ -209,7 +219,6 @@ public class LocationActivity extends BaseActivity implements
         });
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final LocationSettingsStates states = LocationSettingsStates.fromIntent(data);
@@ -243,17 +252,17 @@ public class LocationActivity extends BaseActivity implements
                 updateUI();
             }
 
-            if(mRequestingLocationUpdates) {
+            if (mRequestingLocationUpdates) {
                 startLocationUpdates();
             }
 
-        }catch (SecurityException se){
+        } catch (SecurityException se) {
             se.printStackTrace();
         }
 
 
         // prevents null pointer exception
-        if(mCurrentLocation != null) {
+        if (mCurrentLocation != null) {
             // save Lat Long for use in Maps Activity
             Double mLat = mCurrentLocation.getLatitude();
             Double mLong = mCurrentLocation.getLongitude();
@@ -266,9 +275,7 @@ public class LocationActivity extends BaseActivity implements
 
     }
 
-
-    protected void createLocationRequest()
-    {
+    protected void createLocationRequest() {
         if (mLocationRequest == null) {
             mLocationRequest = new LocationRequest();
             mLocationRequest.setInterval(10000);
@@ -277,20 +284,18 @@ public class LocationActivity extends BaseActivity implements
         }
     }
 
-    protected void startLocationUpdates()
-    {
+    protected void startLocationUpdates() {
         try {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-        }catch (SecurityException se){
+        } catch (SecurityException se) {
             se.printStackTrace();
         }
     }
 
-    protected void stopLocationUpdates()
-    {
+    protected void stopLocationUpdates() {
         try {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }catch (SecurityException se){
+        } catch (SecurityException se) {
             se.printStackTrace();
         }
     }
@@ -304,22 +309,20 @@ public class LocationActivity extends BaseActivity implements
         updateUI();
     }
 
-    private void updateUI()
-    {
+    private void updateUI() {
 
-        if(mCurrentLocation != null) {
+        if (mCurrentLocation != null) {
             mLatitudeText.setText(String.valueOf(mCurrentLocation.getLatitude()));
             mLongitudeText.setText(String.valueOf(mCurrentLocation.getLongitude()));
             mLongitudeText.setVisibility(View.VISIBLE);
             mTimeText.setText(mLastUpdateTime);
 
-        }else {
+        } else {
             mLatitudeText.setText(R.string.connection_failed);
             mLongitudeText.setVisibility(View.INVISIBLE);
         }
 
     }
-
 
 
     @Override
@@ -329,7 +332,6 @@ public class LocationActivity extends BaseActivity implements
     }
 
 
-
     @Override
     public void onConnectionSuspended(int i) {
         // The connection to Google Play services was lost for some reason. We call connect() to
@@ -337,7 +339,6 @@ public class LocationActivity extends BaseActivity implements
         Log.i(TAG, "Connection suspended");
         mGoogleApiClient.connect();
     }
-
 
 
     @Override
@@ -377,13 +378,11 @@ public class LocationActivity extends BaseActivity implements
             if (mGoogleApiClient.isConnected() && mRequestingLocationUpdates) {
                 startLocationUpdates();
             }
-        }catch (IllegalStateException i){
+        } catch (IllegalStateException i) {
             Log.i(TAG, "onResume GoogleApiClient is not Connected yet = " + i.getMessage());
         }
         locationSwitch.setChecked(bundle.getBoolean("SwitchState", false));
     }
-
-
 
 
     @Override

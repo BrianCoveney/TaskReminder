@@ -21,6 +21,11 @@ public class SecondFragment extends ListFragment {
 
     private ArrayAdapter<Task> adapter;
 
+    //The interface which this fragment uses to communicate up to its Activity
+    public interface TaskSearcher {
+        void refreshTaskList();
+    }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

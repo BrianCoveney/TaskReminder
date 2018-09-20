@@ -9,10 +9,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.view.MenuItem;
 import android.widget.Toast;
-
-import java.util.Objects;
 
 import ie.cit.brian.taskreminder.R;
 

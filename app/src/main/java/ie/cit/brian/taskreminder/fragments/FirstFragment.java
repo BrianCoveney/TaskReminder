@@ -1,25 +1,17 @@
 package ie.cit.brian.taskreminder.fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,8 +21,6 @@ import java.util.TimeZone;
 
 import ie.cit.brian.taskreminder.R;
 import ie.cit.brian.taskreminder.TaskController;
-import ie.cit.brian.taskreminder.UtilityClass;
-import ie.cit.brian.taskreminder.activities.MainActivity;
 
 
 /**
@@ -46,7 +36,7 @@ public class FirstFragment extends Fragment {
 
     //The interface which this fragment uses to communicate up to its Activity
     public interface TaskSearcher {
-        public void refreshTaskList();
+        void refreshTaskList();
     }
 
 
@@ -60,11 +50,17 @@ public class FirstFragment extends Fragment {
     }
 
 
-    @Override
-    public void onAttach(Activity activity) {
-        searcher = (TaskSearcher) activity;
-        super.onAttach(activity);
+//    @Override
+//    public void onAttach(Activity activity) {
+//        searcher = (TaskSearcher) activity;
+//        super.onAttach(activity);
+//    }
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        searcher = (TaskSearcher) context;
     }
 
     @Override

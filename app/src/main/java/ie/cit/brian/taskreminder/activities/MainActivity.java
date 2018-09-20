@@ -30,7 +30,7 @@ import ie.cit.brian.taskreminder.fragments.SecondFragment;
 /**
  * Created by briancoveney on 11/25/15.
  */
-public class MainActivity extends BaseActivity implements FirstFragment.TaskSearcher {
+public class MainActivity extends BaseActivity implements FirstFragment.TaskSearcher, SecondFragment.TaskSearcher {
 
 
     private static String TAG = "ie.cit.brian.taskreminder";
